@@ -1,0 +1,26 @@
+<div class="modal-content">
+        <div class="panel panel-default" style="margin-bottom: 0px;">
+
+            <div class="panel-body" style="min-height: 400px;">
+                <button type="button" class="close" data-dismiss="modal" (click)="hideAddressModal()">&times;</button>
+
+                <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;"> <b>Add Location11    </b> </p>
+                <div class="clearfix mtx20"></div>
+
+                <div class="row ">
+                    <div class="col-md-5">
+                        <label class="form-control-static txtlabel">Name </label>
+                    </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-control-static txtlabel">Gender  </label>
+                                    <select class="form-control rdc2" #partnerGender formControlName="partnerGender" [class.invalid]="!model.controls.partnerGender.valid && model.controls.partnerGender.dirty"> 
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="transgender">Transgender</option>
+                            </select>
+                                    <div class="alert alert-danger" *ngIf="!model.controls.partnerGender.valid  && model.controls.partnerGender.dirty">
+                                        <p>Please enter a valid gender.</p>
+                                    </div>
+                                </div>
+                            </div>

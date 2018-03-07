@@ -1,0 +1,35 @@
+<!-- loader content end -->
+
+
+<div class="aitsheaderw3ls" id="agilehome">
+
+    <!-- Navigation -->
+    <div class="agiletopbar ">
+        <div class="wthreenavigation ">
+            <div class="menu-wrap">
+                <nav class="menu">
+                    <div class="icon-list">
+                        <a class="scroll active" [routerLink]="['/home']"> <span>Home</span></a>
+                        <a class="scroll" [routerLink]="['/home/profile']" (click)="check()"> <span>Profile</span></a>
+                        <a class="scroll" [routerLink]="['/home/bookings']" (click)="check()"> <span>Bookings</span></a>
+                        <a class="scroll" [routerLink]="['/home/notifications']" (click)="check()"> <span>Notifications</span></a>
+                        <a class="scroll" href="#" (click)="check()"> <span>Partner</span></a>
+                    </div>
+                </nav>
+                <button class="close-button" id="close-button">Close Menu</button>
+            </div>
+            <button class="menu-button" id="open-button">Open Menu</button>
+        </div>
+
+
+        <div class="logo"> MobileStyler11</div>
+        <div class="right-header"> 
+         
+            Norton NJ <i class="fa fa-times"></i>
+        </div>
+
+    </div>
+    <!-- //Navigation -->
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,227 @@
+<!-- loader content start -->
+<div class="dialog" [hidden]="loading">
+
+    <div class="modal-dialog modal-sm login-cls pt10">
+
+        <div class="modal-content spinner">
+            <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+        </div>
+    </div>
+</div>
+<div class="overlay" [hidden]="loading"></div>
+<!-- loader end -->
+
+<!-- details modal -->
+<div class="dialog" [hidden]="bookPage">
+    <div class="modal-dialog modal-sm login-cls pt10">
+
+        <div class="modal-content">
+            <div class="panel panel-default" style="margin-bottom: 0px">
+                <div class="panel-body" style="min-height: 400px;">
+
+                    <button type="button" class="close" data-dismiss="modal" (click)="hideDetails()">&times;</button>
+                    <div class="profile_pic pull-right">
+                        <img src="{{profile_data.profilePicture}}" alt="..." class="img-circle profile_img1">
+                    </div>
+                    <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;"> <b>{{profile_data.partnerName}}  </b>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </p>
+                    <div class="clearfix"></div>
+                    <div class="row ">
+                        <div class="col-md-6">
+                            <label class="form-control-static txtlabel">Service</label>
+                            <select class="form-control selectcontrol" [(ngModel)]="details.category" (ngModelChange)="getSubCategories()">
+                                <option *ngFor="let category of category_data" value="{{category}}">{{category}}</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-static txtlabel">Price</label>
+                            <input class="form-control" [(ngModel)]="details.price" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-control-static txtlabel">Expertise</label>
+                            <select class="form-control selectcontrol" [(ngModel)]="details.speciality" (ngModelChange)="getAmount(details.speciality)">
+                                <option *ngFor="let category of sub_categories;let i=index" value="{{i}}">{{category.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 ">
+
+                            <label class="form-control-static txtlabel"></label>
+                            <button class="btn btn-theme btn-sm btn-block btnselect border-radius" (click)="addService()">Select</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label class="form-control-static txtlabel">Selected Services</label>
+                            <div class="grid1 mb10 column services-list-card scrollable-div" style="padding: 0px;  height:133px;">
+
+
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li *ngFor="let item_address of added_services; let i = index">
+                                        <a> <i class="fa fa-times-circle-o pull-right" aria-hidden="true" style="font-size: 20px;" (click)="removeService(i)"></i> {{item_address.serviceName}}</a>
+                                    </li>
+
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-control-static txtlabel">Schedule</label>
+                            <input type="date" class="form-control" [(ngModel)]="details.myDate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-static txtlabel">Time </label>
+                            <input type="time" class="form-control" [(ngModel)]="details.myTime" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-control-static txtlabel">Address  </label>
+                            <select class="form-control selectcontrol" [(ngModel)]="details.address">
+                                <option *ngFor="let address of addresses;let i=index" value="{{i}}">{{address.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-control-static txtlabel">Notes  </label>
+                            <textarea cols="10" rows="3" class="form-control" [(ngModel)]="details.notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color: #34495e" (click)="book()"><button class="btn btn-theme btn-lg btn-block" style="border-radius:0px"> <span class="pull-left">Book</span> <span class="pull-right">${{amount}}</span>     </button> </div>
+        </div>
+    </div>
+    <!--button (click)="close()" aria-label="Close" class="dialog__close-btn">X</button-->
+</div>
+<div class="overlay" [hidden]="bookPage"></div>
+<!-- details modal end -->
+
+<div class="banner1"><br>
+    <div class="row prl10">
+
+        <div class="col-md-3" #mainScreen>
+                <div class="grid1 mb10 column scrollable-div" style="padding: 0px; height:267px;">
+                <ul class="nav nav-pills nav-stacked">
+                    <li *ngFor="let item of items;let j=index" (click)="itemArrow(item,j)">
+                        <a>
+                            <i class="fa fa-chevron-circle-left" aria-hidden="true" style="font-size: 20px;" (click)="backToMain()" *ngIf="arrow_flag==1 && j==0"></i> {{item.name}}
+                        </a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+            <div class="grid1 mb10 " [hidden]="showCard">
+
+                <div class="profile_pic pull-left">
+                    <img src="{{profile_data.profilePicture}}" alt="..." class="img-circle profile_img">
+                </div>
+                <p>
+                    <b>{{profile_data.partnerName}}   </b> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <br /> {{profile_data.service}}
+                </p>
+
+                <button type="button" class="btn btn-theme btn-sm pull-right" (click)="showBookPage(profile_data.puid)">Details</button>
+                <div class="clearfix    "></div>
+
+
+            </div>
+
+            <div class="grid1 mb10">
+
+                <div class="form-group mb10 ">
+                    <label class="col-md-12 mb10 form-control-static txtlabel">Gender</label>
+                    <div class="col-md-12">
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-default btnchecks btnchecksradiusleft active">
+                                <input type="radio" name="gender" value="male" checked [(ngModel)]="gender" (ngModelChange)="changeGender()"/> Male
+                            </label>
+                            <label class="btn btn-default btnchecks ">
+                                    <input type="radio" name="gender" value="transgender" [(ngModel)]="gender" (ngModelChange)="changeGender()"/> Transgen.
+                                </label>
+                            <label class="btn btn-default btnchecks btnchecksradiusright">
+                                <input type="radio" name="gender" value="female" [(ngModel)]="gender" (ngModelChange)="changeGender()"/> Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="p10 clearfix"></div>
+
+                <div class="form-group mb10  ">
+                    <label class="col-md-12 mb10 form-control-static txtlabel">Distance - Mins</label>
+                    <div class="col-md-12">
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-default btnchecks btnchecksradiusleft active">
+                                <input type="radio" name="gender" value="5" [(ngModel)]="distance" (ngModelChange)="changeDistance()"/> 5
+                            </label>
+                            <label class="btn btn-default btnchecks">
+                                <input type="radio" name="gender" value="10" [(ngModel)]="distance" (ngModelChange)="changeDistance()"/> 10
+                            </label>
+                            <label class="btn btn-default btnchecks">
+                                <input type="radio" name="gender" value="15" [(ngModel)]="distance" (ngModelChange)="changeDistance()"/> 15
+                            </label>
+                            <label class="btn btn-default btnchecks btnchecksradiusright">
+                                <input type="radio" name="gender" value="20" [(ngModel)]="distance" (ngModelChange)="changeDistance()"/> 20
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="p10 clearfix"></div>
+                <div class="form-group mb10 ">
+                    <label class="col-md-12 mb10 form-control-static txtlabel">Price</label>
+                    <div class="col-md-12">
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-default btnchecks btnchecksradiusleft active">
+                                <input type="radio" name="price" value="high" checked [(ngModel)]="price" (ngModelChange)="changePrice()" /> $$$
+                            </label>
+                            <label class="btn btn-default btnchecks btnchecksradiusright">
+                                <input type="radio" name="price" value="low" checked [(ngModel)]="price" (ngModelChange)="changePrice()" /> $$
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="p10 clearfix"></div>
+                <div class="form-group mb10">
+                    <label class="col-md-12 mb10 form-control-static txtlabel">Rating</label>
+                    <div class="col-md-12">
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-default btnchecks btnchecksradiusleft active">
+                                <input type="radio" name="rating" value="high" checked [(ngModel)]="rating" (ngModelChange)="changeRating()" /> High
+                            </label>
+                            <label class="btn btn-default btnchecks">
+                                <input type="radio" name="rating" value="medium" [(ngModel)]="rating" (ngModelChange)="changeRating()"/>Medium
+                            </label>
+                            <label class="btn btn-default btnchecks btnchecksradiusright">
+                                <input type="radio" name="rating" value="low" [(ngModel)]="rating" (ngModelChange)="changeRating()"/> Low
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [style.height.px]="viewHeight">
+                <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="'assets/map-icon.png'"></agm-marker>
+                <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [iconUrl]="marker.icon" (markerClick)="testMarker(marker.marker,marker.content,i)" *ngFor="let marker of markers;let i=index"></agm-marker>
+            </agm-map>
+
+        </div>
+    </div>
+</div>
