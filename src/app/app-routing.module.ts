@@ -10,6 +10,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PaymentsComponent } from './payments/payments.component';
 import { RegisterComponent } from './register/register.component';
 import { DetailsComponent } from './details/details.component';
+import { ClientComponent } from './client/client.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
@@ -42,6 +43,16 @@ const routes: Routes = [
                 path: 'payments',
                 component: PaymentsComponent
             }
+            ,
+            {
+                path: 'client',
+                component: ClientComponent
+            }
+            // ,
+            // {
+            //     path: 'payments',
+            //     component: PaymentsComponent
+            // }
             
         ]
     },
