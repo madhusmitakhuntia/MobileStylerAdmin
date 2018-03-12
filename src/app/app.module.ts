@@ -27,6 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule, MapsAPILoader, NoOpMapsAPILoader} from '@agm/core';
 import { PrivacyComponent } from './privacy/privacy.component';
 
+import { DemopartnerComponent } from './demopartner/demopartner.component';
+
 // AF2 DEV Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyCvktdcqYeGv0I0hEixFAtnTjmgwza1npo",
@@ -51,7 +53,8 @@ export const firebaseConfig = {
     PartnerComponent,
     RegisterComponent,
     DetailsComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    DemopartnerComponent
   ],
   imports: [
     BrowserModule,
