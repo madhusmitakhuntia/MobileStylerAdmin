@@ -40,9 +40,9 @@ export class ClientComponent implements OnInit {
   error;
   emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
   datas:any = [
-    { email: "saobikram@gmail.com", fname: 'Bikram', mobile: '1234567890', lname: 'Sao' },
-    { email: "brahmi@gmail.com", fname: 'Brahmi', mobile: '9876543211', lname: 'Devi' },
-    { email: "abhi@gmail.com", fname: 'Abhi', mobile: '1234123412', lname: 'Behera' }
+    { email: "saobikram@gmail.com", fname: 'Bikram', mname:'', mobile: '1234567890', lname: 'Sao',dob:'1992-05-18',gender:'male' },
+    { email: "brahmi@gmail.com", fname: 'Brahmi',mname:'', mobile: '9876543211', lname: 'Devi',dob:'1994-07-25' ,gender:'female'},
+    { email: "abhi@gmail.com", fname: 'Abhi', mname:'kumar', mobile: '1234123412', lname: 'Behera',dob:'1991-04-01' ,gender:'male'}
   ];
 
   // signupForm: FormGroup;
@@ -134,9 +134,6 @@ export class ClientComponent implements OnInit {
 
         alert(email);
         this.loadProfile(email);
-        //this.email1=email;
-        //alert(this.email1);
-        //this.model.setValue({});
         count++;
         break;
         // return email;
@@ -162,26 +159,41 @@ export class ClientComponent implements OnInit {
     })
   }
 
-  // findEmailfromdata(email) {
-  //   let count = 0;
-  //   for (let i = 0; i < this.datas.length; i++) {
-  //     if (this.dataemails[i] == email) {
+  findEmailfromdata(email) {
+    //alert(this.datas.length);
+    let count = 0;
+    for (let i = 0; i < this.datas.length; i++) {
+      if (this.datas[i].email == email) {
 
-  //       alert(email);
-  //       this.loadProfile(email);
-  //       //this.email1=email;
-  //       //alert(this.email1);
-  //       //this.model.setValue({});
-  //       count++;
-  //       break;
-  //       // return email;
+        alert(email);
+        this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
+        //this.email1=email;
+        //alert(this.email1);
+        //this.model.setValue({});
+        count++;
+        break;
+        // return email;
 
-  //     }
+      }
 
-  //   }
-  //   if (count == 0) {
-  //     alert('not found');
-  //   }
-  // }
+    }
+    if (count == 0) {
+      alert('not found');
+    }
+  }
+  loadProfilefromdata(email,fname,mname,mobile,lname,dob,gender) {
+    console.log(dob);
+    console.log(gender);
+
+    this.model.setValue({
+      'partnerEmail': email,
+      'partnerFName': fname,
+      'partnerMName': mname,
+      'partnerLName': lname,
+      'partnerGender': gender,
+      'partnerDob':dob,
+      'partnerPhone': mobile
+    })
+  }
 
 }
