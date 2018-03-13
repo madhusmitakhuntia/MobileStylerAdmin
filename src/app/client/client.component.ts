@@ -46,7 +46,7 @@ export class ClientComponent implements OnInit {
   ];
 
   // signupForm: FormGroup;
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router,private elementRef: ElementRef , private fb: FormBuilder) {
     this.model = {
       partnerFName: '',
       partnerMName: '',
@@ -65,11 +65,11 @@ export class ClientComponent implements OnInit {
       zip: '',
       state: ''
     };
-    this.search = {
-      searchFname: '',
-      searchLname: '',
-      searchEmail: ''
-    };
+    // this.search = {
+    //   searchFname: '',
+    //   searchLname: '',
+    //   searchEmail: ''
+    // };
 
     let mobileRegEx = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/; //  regular expression for us number
     let nameRegEx = /^[a-zA-Z ]{2,30}$/;
@@ -96,6 +96,12 @@ export class ClientComponent implements OnInit {
       'state': [null, Validators.required],
       'zip': [null, Validators.pattern(zipCodeRegex)]
     });
+    this.search = fb.group({
+      'searchFname': [null],
+      'searchLname': [null],
+      'searchEmail': [null]
+    });
+ 
 
   }
 
@@ -127,36 +133,23 @@ export class ClientComponent implements OnInit {
     this.is_readonly = false;
     // this.is_readonly = !this.is_readonly
   }
-  findEmail(email) {
+  findfname(fname,lname){
+    // alert(fname);
+    // alert(lname);
     let count = 0;
-    for (let i = 0; i < this.emails.length; i++) {
-      if (this.emails[i] == email) {
+    for (let i = 0; i < this.datas.length; i++) {
+      if (this.datas[i].fname == fname && this.datas[i].lname == lname) {
 
-        alert(email);
-        this.loadProfile(email);
+        alert(this.datas[i].email);
+        // this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
         count++;
         break;
-        // return email;
-
       }
 
     }
     if (count == 0) {
       alert('not found');
     }
-  }
-  loadProfile(email) {
-    console.log(email)
-
-    this.model.setValue({
-      'partnerEmail': email,
-      'partnerFName': "",
-      'partnerMName': "",
-      'partnerLName': "",
-      'partnerGender': "",
-      'partnerDob':"",
-      'partnerPhone': ""
-    })
   }
 
   findEmailfromdata(email) {
@@ -165,11 +158,8 @@ export class ClientComponent implements OnInit {
     for (let i = 0; i < this.datas.length; i++) {
       if (this.datas[i].email == email) {
 
-        alert(email);
+        // alert(email);
         this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
-        //this.email1=email;
-        //alert(this.email1);
-        //this.model.setValue({});
         count++;
         break;
         // return email;
