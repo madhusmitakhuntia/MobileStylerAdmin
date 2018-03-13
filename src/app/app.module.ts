@@ -28,6 +28,10 @@ import { AgmCoreModule, MapsAPILoader, NoOpMapsAPILoader} from '@agm/core';
 import { PrivacyComponent } from './privacy/privacy.component';
 
 import { DemopartnerComponent } from './demopartner/demopartner.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { ClientComponent } from './client/client.component';
+
 
 // AF2 DEV Settings
 export const firebaseConfig = {
@@ -54,7 +58,10 @@ export const firebaseConfig = {
     RegisterComponent,
     DetailsComponent,
     PrivacyComponent,
-    DemopartnerComponent
+    DemopartnerComponent,
+    AdminloginComponent,
+    AdminhomeComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

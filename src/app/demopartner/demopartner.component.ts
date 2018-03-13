@@ -79,12 +79,10 @@ export class DemopartnerComponent implements OnInit {
     let mobileRegEx = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/; //  regular expression for us number
     let nameRegEx = /^[a-zA-Z ]{2,30}$/;// validation for name to accept only letter and space
 
-    this.model = fb.group({
+    this.check = fb.group({
       'partnerfName': [null, Validators.pattern(nameRegEx)],
       'partnerlName': [null, Validators.pattern(nameRegEx)],
       'partnercEmail': [null, Validators.email]
-      
-
     });
 
     /* address popup form validation*/
