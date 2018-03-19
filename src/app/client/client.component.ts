@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ClientComponent implements OnInit {
 
   adressPage: any = true;
+  bookingPage: any = true;
   modal_opened: boolean = true;
   model: any = {
     partnerFName: '',
@@ -29,6 +30,16 @@ export class ClientComponent implements OnInit {
     zip: '',
     state: ''
   };
+  booking: any = {
+    b_id: '',
+    service: '',
+    expertise: '',
+    price: '',
+    b_address: '',
+    date: '',
+    time: '',
+    note: ''
+  };
 
   search: any = {
     searchFname: '',
@@ -38,7 +49,7 @@ export class ClientComponent implements OnInit {
   addresses: any = [];
   is_readonly: boolean = true;
   error;
-  emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
+  // emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
   datas:any = [
     { email: "saobikram@gmail.com", fname: 'Bikram', mname:'', mobile: '1234567890', lname: 'Sao',dob:'1992-05-18',gender:'male' },
     { email: "brahmi@gmail.com", fname: 'Brahmi',mname:'', mobile: '9876543211', lname: 'Devi',dob:'1994-07-25' ,gender:'female'},
@@ -64,6 +75,16 @@ export class ClientComponent implements OnInit {
       city: '',
       zip: '',
       state: ''
+    };
+    this.booking = {
+      b_id: '',
+      service: '',
+      expertise: '',
+      price: '',
+      b_address: '',
+      date: '',
+      time: '',
+      note: ''
     };
     // this.search = {
     //   searchFname: '',
@@ -101,6 +122,17 @@ export class ClientComponent implements OnInit {
       'searchLname': [null],
       'searchEmail': [null]
     });
+
+    this.booking = fb.group({
+      'b_id': [null],
+      'service': [null],
+      'expertise':[null] ,
+      'price': [null],
+      'b_address': [null],
+      'date': [null],
+      'time': [null],
+      'note': [null]
+    });
  
 
   }
@@ -123,6 +155,25 @@ export class ClientComponent implements OnInit {
 
   hideAddressModal() {
     this.adressPage = !this.adressPage;
+    this.modal_opened = !this.modal_opened;
+  }
+
+  showBooking() {
+    this.booking.b_id = null;
+    this.booking.service = "";
+    this.booking.expertise = "";
+    this.booking.price = "";
+    this.booking.b_address = "";
+    this.booking.date = "";
+    this.booking.time = "";
+    this.booking.note = "";
+    this.bookingPage = !this.bookingPage;
+    this.modal_opened = !this.modal_opened;
+  }
+
+
+  hideBookingModal() {
+    this.bookingPage = !this.bookingPage;
     this.modal_opened = !this.modal_opened;
   }
   hideError() {
