@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ClientComponent implements OnInit {
 
   adressPage: any = true;
+  bookingPage: any = true;
   modal_opened: boolean = true;
   model: any = {
     partnerFName: '',
@@ -19,7 +20,8 @@ export class ClientComponent implements OnInit {
     partnerGender: 'male',
     partnerDob: '',
     partnerEmail: '',
-    partnerPhone: ''
+    partnerPhone: '',
+    rewardpoint:''
   };
   address: any = {
     name: '',
@@ -28,6 +30,16 @@ export class ClientComponent implements OnInit {
     city: '',
     zip: '',
     state: ''
+  };
+  booking: any = {
+    b_id: '',
+    service: '',
+    expertise: '',
+    price: '',
+    b_address: '',
+    date: '',
+    time: '',
+    note: ''
   };
 
   search: any = {
@@ -38,11 +50,11 @@ export class ClientComponent implements OnInit {
   addresses: any = [];
   is_readonly: boolean = true;
   error;
-  emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
+  // emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
   datas:any = [
-    { email: "saobikram@gmail.com", fname: 'Bikram', mname:'', mobile: '1234567890', lname: 'Sao',dob:'1992-05-18',gender:'male' },
-    { email: "brahmi@gmail.com", fname: 'Brahmi',mname:'', mobile: '9876543211', lname: 'Devi',dob:'1994-07-25' ,gender:'female'},
-    { email: "abhi@gmail.com", fname: 'Abhi', mname:'kumar', mobile: '1234123412', lname: 'Behera',dob:'1991-04-01' ,gender:'male'}
+    { email: "saobikram@gmail.com", fname: 'Bikram', mname:'', mobile: '1234567890', lname: 'Sao',dob:'1992-05-18',gender:'male',reward:'1000' },
+    { email: "brahmi@gmail.com", fname: 'Brahmi',mname:'', mobile: '9876543211', lname: 'Devi',dob:'1994-07-25' ,gender:'female',reward:'2000'},
+    { email: "abhi@gmail.com", fname: 'Abhi', mname:'kumar', mobile: '1234123412', lname: 'Behera',dob:'1991-04-01' ,gender:'male',reward:'500'}
   ];
 
   // signupForm: FormGroup;
@@ -54,7 +66,8 @@ export class ClientComponent implements OnInit {
       partnerDob: '',
       partnerGender: 'male',
       partnerEmail: '',
-      partnerPhone: ''
+      partnerPhone: '',
+      rewardpoint:''
 
     };
     this.address = {
@@ -64,6 +77,16 @@ export class ClientComponent implements OnInit {
       city: '',
       zip: '',
       state: ''
+    };
+    this.booking = {
+      b_id: '',
+      service: '',
+      expertise: '',
+      price: '',
+      b_address: '',
+      date: '',
+      time: '',
+      note: ''
     };
     // this.search = {
     //   searchFname: '',
@@ -80,7 +103,8 @@ export class ClientComponent implements OnInit {
       'partnerGender': [null, Validators.required],
       'partnerEmail': [null, Validators.email],
       'partnerDob': [null, Validators.email],
-      'partnerPhone': [null, Validators.pattern(mobileRegEx)]
+      'partnerPhone': [null, Validators.pattern(mobileRegEx)],
+      'rewardpoint':[null]
     });
 
     let stateCodeRegex = /^(AL|Alabama|alabama|AK|Alaska|alaska|AZ|Arizona|arizona|AR|Arkansas|arkansas|CA|California|california|CO|Colorado|colorado|CT|Connecticut|connecticut|DE|Delaware|delaware|FL|Florida|florida|GA|Georgia|georgia|HI|Hawaii|hawaii|ID|Idaho|idaho|IL|Illinois|illinois|IN|Indiana|indiana|IA|Iowa|iowa|KS|Kansas|kansas|KY|Kentucky|kentucky|LA|Louisiana|louisiana|ME|Maine|maine|MD|Maryland|maryland|MA|Massachusetts|massachusetts|MI|Michigan|michigan|MN|Minnesota|minnesota|MS|Mississippi|mississippi|MO|Missouri|missouri|MT|Montana|montana|NE|Nebraska|nebraska|NV|Nevada|nevada|NH|New Hampshire|new hampshire|NJ|New Jersey|new jersey|NM|New Mexico|new mexico|NY|New York|new york|NC|North Carolina|new carolina|ND|North Dakota|north dakota|OH|Ohio|ohio|OK|Oklahoma|oklahoma|OR|Oregon|oregon|PA|Pennsylvania|pennsylvania|RI|Rhode Island|rhode island|SC|South Carolina|south carolina|SD|South Dakota|south dakota|TN|Tennessee|tennessee|TX|Texas|texas|UT|Utah|utah|VT|Vermont|vermont|VA|Virginia|virginia|WA|Washington|washington|WV|West Virginia|west virginia|WI|Wisconsin|wisconsin|WY|Wyoming|wyoming)$/;
@@ -100,6 +124,17 @@ export class ClientComponent implements OnInit {
       'searchFname': [null],
       'searchLname': [null],
       'searchEmail': [null]
+    });
+
+    this.booking = fb.group({
+      'b_id': [null],
+      'service': [null],
+      'expertise':[null] ,
+      'price': [null],
+      'b_address': [null],
+      'date': [null],
+      'time': [null],
+      'note': [null]
     });
  
 
@@ -123,6 +158,25 @@ export class ClientComponent implements OnInit {
 
   hideAddressModal() {
     this.adressPage = !this.adressPage;
+    this.modal_opened = !this.modal_opened;
+  }
+
+  showBooking() {
+    this.booking.b_id = null;
+    this.booking.service = "";
+    this.booking.expertise = "";
+    this.booking.price = "";
+    this.booking.b_address = "";
+    this.booking.date = "";
+    this.booking.time = "";
+    this.booking.note = "";
+    this.bookingPage = !this.bookingPage;
+    this.modal_opened = !this.modal_opened;
+  }
+
+
+  hideBookingModal() {
+    this.bookingPage = !this.bookingPage;
     this.modal_opened = !this.modal_opened;
   }
   hideError() {
@@ -159,7 +213,7 @@ export class ClientComponent implements OnInit {
       if (this.datas[i].email == email) {
 
         // alert(email);
-        this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
+        this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender,this.datas[i].reward);
         count++;
         break;
         // return email;
@@ -171,7 +225,7 @@ export class ClientComponent implements OnInit {
       alert('not found');
     }
   }
-  loadProfilefromdata(email,fname,mname,mobile,lname,dob,gender) {
+  loadProfilefromdata(email,fname,mname,mobile,lname,dob,gender,reward) {
     console.log(dob);
     console.log(gender);
 
@@ -182,7 +236,9 @@ export class ClientComponent implements OnInit {
       'partnerLName': lname,
       'partnerGender': gender,
       'partnerDob':dob,
-      'partnerPhone': mobile
+      'partnerPhone': mobile,
+      'rewardpoint':reward
+
     })
   }
 

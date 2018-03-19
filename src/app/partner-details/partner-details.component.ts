@@ -4,11 +4,11 @@ import { FormBuilder,  ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-adminhome',
-  templateUrl: './adminhome.component.html',
-  styleUrls: ['./adminhome.component.css']
+  selector: 'app-partner-details',
+  templateUrl: './partner-details.component.html',
+  styleUrls: ['./partner-details.component.css']
 })
-export class AdminhomeComponent implements OnInit {
+export class PartnerDetailsComponent implements OnInit {
 
   searchpartner:any={
     partnerfDate:'',
@@ -22,6 +22,7 @@ export class AdminhomeComponent implements OnInit {
     { rdate: "2018-07-05",  pname:'bikram' }
     
   ];
+
 
   constructor(private router: Router,private fb: FormBuilder) { 
 
@@ -38,25 +39,7 @@ export class AdminhomeComponent implements OnInit {
   
 
     
-      if(localStorage.getItem('loaded')===null)
-      this.refresh();
-    
-  }
-  refresh(): void {
-    localStorage.setItem('loaded','1');
-    window.location.reload();
-}
-
-  check(){
-    // if(localStorage.getItem('uid') === null){
-    //   this.router.navigate(['/login']);
-    // }
-  }
-  signOut(): void {
-    localStorage.clear();
-
-
-      this.router.navigateByUrl('');
+        
   }
   search(fdate,tdate){
     this.result=[];
@@ -79,11 +62,6 @@ export class AdminhomeComponent implements OnInit {
     }
 
   }
-
-  hideError(){
-
-  }
-
   ngOnInit() {
   }
 

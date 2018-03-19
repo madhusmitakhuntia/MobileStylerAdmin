@@ -1,0 +1,67 @@
+<div class="row prl10">
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6 aboutright" style="background-color: #edf0f3;">
+
+
+      <div class="row ">
+          <form  [formGroup]="searchpartner">
+              <div class="tab-contentt" style="padding: 6%">
+                  <div role="tabpanel" class="tab-pane active" id="home">
+
+                      <div class="panel panel-default mb10" style="margin-bottom: 0px;" (click)="hideError()">
+                          <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
+                              <b class="theme-color pull-left"> Profile   </b>
+
+
+                          </div>
+                          <div class="panel-body">
+                              <div class="clearfix"></div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label class="form-control-static txtlabel">From Date</label>
+                                      <input class="form-control rdc2" name="fromdate" #partnerfDate formControlName="partnerfDate" type="date"  />
+                                     
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label class="form-control-static txtlabel">To Date</label>
+                                      <input class="form-control rdc2" name="todate" #partnertDate formControlName="partnertDate" type="date" />
+                                      
+                                  </div>
+                            
+                              </div>
+                             
+                          </div>
+                      </div>
+                      <div class="row mtx20">
+
+                          <div class="col-md-12">
+                             
+
+                              <button type="button" class="btn btn-theme  btn-lg btn-block"  (click)="search(partnerfDate.value,partnertDate.value)">Search</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+                  
+  </div>
+</div>
+
+<div class="row prl10">
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6 aboutright" style="background-color: #edf0f3;">
+
+
+      <div class="row ">
+          <li *ngFor="let data of result">{{data.rdate}}{{data.pname}}</li>
+      </div>
+                  
+  </div>
+</div>

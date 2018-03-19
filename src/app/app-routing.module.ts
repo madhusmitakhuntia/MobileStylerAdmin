@@ -4,7 +4,7 @@ import { DemopartnerComponent } from './demopartner/demopartner.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
-ClientComponent
+import { PartnerDetailsComponent } from './partner-details/partner-details.component';
 
 const routes: Routes = [
     {
@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'adminhome',
         component: AdminhomeComponent,
         children: [
+            {
+                path: '',
+                component: PartnerDetailsComponent
+            },
             {
                 path: 'demopartner',
                 component:DemopartnerComponent 

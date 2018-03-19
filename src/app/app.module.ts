@@ -31,6 +31,8 @@ import { DemopartnerComponent } from './demopartner/demopartner.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
+import { PartnerDetailsComponent } from './partner-details/partner-details.component';
+
 
 
 // AF2 DEV Settings
@@ -61,7 +63,8 @@ export const firebaseConfig = {
     DemopartnerComponent,
     AdminloginComponent,
     AdminhomeComponent,
-    ClientComponent
+    ClientComponent,
+    PartnerDetailsComponent
   ],
   imports: [
     BrowserModule,
