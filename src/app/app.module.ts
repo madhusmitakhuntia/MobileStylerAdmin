@@ -27,6 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule, MapsAPILoader, NoOpMapsAPILoader} from '@agm/core';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ClientComponent } from './client/client.component';
+import { DataComponent } from './data/data.component';
+
+import { HttpModule } from '@angular/http';
 
 // AF2 DEV Settings
 export const firebaseConfig = {
@@ -53,10 +56,12 @@ export const firebaseConfig = {
     RegisterComponent,
     DetailsComponent,
     PrivacyComponent,
-    ClientComponent
+    ClientComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     routing,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
