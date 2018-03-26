@@ -10,13 +10,13 @@
               <th>Like</th>
               <th>Image</th>
           </tr>
-
+   
           <!-- Use *ngFor directive to loop throught our list of products. -->
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of items">
               <td>{{product.pname}}</td>
               <td>{{product.price}}</td>
-              <td>{{product.likes}}</td>
-              <td>{{product.image}}</td>
+              <td>{{product.likes}}</td> 
+              <td><img height="100"  src="{{product.image}}"></td>
               
           </tr>
       </table>

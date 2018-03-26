@@ -10,14 +10,31 @@ import { Product } from '../product';
   providers: [ProductService]
 })
 export class DataComponent implements OnInit {
-  products: Product[];
+  products: any={};
+  items: any=[];
+  // products:Product[];
+ 
+  
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
     this.productService.readProducts()
-      .subscribe(products =>
-        this.products = products['records']
-      );
+      .subscribe(products =>{
+        this.products = products['products']
+        //console.log(products);
+        //console.log(products.products);
+       // console.log(Object.keys(products.products)[0]);
+        // console.log((Object.values(products.products)[2].pname);
+        //console.log((Object.values(products.products)[2]));
+        console.log((Object.values(products.products)));
+        console.log(Object.values(products.products).length);
+        this.items = Object.values(products.products);
+        
+        console.log("Item data:"+this.items);
+ 
+      });
+      
+      
   }
-
+ 
 }
