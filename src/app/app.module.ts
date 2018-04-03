@@ -32,6 +32,12 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
 import { PartnerDetailsComponent } from './partner-details/partner-details.component';
+import { DataComponent } from './data/data.component';
+import { ProductService } from './product.service';
+import { HttpModule } from '@angular/http';
+
+
+
 
 
 
@@ -64,7 +70,11 @@ export const firebaseConfig = {
     AdminloginComponent,
     AdminhomeComponent,
     ClientComponent,
-    PartnerDetailsComponent
+    PartnerDetailsComponent,
+    DataComponent,
+    
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -75,6 +85,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD5oKjXY9B9Kwch941wSWD7jRRF4r78TRw',
       libraries: ["places"]
@@ -85,7 +96,8 @@ export const firebaseConfig = {
     NotificationsService,
     BookingsService,
     ServicesService,
-    ProfileService
+    ProfileService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
