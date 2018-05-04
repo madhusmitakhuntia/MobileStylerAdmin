@@ -5,6 +5,7 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
 import { PartnerDetailsComponent } from './partner-details/partner-details.component';
+import { Data1Component } from './data1/data1.component';
 
 const routes: Routes = [
     {
@@ -28,6 +29,11 @@ const routes: Routes = [
                 path: 'client',
                 component:ClientComponent 
             },
+            {
+                path: 'graph',
+                component:Data1Component 
+            }
+           
            
         ]
    },

@@ -3,7 +3,7 @@ import {BookingsService} from "../services/bookings.service";
 import {ProfileService} from "../services/profile.service";
 import {AuthService} from '../services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { } from 'googlemaps';
 import { ServicesService } from '../services/services.service';
 import {Router} from '@angular/router';

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder,  ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-adminhome',
@@ -15,15 +16,18 @@ export class AdminhomeComponent implements OnInit {
     partnertDate:''
   };
   result:any=[];
+  items: any = [];
+  users: any = {};
+  userkey: any = [];
 // rdate="2018-03-32";
-  datas:any = [
-    { rdate: "2018-03-01",  pname:'brahmi' },
-    { rdate: "2018-04-04",  pname:'abhi' },
-    { rdate: "2018-07-05",  pname:'bikram' }
+  // datas:any = [
+  //   { rdate: "2018-03-01",  pname:'brahmi' },
+  //   { rdate: "2018-04-04",  pname:'abhi' },
+  //   { rdate: "2018-07-05",  pname:'bikram' }
     
-  ];
+  // ];
 
-  constructor(private router: Router,private fb: FormBuilder) { 
+  constructor(private router: Router,private fb: FormBuilder,private productService: ProductService) { 
 
     this. searchpartner={
       partnerfDate:'',
@@ -59,13 +63,15 @@ export class AdminhomeComponent implements OnInit {
       this.router.navigateByUrl('');
   }
   search(fdate,tdate){
+    alert(fdate);
     this.result=[];
     let count=0;
-    for (let i = 0; i < this.datas.length; i++)
+    for(let user of this.userkey)
     {
-      if( moment(this.datas[i].rdate).isSameOrAfter(fdate)==true && moment(this.datas[i].rdate).isSameOrBefore(tdate) ){
+      if( moment(new Date(this.users[user].createdAt)).isSameOrAfter(fdate)==true && moment(new Date(this.users[user].createdAt)).isSameOrBefore(tdate) ){
     
-    this.result.push(this.datas[i]);
+    this.result.push(user);
+    console.log(this.result);
  
 
         count++;
@@ -85,6 +91,26 @@ export class AdminhomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productService.readUsers()
+    .subscribe(users => {
+      this.users = users['customer'];
+      //console.log(products);
+      //console.log(products.products);
+      // console.log(Object.keys(products.products)[0]);
+      // console.log((Object.values(products.products)[2].pname);
+      //console.log((Object.values(products.products)[2]));
+      // this.dtTrigger.next();
+       //console.log(this.users);
+      // console.log((Object.values(this.users)));
+      // console.log(Object.values(this.users).length);
+      this.items = Object.values(this.users);
+
+       //console.log(this.items);
+       this.userkey = Object.keys(this.users);
+
+    });
   }
+
+
 
 }

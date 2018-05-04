@@ -1,18 +1,45 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { ProductService } from '../services/product.service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { DataTablesModule } from 'angular-datatables';
+import { Subject } from 'rxjs/Subject';
+declare var $: any;
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  styleUrls: ['./client.component.css'],
+  providers: [ProductService]
 })
 export class ClientComponent implements OnInit {
-
+  products: any = {};
+  items: any = [];
+  users: any = {};
+  userkey: any = [];
+  customerKey: any = [];
+  result:any=[];
+ dtOptions: DataTables.Settings = {}; 
+ dtTrigger: Subject<any> = new Subject();
   adressPage: any = true;
   bookingPage: any = true;
   modal_opened: boolean = true;
+  
+  updatePage: any = true;
+  userTable:any = true;
+  updateUser: any = {
+    userKey:'',
+    UserFName:'',
+   
+    UserLName: '',
+    email: '',
+    gender: '',
+    mobile:''
+
+  };
   model: any = {
     partnerFName: '',
     partnerMName: '',
@@ -42,23 +69,21 @@ export class ClientComponent implements OnInit {
     note: ''
   };
 
-  search: any = {
+  searchByName: any = {
     searchFname: '',
-    searchLname: '',
-    searchEmail: ''
+    searchLname: ''
+   
+  };
+  searchByEmail: any = {
+    email: ''   
+   
   };
   addresses: any = [];
+  loader=true;
   is_readonly: boolean = true;
   error;
-  // emails = ['saobikram@gmail.com', 'brahmi@gmail.com', 'abhi@gmail.com'];
-  datas:any = [
-    { email: "saobikram@gmail.com", fname: 'Bikram', mname:'', mobile: '1234567890', lname: 'Sao',dob:'1992-05-18',gender:'male',reward:'1000' },
-    { email: "brahmi@gmail.com", fname: 'Brahmi',mname:'', mobile: '9876543211', lname: 'Devi',dob:'1994-07-25' ,gender:'female',reward:'2000'},
-    { email: "abhi@gmail.com", fname: 'Abhi', mname:'kumar', mobile: '1234123412', lname: 'Behera',dob:'1991-04-01' ,gender:'male',reward:'500'}
-  ];
-
-  // signupForm: FormGroup;
-  constructor(private router: Router,private elementRef: ElementRef , private fb: FormBuilder) {
+ 
+  constructor(private router: Router,private elementRef: ElementRef , private fb: FormBuilder,private productService: ProductService,public db: AngularFireDatabase) {
     this.model = {
       partnerFName: '',
       partnerMName: '',
@@ -88,11 +113,28 @@ export class ClientComponent implements OnInit {
       time: '',
       note: ''
     };
-    // this.search = {
-    //   searchFname: '',
-    //   searchLname: '',
-    //   searchEmail: ''
-    // };
+   
+
+    this.updateUser = {
+      userKey:'',
+      UserFName:'',
+  
+      UserLName: '',
+      email: '',
+      gender: '',
+      mobile:''
+  
+    };
+    this.updateUser =fb.group( {
+      'userKey':[null],
+      'UserFName':[null],
+      
+      'UserLName':[null],
+      'email': [null],
+      'gender':[null],
+      'mobile':[null]
+  
+    });
 
     let mobileRegEx = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/; //  regular expression for us number
     let nameRegEx = /^[a-zA-Z ]{2,30}$/;
@@ -120,10 +162,12 @@ export class ClientComponent implements OnInit {
       'state': [null, Validators.required],
       'zip': [null, Validators.pattern(zipCodeRegex)]
     });
-    this.search = fb.group({
+    this.searchByName= fb.group({
       'searchFname': [null],
       'searchLname': [null],
-      'searchEmail': [null]
+     });
+    this.searchByEmail = fb.group({
+       'email': [null]
     });
 
     this.booking = fb.group({
@@ -140,7 +184,27 @@ export class ClientComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit()   {
+   
+    this.productService.readUsers()
+      .subscribe(users => {
+        this.users = users['customer'];
+        //console.log(products);
+        //console.log(products.products);
+        // console.log(Object.keys(products.products)[0]);
+        // console.log((Object.values(products.products)[2].pname);
+        //console.log((Object.values(products.products)[2]));
+        // this.dtTrigger.next();
+         //console.log(this.users);
+        // console.log((Object.values(this.users)));
+        // console.log(Object.values(this.users).length);
+        this.items = Object.values(this.users);
+
+        // console.log(this.items);
+         this.userkey = Object.keys(this.users);
+
+      });
+
   }
 
 
@@ -187,44 +251,50 @@ export class ClientComponent implements OnInit {
     this.is_readonly = false;
     // this.is_readonly = !this.is_readonly
   }
-  findfname(fname,lname){
-    // alert(fname);
-    // alert(lname);
-    let count = 0;
-    for (let i = 0; i < this.datas.length; i++) {
-      if (this.datas[i].fname == fname && this.datas[i].lname == lname) {
+  // findfname(fname,lname){
+  //   // alert(fname);
+  //   // alert(lname);
+  //   let count = 0;
+  //   for (let i = 0; i < this.datas.length; i++) {
+  //     if (this.datas[i].fname == fname && this.datas[i].lname == lname) {
 
-        alert(this.datas[i].email);
-        // this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
-        count++;
-        break;
-      }
+  //       alert(this.datas[i].email);
+  //       // this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
+  //       count++;
+  //       break;
+  //     }
 
-    }
-    if (count == 0) {
-      alert('not found');
-    }
-  }
+  //   }
+  //   if (count == 0) {
+  //     alert('not found');
+  //   }
+  // }
 
-  findEmailfromdata(email) {
-    //alert(this.datas.length);
-    let count = 0;
-    for (let i = 0; i < this.datas.length; i++) {
-      if (this.datas[i].email == email) {
+  // findEmailfromdata(email,fname,lname) {
+  //   //console.log(this.items);
+  //  // alert(email);
+  //   let count = 0;
+  //   this.result=[];
+  //   for(let user of this.userkey)
+  //   {
+  //     if (this.users[user].partnerEmail == email || this.users[user].partnerFirstName==fname && this.users[user].partnerLastName==lname) {
 
-        // alert(email);
-        this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender,this.datas[i].reward);
-        count++;
-        break;
-        // return email;
+  //       console.log(this.users[user].partnerEmail);
+  //       this.result.push(user);
+  //       console.log(this.result);
+  //       count++;
 
-      }
+  //     }
 
-    }
-    if (count == 0) {
-      alert('not found');
-    }
-  }
+
+  //   }
+  //   this.userTable=false;
+   
+  //   if (count == 0) {
+  //     alert('not found');
+  //   }
+  // }
+
   loadProfilefromdata(email,fname,mname,mobile,lname,dob,gender,reward) {
     console.log(dob);
     console.log(gender);
@@ -240,6 +310,106 @@ export class ClientComponent implements OnInit {
       'rewardpoint':reward
 
     })
+  }
+
+  showUpdateModal(user,fname,lname,email,gender,mobile)  {
+    this.updatePage = !this.updatePage;
+    this.modal_opened = !this.modal_opened;
+    // alert(user+fname+mname+lname+email+gender+mobile);
+    this.updateUser.setValue({
+  'userKey':user,
+  'UserFName':fname,
+  
+  'UserLName':lname,
+  'email': email,
+  'gender':gender,
+  'mobile':mobile
+
+     });
+  }
+  hideUpdateModal() {
+    this.updatePage = !this.updatePage;
+    this.modal_opened = !this.modal_opened;
+  }
+
+  updateUserInfo(updateUser){
+    //alert(this.updateUser.userKey);
+    //let data = this.updateUser.value;
+    updateUser=this.updateUser.value;
+   //console.log(updateUser);
+   //alert(updateUser.UserFName);
+   var json={
+    partnerFirstName:updateUser.UserFName,
+   
+    partnerLastName:updateUser.UserLName,
+    partnerGender:updateUser.gender,
+    partnerEmail:updateUser.email,
+    partnerPhone:updateUser.mobile
+   };
+   //alert(json);
+   console.log(json);
+   this.db.list('/customer').update(updateUser.userKey,json);
+
+   this.hideUpdateModal() ;
+   
+  }
+  hideTable()
+  {
+    this.userTable=!this.userTable;
+  }
+  searchByDate(fdate,tdate): void  {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+     
+    };
+   this.productService.readUserByDate(fdate,tdate)
+    .subscribe(users => {
+      this.users = users['customer'];
+      //console.log(this.users);
+      this.items = Object.values(this.users);
+      this.customerKey = Object.keys(this.users);
+        $('#DataTables').DataTable().destroy();
+        this.dtTrigger.next();
+    });
+    this.userTable=false;
+  }
+  searchName(fname,lname): void  {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+     
+    };
+    this.productService.readUserByName(fname,lname)
+    .subscribe(users => {
+      this.users = users['customer'];
+      //console.log(this.users);
+    
+       this.items = Object.values(this.users);
+       //console.log(this.items);
+      
+       this.customerKey = Object.keys(this.users);
+     // console.log( "key"+this.customerKey);
+        $('#DataTables').DataTable().destroy();
+         this.dtTrigger.next();
+    });
+    this.userTable=false;
+    
+  }
+  searchEmail(email): void  {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+     
+    };
+    this.productService.readUserByEmail(email)
+    .subscribe(users => {
+      this.users = users['customer'];
+    
+      this.items = Object.values(this.users);
+      this.customerKey = Object.keys(this.users);
+        $('#DataTables').DataTable().destroy();
+        this.dtTrigger.next();
+    });
+    this.userTable=false;
+
   }
 
 }

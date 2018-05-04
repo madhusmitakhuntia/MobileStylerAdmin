@@ -9,11 +9,12 @@
 
                         <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;"> <b>Update User Info</b> </p>
                         <div class="clearfix mtx20"></div>
-
+                        <input type="hidden" #productKey formControlName="productKey" />
                         <div class="row ">
                             <div class="col-md-5">
                                 <label class="form-control-static txtlabel">Product</label>
                             </div>
+                           
                             <div class="col-md-7">
 
                                 <input class="form-control rdc2" #productName formControlName="productName" />
@@ -53,13 +54,15 @@
 
                     </div>
                 </div>
-                <div style="background-color: #34495e" (click)="updateInfo()" ><button  id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button> </div>
+                <div style="background-color: #34495e" (click)="updateInfo(productKey.value)" ><button  id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button> </div>
             </div>
         </form>
     </div>
     
 </div>
 <div class="overlay" [hidden]="modal_opened"></div>
+<div ></div>
+<button class="btn btn-default" (click)="showGraph()">Graph</button>
 
 <div class="row">
   <div class="col-md-12">
@@ -95,4 +98,5 @@
       </table>
   </div>
 </div>
+
 

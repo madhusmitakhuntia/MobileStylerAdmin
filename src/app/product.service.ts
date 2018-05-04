@@ -16,8 +16,8 @@ export class ProductService {
     // Get list of products from remote server.
     readProducts(): Observable<Product[]>{
         return this._http
-            .get("https://us-central1-sign-up-angular.cloudfunctions.net/getProducts")
+            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getProducts")
             .map(res => res.json());
-    }
+    } 
  
 }

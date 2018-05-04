@@ -11,7 +11,7 @@
               <div class="tab-contentt" style="padding: 6%">
                   <div role="tabpanel" class="tab-pane active" id="home">
 
-                      <div class="panel panel-default mb10" style="margin-bottom: 0px;" (click)="hideError()">
+                      <div class="panel panel-default mb10" style="margin-bottom: 0px;">
                           <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
                               <b class="theme-color pull-left"> Profile   </b>
 
@@ -41,7 +41,8 @@
                              
 
                               <button type="button" class="btn btn-theme  btn-lg btn-block"  (click)="search(partnerfDate.value,partnertDate.value)">Search</button>
-                          </div>
+                             
+                            </div>
                       </div>
                   </div>
               </div>
@@ -51,17 +52,41 @@
   </div>
 </div>
 
-<div class="row prl10">
 
-  <div class="col-md-3">
+
+ 
+<div class="row">
+    <div class="col-md-12" [hidden]="userTable">
+  
+      <div style="position:relative">
+        <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button></div>
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" id="DataTables" >
+        <thead>
+          <tr>
+              <!-- <th>Created At</th> -->
+            <th>FirstName</th>
+           
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of items">
+            
+            <!-- <td>{{users[user].createdAt}}</td> -->
+            <!-- <td>{{users[user].MiddleName}}</td> -->
+            <td>{{user.partnerFirstName}}</td>
+            <td>{{user.partnerLastName}}</td>
+            <td>{{user.partnerEmail}}</td>
+            <td>{{user.partnerGender}}</td>
+            <td>{{user.partnerPhone}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
   </div>
-
-  <div class="col-md-6 aboutright" style="background-color: #edf0f3;">
-
-
-      <div class="row ">
-          <li *ngFor="let data of result">{{data.rdate}}{{data.pname}}</li>
-      </div>
-                  
-  </div>
-</div>
+ 
