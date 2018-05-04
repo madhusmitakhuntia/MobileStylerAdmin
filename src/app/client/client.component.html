@@ -86,7 +86,8 @@
 
 <!--update modal -->
 
-
+<div style="width: 100%;
+float: left;"><b class="theme-color pull-left"> Client </b></div>
 <div class="">
   
     <div class="col-md-4">
@@ -95,7 +96,7 @@
               <!-- <fieldset ng-disabled="disabled"> -->
              
              
-                  <b class="theme-color pull-left"> Client </b>
+                  
 
 
                   <div class="clearfix"></div>
@@ -137,7 +138,7 @@
                     <div class="row">
                                     
                       
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <label class="form-control-static txtlabel">Email </label>
                         <input class="form-control rdc2" #email formControlName="email" />
                         <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
@@ -165,10 +166,10 @@
 
 
 <div class="col-md-4">
-    <div class="row ">
+    <div class="row " >
         <form  [formGroup]="searchpartner">
            
-                <div role="tabpanel" class="tab-pane active" id="home">
+                <div role="tabpanel" class="active" id="home" style="padding: 0px 9px;">
 
                       
                             <div class="clearfix"></div>
@@ -205,14 +206,21 @@
 </div>
 
 <!--Data table -->
-
-<div class="row">
+<div class="clearfix"></div>
+<div class="row" >
+        
   <div class="col-md-12" [hidden]="userTable">
-
-    <div style="position:relative">
-      <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
-      <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div>
-    <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" id="DataTables" >
+        <div class="row" *ngIf="customerKey?.length == 0">
+                <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        </div>   
+    <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+        <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div>
+    
+        <div class="clearfix"></div>
+        <div style="position:relative">
+      
+      
+      <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" id="DataTables" >
       <thead>
         <tr>
             <!-- <th>Created At</th> -->
@@ -240,7 +248,9 @@
           <td>{{users[user].partnerPhone}}</td>
          
           <td></td>
-          <td></td>
+          <td>
+            <button class="btn btn-default" (click)="findbooking(user,users[user].uid)">View Booking</button>
+          </td>
           <td><button class="btn btn-default" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">update</button></td>
           <td><button class="btn btn-danger">Delete</button></td> 
         </tr>
@@ -251,5 +261,52 @@
 </div>
 
 <!--Data table -->
+<!-- Booking Data Table -->
+<div class="row">
+    <div class="col-md-12" [hidden]="bookingTable">
+  
+      <div style="position:relative">
+        <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+        <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <!-- <th>Created At</th> -->
+              <th>Name</th>
+  
+              <th>Key</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Note</th>
+              <th>Service</th>
+              <th>Stage</th>
+              <th>Total Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let booking of booking_result">
+  
+              <td>{{bookings[booking].customerName}}</td>
+              <td>{{booking}}</td>
+              <td>{{bookings[booking].bookingSchedule.date}}</td>
+              <td>{{bookings[booking].bookingSchedule.time}}</td>
+              <td>{{bookings[booking].notes}}</td>
+              <td>{{bookings[booking].services[0].serviceName}}</td>
+              <td>{{bookings[booking].stage}}</td>
+              <td>{{bookings[booking].totalAmount}}</td>
+              <td></td>
+              <td>
+                <button class="btn btn-default" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">update</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row" *ngIf="items?.length == 0">
+    <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+  </div> -->
 
 

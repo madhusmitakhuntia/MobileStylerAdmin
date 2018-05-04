@@ -1,0 +1,172 @@
+<!-- <div class="">
+  <div class="row prl10" style="height:100%">
+
+    <div class="col-md-3">
+    </div>
+
+    <div class="col-md-6 aboutright" style="background-color: #edf0f3;">
+
+
+      <div class="row ">
+
+        <div style="padding: 6%">
+          <div role="tabpanel" class="tab-pane active" id="home">
+
+            <form [formGroup]="search">
+              <fieldset ng-disabled="disabled"> -->
+              <!-- <div class="panel panel-default mb10" style="margin-bottom: 0px;">
+                <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
+                  <b class="theme-color pull-left"> Client </b>
+
+
+                </div>
+                <div class="panel-body">
+
+                  <div class="clearfix"></div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="form-control-static txtlabel">First Name</label>
+                      <input class="form-control rdc2" name="Email" #searchFname formControlName="searchFname" type="text" /> -->
+                      <!--[readonly]="true" -->
+                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
+                    <p>Please enter a valid name.</p>
+                </div>-->
+                    <!-- </div>
+                    <div class="col-md-3">
+                      <label class="form-control-static txtlabel">Last Name</label>
+                      <input class="form-control rdc2" name="Email" #searchLname formControlName="searchLname" type="text" /> -->
+                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
+                    <p>Please enter a valid name.</p>
+                </div>-->
+                    <!-- </div>
+
+                    <div class="col-md-1" style="padding: 18px 0px; text-align: center;color: #000;font-weight: bold;">OR</div>
+                    <div class="col-md-5">
+                      <label class="form-control-static txtlabel">Email </label>
+                      <input class="form-control rdc2" #searchEmail formControlName="searchEmail" /> -->
+                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
+                  <p>Please enter a valid email.</p>
+              </div>-->
+                    <!-- </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+
+              <div class="row mtx20">
+
+                <div class="col-md-12">
+                  <div class="alert alert-danger" *ngIf="error">
+                    <strong>Error!</strong> {{error}}
+                  </div>
+
+                  <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="findEmailfromdata(searchEmail.value,searchFname.value,searchLname.value);">Submit</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>  -->
+<div class="row">
+  <div class="col-md-12" [hidden]="userTable">
+
+    <div style="position:relative">
+      <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+      <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>FirstName</th>
+
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Booking</th>
+            <th>Action</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of result">
+
+            <!-- <td>{{users[user].createdAt}}</td> -->
+            <!-- <td>{{users[user].MiddleName}}</td> -->
+            <td>{{users[user].partnerFirstName}}</td>
+            <td>{{users[user].partnerLastName}}</td>
+            <td>{{users[user].partnerEmail}}</td>
+            <td>{{users[user].partnerGender}}</td>
+            <td>{{users[user].partnerPhone}}</td>
+            <td>{{users[user].uid}}</td>
+            <td></td>
+            <td>
+              <button class="btn btn-default" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">update</button>
+            </td>
+            <td>
+              <button class="btn btn-default" (click)="findbooking(user,users[user].uid)">View Booking</button>
+            </td>
+            <td>
+              <button class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Data Table -->
+<div class="row">
+  <div class="col-md-12" [hidden]="bookingTable">
+
+    <div style="position:relative">
+      <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+      <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>Name</th>
+
+            <th>Key</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Note</th>
+            <th>Service</th>
+            <th>Stage</th>
+            <th>Total Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of booking_result">
+
+            <td>{{bookings[booking].customerName}}</td>
+            <td>{{booking}}</td>
+            <td>{{bookings[booking].bookingSchedule.date}}</td>
+            <td>{{bookings[booking].bookingSchedule.time}}</td>
+            <td>{{bookings[booking].notes}}</td>
+            <td>{{bookings[booking].services[0].serviceName}}</td>
+            <td>{{bookings[booking].stage}}</td>
+            <td>{{bookings[booking].totalAmount}}</td>
+            <td></td>
+            <td>
+              <button class="btn btn-default" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

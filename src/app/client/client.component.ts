@@ -22,14 +22,17 @@ export class ClientComponent implements OnInit {
   userkey: any = [];
   customerKey: any = [];
   result:any=[];
+  booking_result: any = [];
+  bookingkey: any = [];
  dtOptions: DataTables.Settings = {}; 
  dtTrigger: Subject<any> = new Subject();
   adressPage: any = true;
   bookingPage: any = true;
   modal_opened: boolean = true;
-  
+  bookings:any = [];
   updatePage: any = true;
   userTable:any = true;
+  bookingTable: any = true;
   updateUser: any = {
     userKey:'',
     UserFName:'',
@@ -82,7 +85,7 @@ export class ClientComponent implements OnInit {
   loader=true;
   is_readonly: boolean = true;
   error;
- 
+  bookings_arr: any = {};
   constructor(private router: Router,private elementRef: ElementRef , private fb: FormBuilder,private productService: ProductService,public db: AngularFireDatabase) {
     this.model = {
       partnerFName: '',
@@ -204,6 +207,17 @@ export class ClientComponent implements OnInit {
          this.userkey = Object.keys(this.users);
 
       });
+      this.productService.readBookings()
+      .subscribe(bookings => {
+        this.bookings = bookings['bookings'];
+      
+        this.bookings_arr = Object.values(this.bookings);
+       
+
+        console.log(this.bookings_arr);
+        
+        this.bookingkey = Object.keys(this.bookings);
+      })
 
   }
 
@@ -372,6 +386,7 @@ export class ClientComponent implements OnInit {
         this.dtTrigger.next();
     });
     this.userTable=false;
+    this.bookingTable = true;
   }
   searchName(fname,lname): void  {
     this.dtOptions = {
@@ -392,6 +407,7 @@ export class ClientComponent implements OnInit {
          this.dtTrigger.next();
     });
     this.userTable=false;
+    this.bookingTable = true;
     
   }
   searchEmail(email): void  {
@@ -409,7 +425,25 @@ export class ClientComponent implements OnInit {
         this.dtTrigger.next();
     });
     this.userTable=false;
+    this.bookingTable = true;
 
   }
+  findbooking(key,uid){
+    this.booking_result = [];
+    for (let booking of this.bookingkey) {
+      if (this.bookings[booking].customerId == uid) {
+
+        console.log(this.bookings[booking].customerId);
+        this.booking_result.push(booking);
+        console.log(this.booking_result);
+
+
+      }
+
+
+    }
+    this.bookingTable = false;
+  }
+
 
 }

@@ -45,6 +45,7 @@ import { FusionChartsModule } from 'angular4-fusioncharts';
 
 // import { GraphComponent } from './graph/graph.component';
 import { Data1Component } from './data1/data1.component';
+import { GetbookingComponent } from './getbooking/getbooking.component';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 // AF2 DEV Settings
@@ -84,7 +85,8 @@ export const firebaseConfig = {
     ClientComponent,
     PartnerDetailsComponent,
     DataComponent,
-    Data1Component
+    Data1Component,
+    GetbookingComponent
     ],
   imports: [
     BrowserModule,
