@@ -32,7 +32,7 @@
                       </div>
                       <div>
                           <label class="mt10   control-label txtlabel1" style="margin-bottom: 15px;"><b> Password  </b></label>
-                          <input type="password" class="form-control height50" #password formControlName="password" type="password" placeholder="Your email address" [class.invalid]="!rForm.controls.password.valid && rForm.controls.password.dirty" />
+                          <input type="password" class="form-control height50" #password formControlName="password" type="password" placeholder="Your password" [class.invalid]="!rForm.controls.password.valid && rForm.controls.password.dirty" />
                       </div>
                       <div class="danger" *ngIf="!rForm.controls.password.valid  && rForm.controls.password.dirty">
                           <p>Please enter a valid password.</p>

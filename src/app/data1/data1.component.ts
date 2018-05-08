@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
-
+import { PartnerService } from '../services/partner.service';
 
 class Person {
 
@@ -27,7 +27,8 @@ class Booking {
 @Component({
   selector: 'app-data1',
   templateUrl: './data1.component.html',
-  styleUrls: ['./data1.component.css']
+  styleUrls: ['./data1.component.css'],
+  providers: [ProductService,PartnerService]
 })
 export class Data1Component implements OnInit {
 
@@ -64,13 +65,36 @@ export class Data1Component implements OnInit {
   dataSource;
   title = 'Angular4 FusionCharts Sample';
 
+  item_partners: any = {};
+ partners: any = {};
+ partner_jan = 0;
+ partner_feb = 0;
+ partner_mar = 0;
+ partner_apr = 0;
+ partner_may = 0;
+ partner_jun = 0;
+ partner_jul = 0;
+ partner_aug = 0;
+ partner_sep = 0;
+ partner_oct = 0;
+ partner_nov = 0;
+ partner_dec = 0;
+
+ id2 = 'chart1';
+ width2 = 600;
+ height2 = 400;
+ type2 = 'column2d';
+ dataFormat2 = 'json';
+ dataSource2;
+ title2 = 'Angular4 FusionCharts Sample';
+
   width1 = 600;
   height1 = 400;
   type1 = 'pie3d';
   dataFormat1 = 'json';
   dataSource1;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,private partnerService:PartnerService) {
 
   }
 
@@ -282,6 +306,105 @@ export class Data1Component implements OnInit {
         };
 
       });
+      this.partnerService.readPartner()
+     .subscribe(partners => {
+       this.partners = partners['partner'];
+       console.log(partners);
+       this.item_partners = Object.values(this.partners);
+       // this.items1 = Object.values(this.items);
+
+       console.log(this.item_partners[0].createdAt);
+
+       // console.log(Object.values(this.items).length);
+       // this.foundBooks = Array.of(this.foundBooks);
+
+       console.log(this.partners);
+       // alert(this.persons);
+       for (let item of this.item_partners) {
+         // alert('loop');
+         let date = item.createdAt;
+         let newDate = new Date(date);
+         console.log(newDate.getMonth());
+         switch (newDate.getMonth()) {
+           case 0:
+             this.partner_jan++;
+             break;
+           case 1:
+             this.partner_feb++;
+             break;
+           case 2:
+             this.partner_mar++;
+             break;
+           case 3:
+             this.partner_apr++;
+             break;
+           case 4:
+             this.partner_may++;
+             break;
+           case 5:
+             this.partner_jun++;
+             break;
+           case 6:
+             this.partner_jul++;
+             break;
+           case 7:
+             this.partner_aug++;
+             break;
+           case 8:
+             this.partner_sep++;
+             break;
+           case 9:
+             this.partner_oct++;
+             break;
+           case 10:
+             this.partner_nov++;
+             break;
+           case 11:
+             this.partner_dec++;
+             break;
+           // default:
+           //   confirm('No data found');
+
+         }
+       }
+       console.log('marpar' + this.partner_mar);
+       console.log('aprpar' + this.partner_apr);
+       //   width = 600;
+       //   height = 400;
+       //   type = 'column2d';
+       //   dataFormat = 'json';
+       this.dataSource2 = {
+         "chart": {
+           "caption": "Mobile styler ",
+           "subCaption": "No of signup for partner in month",
+           // "numberPrefix": "$",
+           "theme": "ocean"
+         },
+         "data": [
+           {
+             "label": "January",
+             "value": this.partner_jan
+           },
+           {
+             "label": "February",
+             "value": this.partner_feb
+           },
+           {
+             "label": "Mar",
+             "value": this.partner_mar
+           },
+           {
+             "label": "Apr",
+             "value": this.partner_apr
+           },
+           {
+             "label": "May",
+             "value": this.partner_may
+           }
+         ]
+       };
+
+     });
   }
 
 }

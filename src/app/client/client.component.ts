@@ -29,8 +29,10 @@ export class ClientComponent implements OnInit {
   adressPage: any = true;
   bookingPage: any = true;
   modal_opened: boolean = true;
+  modal1_opened: boolean = true;
   bookings:any = [];
   updatePage: any = true;
+  updateBooking:any=true;
   userTable:any = true;
   bookingTable: any = true;
   updateUser: any = {
@@ -41,6 +43,16 @@ export class ClientComponent implements OnInit {
     email: '',
     gender: '',
     mobile:''
+
+  };
+  updateBookingData: any = {
+    booking:'',
+    customername:'',
+   
+    date: '',
+    time: '',
+    note: '',
+    stage:''
 
   };
   model: any = {
@@ -138,6 +150,26 @@ export class ClientComponent implements OnInit {
       'mobile':[null]
   
     });
+    this.updateBookingData = {
+      booking:'',
+      customername:'',
+     
+      date: '',
+      time: '',
+      note: '',
+      stage:''
+  
+    };
+    this.updateBookingData= fb.group( {
+      'booking':[null],
+      'customername':[null],
+     
+      'date': [null],
+      'time':[null],
+      'note': [null],
+      'stage':[null]
+  
+    });
 
     let mobileRegEx = /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/; //  regular expression for us number
     let nameRegEx = /^[a-zA-Z ]{2,30}$/;
@@ -192,15 +224,7 @@ export class ClientComponent implements OnInit {
     this.productService.readUsers()
       .subscribe(users => {
         this.users = users['customer'];
-        //console.log(products);
-        //console.log(products.products);
-        // console.log(Object.keys(products.products)[0]);
-        // console.log((Object.values(products.products)[2].pname);
-        //console.log((Object.values(products.products)[2]));
-        // this.dtTrigger.next();
-         //console.log(this.users);
-        // console.log((Object.values(this.users)));
-        // console.log(Object.values(this.users).length);
+       
         this.items = Object.values(this.users);
 
         // console.log(this.items);
@@ -265,49 +289,7 @@ export class ClientComponent implements OnInit {
     this.is_readonly = false;
     // this.is_readonly = !this.is_readonly
   }
-  // findfname(fname,lname){
-  //   // alert(fname);
-  //   // alert(lname);
-  //   let count = 0;
-  //   for (let i = 0; i < this.datas.length; i++) {
-  //     if (this.datas[i].fname == fname && this.datas[i].lname == lname) {
-
-  //       alert(this.datas[i].email);
-  //       // this.loadProfilefromdata(this.datas[i].email,this.datas[i].fname,this.datas[i].mname, this.datas[i].mobile, this.datas[i].lname,this.datas[i].dob,this.datas[i].gender);
-  //       count++;
-  //       break;
-  //     }
-
-  //   }
-  //   if (count == 0) {
-  //     alert('not found');
-  //   }
-  // }
-
-  // findEmailfromdata(email,fname,lname) {
-  //   //console.log(this.items);
-  //  // alert(email);
-  //   let count = 0;
-  //   this.result=[];
-  //   for(let user of this.userkey)
-  //   {
-  //     if (this.users[user].partnerEmail == email || this.users[user].partnerFirstName==fname && this.users[user].partnerLastName==lname) {
-
-  //       console.log(this.users[user].partnerEmail);
-  //       this.result.push(user);
-  //       console.log(this.result);
-  //       count++;
-
-  //     }
-
-
-  //   }
-  //   this.userTable=false;
-   
-  //   if (count == 0) {
-  //     alert('not found');
-  //   }
-  // }
+  
 
   loadProfilefromdata(email,fname,mname,mobile,lname,dob,gender,reward) {
     console.log(dob);
@@ -338,7 +320,6 @@ export class ClientComponent implements OnInit {
   'email': email,
   'gender':gender,
   'mobile':mobile
-
      });
   }
   hideUpdateModal() {
@@ -347,11 +328,9 @@ export class ClientComponent implements OnInit {
   }
 
   updateUserInfo(updateUser){
-    //alert(this.updateUser.userKey);
-    //let data = this.updateUser.value;
+    
     updateUser=this.updateUser.value;
-   //console.log(updateUser);
-   //alert(updateUser.UserFName);
+   
    var json={
     partnerFirstName:updateUser.UserFName,
    
@@ -360,7 +339,7 @@ export class ClientComponent implements OnInit {
     partnerEmail:updateUser.email,
     partnerPhone:updateUser.mobile
    };
-   //alert(json);
+   
    console.log(json);
    this.db.list('/customer').update(updateUser.userKey,json);
 
@@ -444,6 +423,45 @@ export class ClientComponent implements OnInit {
     }
     this.bookingTable = false;
   }
+  showUpdateBookingModal(booking,customerName,date,time,notes,serviceName,stage,totalAmount)
+  {
+    this.updateBooking = !this.updateBooking;
+    this.modal_opened = !this.modal_opened;
+    this.updateBookingData.setValue({
+      'booking':booking,
+      'customername':customerName,
+      
+      'date':date,
+      'time': time,
+      'note':notes,
+      'stage':stage
+         });
+  }
+  hideUpdateBookingModal() {
+    this.updateBooking = !this.updateBooking;
+    this.modal1_opened = !this.modal_opened;
+  }
+  updateBookingInfo(updateBookingData)
+  {
+      
+    updateBookingData=this.updateBookingData.value;
+    //console.log(updateBookingData);
+   var json={
+    customerName:updateBookingData.customername,
+   
+    dates:updateBookingData.date,
+    times:updateBookingData.time,
+    notes:updateBookingData.note,
+    stage:updateBookingData.stage
+   };
+   
+   //console.log(json);
+    this.db.list('/booking').update(updateBookingData.booking,json);
+
+   this.hideBookingModal() ;
+
+  }
+
 
 
 }

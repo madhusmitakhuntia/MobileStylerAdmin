@@ -297,7 +297,7 @@ float: left;"><b class="theme-color pull-left"> Client </b></div>
               <td>{{bookings[booking].totalAmount}}</td>
               <td></td>
               <td>
-                <button class="btn btn-default" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">update</button>
+                <button class="btn btn-default" (click)="showUpdateBookingModal(booking,bookings[booking].customerName,bookings[booking].bookingSchedule.date,bookings[booking].bookingSchedule.time,bookings[booking].notes,bookings[booking].services[0].serviceName,bookings[booking].stage,bookings[booking].totalAmount)">update</button>
               </td>
             </tr>
           </tbody>
@@ -305,8 +305,97 @@ float: left;"><b class="theme-color pull-left"> Client </b></div>
       </div>
     </div>
   </div>
-  <!-- <div class="row" *ngIf="items?.length == 0">
-    <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-  </div> -->
+ 
+  <!--Update Bookings -->
+  <div class="dialog" [hidden]="updateBooking">
+    <div class="modal-dialog modal-sm login-cls pt10">
+        <form [formGroup]="updateBookingData">
+            <div class="modal-content">
+                <div class="panel panel-default" style="margin-bottom: 0px;">
+  
+                    <div class="panel-body" style="min-height: 400px;">
+                        <button type="button" class="close" data-dismiss="modal" (click)="hideUpdateBookingModal()">&times;</button>
+  
+                        <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;"> <b>Update Booking Info</b> </p>
+                        <div class="clearfix mtx20"></div>
+                        <input type="hidden" #booking formControlName="booking" />
+                        <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Customer Name</label>
+                            </div>
+                           
+                            <div class="col-md-7">
+  
+                                <input class="form-control rdc2" #customername formControlName="customername" readonly/>
+                            </div>
+                          
+                        </div>
+                        <!-- <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Middle Name</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <input class="form-control rdc2" #UserMName formControlName="UserMName" />
+                            </div>
+                          
+                        </div> -->
+                        <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Date</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <input type="date" class="form-control rdc2" #date formControlName="date" />
+                            </div>
+                          
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Time</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <input type="time" class="form-control rdc2" #time formControlName="time" />
+                            </div>
+                          
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Note</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <textarea  class="form-control ng-untouched ng-pristine ng-valid" cols="10" rows="3"  formControlName="note"></textarea>
+                            </div>
+                          
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Stage</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <select class="form-control selectcontrol"  formControlName="stage">
+                                   
+   <option ng-value="pending">pending</option>
+   <option ng-value="completed">completed</option>
+   <option ng-value="end">end</option>
+   
+    
+                                </select>
+                            </div>
+                          
+                        </div>
+  
+                    </div>
+                </div>
+                <div style="background-color: #34495e" (click)="updateBookingInfo(updateBookingData)" ><button  id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button> </div>
+            </div>
+        </form>
+    </div>
+    
+  </div>
+  <div class="overlay" [hidden]="modal1_opened"></div>
 
 
