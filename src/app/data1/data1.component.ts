@@ -103,22 +103,22 @@ export class Data1Component implements OnInit {
     this.productService.readUsers()
       .subscribe(persons => {
         this.persons = persons['customer'];
-        console.log(persons);
+        //console.log(persons);
         this.items = Object.values(this.persons);
         // this.items1 = Object.values(this.items);
 
-        console.log(this.items[0].createdAt);
+        //console.log(this.items[0].createdAt);
 
         // console.log(Object.values(this.items).length);
         // this.foundBooks = Array.of(this.foundBooks);
 
-        console.log(this.persons);
+        //console.log(this.persons);
         // alert(this.persons);
         for (let item of this.items) {
           // alert('loop');
           let date = item.createdAt;
           let newDate = new Date(date);
-          console.log(newDate.getMonth());
+          //console.log(newDate.getMonth());
           switch (newDate.getMonth()) {
             case 0:
               this.jan++;
@@ -161,16 +161,16 @@ export class Data1Component implements OnInit {
 
           }
         }
-        console.log('mar' + this.mar);
-        console.log('apr' + this.apr);
+        //console.log('mar' + this.mar);
+        //console.log('apr' + this.apr);
         //   width = 600;
         //   height = 400;
         //   type = 'column2d';
         //   dataFormat = 'json';
         this.dataSource = {
           "chart": {
-            "caption": "Mobile styler ",
-            "subCaption": "No of signup in month",
+            "caption": "Customer ",
+            "subCaption": "No of signup per month",
             // "numberPrefix": "$",
             "theme": "ocean"
           },
@@ -202,7 +202,7 @@ export class Data1Component implements OnInit {
     this.productService.readBookings()
       .subscribe(bookings => {
         this.bookings = bookings['bookings'];
-        console.log(bookings);
+        //console.log(bookings);
         this.bookings_arr = Object.values(this.bookings);
         // this.items1 = Object.values(this.items);
 
@@ -211,14 +211,14 @@ export class Data1Component implements OnInit {
         // console.log(Object.values(this.items).length);
         // this.foundBooks = Array.of(this.foundBooks);
 
-        console.log(this.bookings);
-        console.log(this.items);
-        console.log(this.bookings_arr[0].services[0]);
+        //console.log(this.bookings);
+        //console.log(this.items);
+        //console.log(this.bookings_arr[0].services[0]);
         for (let item of this.bookings_arr) {
           // alert('loop');
           let data = item.services[0].serviceName;
 
-          console.log(data);
+          //console.log(data);
           switch (data) {
             case "Haircuts":
               this.haircuts++;
@@ -250,8 +250,8 @@ export class Data1Component implements OnInit {
 
           }
         }
-        console.log('Haircut' + this.haircuts);
-        console.log('Hair Tre' + this.hair_treatments);
+        //console.log('Haircut' + this.haircuts);
+        //console.log('Hair Tre' + this.hair_treatments);
         // alert(this.persons);
 
 
@@ -309,22 +309,22 @@ export class Data1Component implements OnInit {
       this.partnerService.readPartner()
      .subscribe(partners => {
        this.partners = partners['partner'];
-       console.log(partners);
+       //console.log(partners);
        this.item_partners = Object.values(this.partners);
        // this.items1 = Object.values(this.items);
 
-       console.log(this.item_partners[0].createdAt);
+       //console.log(this.item_partners[0].createdAt);
 
        // console.log(Object.values(this.items).length);
        // this.foundBooks = Array.of(this.foundBooks);
 
-       console.log(this.partners);
+      // console.log(this.partners);
        // alert(this.persons);
        for (let item of this.item_partners) {
          // alert('loop');
          let date = item.createdAt;
          let newDate = new Date(date);
-         console.log(newDate.getMonth());
+         //console.log(newDate.getMonth());
          switch (newDate.getMonth()) {
            case 0:
              this.partner_jan++;
@@ -367,16 +367,16 @@ export class Data1Component implements OnInit {
 
          }
        }
-       console.log('marpar' + this.partner_mar);
-       console.log('aprpar' + this.partner_apr);
+       //console.log('marpar' + this.partner_mar);
+       //console.log('aprpar' + this.partner_apr);
        //   width = 600;
        //   height = 400;
        //   type = 'column2d';
        //   dataFormat = 'json';
        this.dataSource2 = {
          "chart": {
-           "caption": "Mobile styler ",
-           "subCaption": "No of signup for partner in month",
+           "caption": "Partner ",
+           "subCaption": "No of signup per month",
            // "numberPrefix": "$",
            "theme": "ocean"
          },

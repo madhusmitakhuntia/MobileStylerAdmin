@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DataTablesModule } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
+import { ProductService } from '../services/product.service';
 declare var $: any;
 
 @Component({
@@ -22,12 +23,17 @@ export class PartnerComponent implements OnInit {
   service_arr: any =[];
   service_key: any =[];
   service_result: any = [];
+  bookings:any=[];
+  bookings_arr:any=[];
+  bookingkey:any=[];
+  booking_result:any=[];
   dtOptions: DataTables.Settings = {}; 
   dtTrigger: Subject<any> = new Subject();
   users: any = {};
   partnerTable:any = true;
   serviceTable: any = true;
   updatePartner: any = true;
+  bookingTable:any=true;
   modal_opened: any=true;
 
   searchPartnerByName:any={
@@ -52,7 +58,7 @@ export class PartnerComponent implements OnInit {
 
   }
 
-  constructor( private fb: FormBuilder,private partnerService:PartnerService,public db: AngularFireDatabase) {
+  constructor( private fb: FormBuilder,private partnerService:PartnerService,public db: AngularFireDatabase,private productService:ProductService) {
     
     this.searchPartnerByName={
       partnerFname:'',
@@ -103,10 +109,10 @@ export class PartnerComponent implements OnInit {
     this. partnerService.readPartner()
     .subscribe(partners => {
       this.partners = partners['partner'];
-    
+      console.log(this.partners);
       this.items = Object.values(this.partners);
 
-        // console.log(this.items);
+         console.log(this.items);
        this.partkey = Object.keys(this.partners);
 
     });
@@ -120,6 +126,17 @@ export class PartnerComponent implements OnInit {
       //console.log(this.service_arr);
       
       this.service_key = Object.keys(this.services);
+    });
+    this.productService.readBookings()
+    .subscribe(bookings => {
+      this.bookings = bookings['bookings'];
+    
+      this.bookings_arr = Object.values(this.bookings);
+     
+
+     // console.log(this.bookings_arr);
+      
+      this.bookingkey = Object.keys(this.bookings);
     })
   }
   searchPartnerName(fname,lname): void  {
@@ -127,6 +144,13 @@ export class PartnerComponent implements OnInit {
       pagingType: 'full_numbers'
      
     };
+    this.searchPartnerByEmail.setValue({
+      email:''
+    });
+    this.searchPartnerByDate.setValue({
+      partnerfDate:'',
+      partnertDate:''
+    });
     this.partnerService.readPartnerByName(fname,lname)
     .subscribe(partners => {
       this.partners = partners['partner'];
@@ -139,14 +163,23 @@ export class PartnerComponent implements OnInit {
          this.dtTrigger.next();
     });
     this.partnerTable=false;
-   // this.serviceTable = true;
+    this.serviceTable = true;
+    this.bookingTable = true;
   }
   searchPartnerEmail(email): void  {
     this.dtOptions = {
       pagingType: 'full_numbers'
      
     };
-    alert(email);
+    this.searchPartnerByName.setValue({
+      partnerFname:'',
+      partnerLname:''
+    });
+    this.searchPartnerByDate.setValue({
+      partnerfDate:'',
+      partnertDate:''
+    });
+   // alert(email);
     this.partnerService.readPartnerByEmail(email)
     .subscribe(partners => {
       this.partners = partners['partner'];
@@ -154,18 +187,26 @@ export class PartnerComponent implements OnInit {
        this.items = Object.values(this.partners);
        
        this.partnerkey = Object.keys(this.partners);
-      console.log( "keyyy"+this.partnerkey);
+     // console.log( "keyyy"+this.partnerkey);
         $('#DataTables').DataTable().destroy();
          this.dtTrigger.next();
     });
     this.partnerTable=false;
-   // this.serviceTable = true;
+    this.serviceTable = true;
+    this.bookingTable = true;
   }
   searchPartnerDate(fdate,tdate): void  {
     this.dtOptions = {
       pagingType: 'full_numbers'
      
     };
+    this.searchPartnerByName.setValue({
+      partnerFname:'',
+      partnerLname:''
+    });
+    this.searchPartnerByEmail.setValue({
+      email:''
+    });
     this.partnerService.readPartnerByDate(fdate,tdate)
     .subscribe(partners => {
       this.partners = partners['partner'];
@@ -178,7 +219,8 @@ export class PartnerComponent implements OnInit {
          this.dtTrigger.next();
     });
     this.partnerTable=false;
-   // this.serviceTable = true;
+    this.serviceTable = true;
+    this.bookingTable = true;
   }
 
   updatePartnerDetails(partner,fname,lname,email,gender,mobile)
@@ -204,6 +246,7 @@ export class PartnerComponent implements OnInit {
   saveUpdateData(updatePartnerdetail)
   {
     updatePartnerdetail=this.updatePartnerdetail.value;
+    //alert(updatePartnerdetail);
     var json={
       partnerFirstName:updatePartnerdetail.partnerFirstname,
       partnerLastName:updatePartnerdetail.partnerLastname,
@@ -212,7 +255,12 @@ export class PartnerComponent implements OnInit {
       partnerPhone:updatePartnerdetail.partnerMobile
     }
     this.db.list('/partner').update(updatePartnerdetail.userKey,json);
+    //console.log(json);
+    //console.log(updatePartnerdetail.userKey);
     this.hidePartnerModal();
+    this.partnerTable=true;
+    this.serviceTable = true;
+    this.bookingTable=true;
   }
   viewService(partner,key)
   {
@@ -231,6 +279,24 @@ export class PartnerComponent implements OnInit {
       
     }
      this.serviceTable = false;
+  }
+  viewBooking(partner,key)
+  {
+   // alert(partner+key);
+   this.booking_result = [];
+   for (let booking of this.bookingkey) {
+     if (this.bookings[booking].partnerId == key) {
+
+       console.log(this.bookings[booking].partnerId);
+       this.booking_result.push(booking);
+       console.log(this.booking_result);
+
+
+     }
+
+
+   }
+   this.bookingTable = false;
   }
 
 

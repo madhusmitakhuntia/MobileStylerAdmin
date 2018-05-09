@@ -107,20 +107,25 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
     </div>
                 
 </div>
-<div class="row" >
+<div >
         
-  <div class="col-md-12" [hidden]="partnerTable">
+  <div class="col-md-12" style="margin-top: 35px;"  [hidden]="partnerTable">
 
     <div class="row" *ngIf="partnerkey?.length == 0">
       <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
    </div> 
-   <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+   <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
     <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button>
-  </div>
+  </div> -->
+  <div style="position:absolute;top: -20px;right: 15px;font-weight: 800;z-index: 999">
+      <button type="button" class="close" data-dismiss="modal" (click)="hideTable()">
+        <i class="fa fa-times-circle"></i>
+      </button>
+    </div>
   <div class="clearfix"></div>
   <div style="position:relative">
       
-      
+      <div class="col-md-12" [hidden]="partnerTable">  
     <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" id="DataTables" >
     <thead>
       <tr>
@@ -131,7 +136,8 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
         <th>Email</th>
         <th>Gender</th>
         <th>Mobile</th>
-        <th>Address</th>
+       
+        <th>Booking</th>
         <th>Service</th>
         <th>Action</th>
       
@@ -148,17 +154,17 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
         <td>{{partners[partner].partnerGender}}</td>
         <td>{{partners[partner].partnerPhone}}</td>
        
-        <td></td>
+        <td><button class="btn btn-success" (click)="viewBooking(partner,partners[partner].uid)">View Booking</button></td>
         <td>
-          <button class="btn btn-default" (click)="viewService(partner,partners[partner].uid)">View Service</button>
+          <button class="btn btn-success" (click)="viewService(partner,partners[partner].uid)">View Service</button>
         </td>
-        <td><button class="btn btn-default" (click)="updatePartnerDetails(partner,partners[partner].partnerFirstName,partners[partner].partnerLastName,partners[partner].partnerEmail,partners[partner].partnerGender,partners[partner].partnerPhone)">update</button></td>
+        <td><button class="btn btn-warning" (click)="updatePartnerDetails(partner,partners[partner].partnerFirstName,partners[partner].partnerLastName,partners[partner].partnerEmail,partners[partner].partnerGender,partners[partner].partnerPhone)">Edit</button></td>
       
       </tr>
     </tbody>
   </table>
 </div>
-
+</div>
 
   </div>
 </div>
@@ -294,3 +300,46 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
       </div>
     </div>
   </div>
+
+  <!--Booking Table -->
+
+  <div class="row">
+        <div class="col-md-12" [hidden]="bookingTable">
+      
+          <div style="position:relative">
+            <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+            <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <!-- <th>Created At</th> -->
+                  <th>Name</th>
+      
+                  <th>Key</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Note</th>
+                  <th>Service</th>
+                  <th>Stage</th>
+                  <th>Total Amount</th>
+              
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let booking of booking_result">
+      
+                  <td>{{bookings[booking].customerName}}</td>
+                  <td>{{booking}}</td>
+                  <td>{{bookings[booking].bookingSchedule.date}}</td>
+                  <td>{{bookings[booking].bookingSchedule.time}}</td>
+                  <td>{{bookings[booking].notes}}</td>
+                  <td>{{bookings[booking].services[0].serviceName}}</td>
+                  <td>{{bookings[booking].stage}}</td>
+                  <td>{{bookings[booking].totalAmount}}</td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
