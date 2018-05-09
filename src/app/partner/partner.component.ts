@@ -35,7 +35,7 @@ export class PartnerComponent implements OnInit {
     partnerLname:''
   }
   searchPartnerByEmail:any={
-    partnerEmail:''
+    email:''
   }
   searchPartnerByDate:any={
     partnerfDate:'',
@@ -59,7 +59,7 @@ export class PartnerComponent implements OnInit {
       partnerLname:''
     };
     this.searchPartnerByEmail={
-      partnerEmail:''
+      email:''
     };
     this.searchPartnerByDate={
       partnerfDate:'',
@@ -80,7 +80,7 @@ export class PartnerComponent implements OnInit {
       'partnerLname':[null]
     });
     this.searchPartnerByEmail=fb.group({
-      'partnerEmail':[null]
+      'email':[null]
       
     });
     this.searchPartnerByDate=fb.group({
@@ -146,6 +146,7 @@ export class PartnerComponent implements OnInit {
       pagingType: 'full_numbers'
      
     };
+    alert(email);
     this.partnerService.readPartnerByEmail(email)
     .subscribe(partners => {
       this.partners = partners['partner'];
@@ -153,7 +154,7 @@ export class PartnerComponent implements OnInit {
        this.items = Object.values(this.partners);
        
        this.partnerkey = Object.keys(this.partners);
-     // console.log( "key"+this.customerKey);
+      console.log( "keyyy"+this.partnerkey);
         $('#DataTables').DataTable().destroy();
          this.dtTrigger.next();
     });

@@ -20,7 +20,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: PartnerDetailsComponent
+                component: Data1Component
             },
             // {
             //     path: 'demopartner',
@@ -34,10 +34,10 @@ const routes: Routes = [
                 path: 'client',
                 component:ClientComponent 
             },
-            {
-                path: 'graph',
-                component:Data1Component 
-            }
+            // {
+            //     path: 'graph',
+            //     component:Data1Component 
+            // }
            
            
         ]

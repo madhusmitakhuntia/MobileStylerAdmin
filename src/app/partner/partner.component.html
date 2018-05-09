@@ -43,7 +43,7 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
                       
                       <div class="col-md-12">
                         <label class="form-control-static txtlabel">Email </label>
-                        <input class="form-control rdc2" #partnerEmail formControlName="partnerEmail" />
+                        <input class="form-control rdc2" #email formControlName="email" />
                         <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
                     <p>Please enter a valid email.</p>
                 </div>-->
@@ -56,7 +56,7 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
                   <div class="col-md-12">
                     
   
-                    <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerEmail(partnerEmail.value);">Search</button>
+                    <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerEmail(email.value);">Search</button>
                   </div>
                 </div>
           
