@@ -57,12 +57,20 @@ export const firebaseConfig = {
   //   projectId: "mobile-styler-dev",
   //   storageBucket: "mobile-styler-dev.appspot.com",
   //   messagingSenderId: "413615010645"
-  apiKey: "AIzaSyCRBXOBtdi9PTZHDyhYJB5Riuf3w0WyW4E",
-    authDomain: "partner-f3f0b.firebaseapp.com",
-    databaseURL: "https://partner-f3f0b.firebaseio.com",
-    projectId: "partner-f3f0b",
-    storageBucket: "partner-f3f0b.appspot.com",
-    messagingSenderId: "396776753432"
+  //brahmi
+  // apiKey: "AIzaSyCRBXOBtdi9PTZHDyhYJB5Riuf3w0WyW4E",
+  //   authDomain: "partner-f3f0b.firebaseapp.com",
+  //   databaseURL: "https://partner-f3f0b.firebaseio.com",
+  //   projectId: "partner-f3f0b",
+  //   storageBucket: "partner-f3f0b.appspot.com",
+  //   messagingSenderId: "396776753432"
+  //mobilestyler-admin
+  apiKey: "AIzaSyDYrZQd7VnoKyWYHkdh5aN-sqvooI7jJCQ",
+    authDomain: "mobilestyler-admin.firebaseapp.com",
+    databaseURL: "https://mobilestyler-admin.firebaseio.com",
+    projectId: "mobilestyler-admin",
+    storageBucket: "mobilestyler-admin.appspot.com",
+    messagingSenderId: "70818185647"
 };
 
 @NgModule({

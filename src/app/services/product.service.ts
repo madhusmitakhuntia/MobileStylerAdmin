@@ -47,18 +47,18 @@ export class ProductService {
     // Get list of users from remote server.
     readUsers(): Observable<Person[]>{
         return this._http
-            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getCustomer")
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomer")
             .map(res => res.json());
     }
     readBookings(): Observable<Booking[]> {
         return this._http
-            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getBookings")
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getBookings")
             .map(res => res.json());
     }
     readUserByDate(from,to): Observable<Person[]>{
   
         return this._http
-            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getCustomerbydate?from="+from+"&to="+to)
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbydate?from="+from+"&to="+to)
             .map(res => res.json());
     }
     readUserByName(fname,lname): Observable<Person[]>{
@@ -66,13 +66,13 @@ export class ProductService {
         // alert(lname);
       
         return this._http
-            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getCustomerbyname?fname="+fname+"&lname="+lname)
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbyname?fname="+fname+"&lname="+lname)
             .map(res => res.json());
     }
     readUserByEmail(email): Observable<Person[]>{
         
         return this._http
-            .get("https://us-central1-partner-f3f0b.cloudfunctions.net/getCustomerbyemail?email="+email)
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbyemail?email="+email)
             .map(res => res.json());
     }
   

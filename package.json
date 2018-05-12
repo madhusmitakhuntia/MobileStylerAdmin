@@ -39,6 +39,7 @@
     "datatables.net-dt": "^1.10.16",
     "firebase": "^4.9.1",
     "fusioncharts": "^3.12.2",
+    "ignore-case": "^0.1.0",
     "jquery": "^3.3.1",
     "moment": "^2.21.0",
     "ng-sidebar": "6.0.4",

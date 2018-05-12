@@ -35,6 +35,7 @@ export class ClientComponent implements OnInit {
   updateBooking: any = true;
   userTable: any = true;
   bookingTable: any = true;
+  not_found: boolean = true;
   updateUser: any = {
     userKey: '',
     UserFName: '',
@@ -306,18 +307,32 @@ export class ClientComponent implements OnInit {
     this.searchByEmail.setValue({
       email:''
     });
-    
     this.productService.readUserByDate(fdate, tdate)
       .subscribe(users => {
         this.users = users['customer'];
-        //console.log(this.users);
-        this.items = Object.values(this.users);
-        this.customerKey = Object.keys(this.users);
-        $('#DataTables').DataTable().destroy();
-        this.dtTrigger.next();
+        if(this.users == null)
+        {
+          //console.log('If condition');
+          this.userTable = true;
+          this.not_found = false;
+          $('#DataTables').DataTable().destroy();
+          this.items =[];
+          this.customerKey =[];
+        }
+        else
+        {
+          this.not_found = true;
+          console.log('else condition');
+          this.items = Object.values(this.users);
+          this.customerKey = Object.keys(this.users);
+          $('#DataTables').DataTable().destroy();
+          this.dtTrigger.next();
+ 
+          this.userTable = false;
+          this.bookingTable = true;
+        }
       });
-    this.userTable = false;
-    this.bookingTable = true;
+    
   }
   searchName(fname, lname): void {
     this.dtOptions = {
@@ -364,14 +379,31 @@ export class ClientComponent implements OnInit {
     this.productService.readUserByEmail(email)
       .subscribe(users => {
         this.users = users['customer'];
+        if(this.users == null)
+        {
+          //console.log('If condition');
+          this.userTable = true;
+          this.not_found = false;
+          $('#DataTables').DataTable().destroy();
+          this.items =[];
+          this.customerKey =[];
+        }
+        else
+        {
+          this.not_found = true;
+          console.log('else condition');
+          this.items = Object.values(this.users);
+          this.customerKey = Object.keys(this.users);
+          $('#DataTables').DataTable().destroy();
+          this.dtTrigger.next();
+ 
+          this.userTable = false;
+          this.bookingTable = true;
+        }
 
-        this.items = Object.values(this.users);
-        this.customerKey = Object.keys(this.users);
-        $('#DataTables').DataTable().destroy();
-        this.dtTrigger.next();
+       
       });
-    this.userTable = false;
-    this.bookingTable = true;
+    
 
   }
   findbooking(key, uid) {
@@ -423,7 +455,7 @@ export class ClientComponent implements OnInit {
     //console.log(json);
     this.db.list('/booking').update(updateBookingData.booking, json);
 
-    this.hideBookingModal();
+    this.hideUpdateBookingModal();
 
   }
 

@@ -108,7 +108,9 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
                 
 </div>
 <div >
-        
+  <div align='center' style="margin-top: 30px; color: #b11616;" class="col-md-12" [hidden]="not_found">
+    <h1>No Data Found! </h1>
+   </div>      
   <div class="col-md-12" style="margin-top: 35px;"  [hidden]="partnerTable">
 
     <div class="row" *ngIf="partnerkey?.length == 0">
