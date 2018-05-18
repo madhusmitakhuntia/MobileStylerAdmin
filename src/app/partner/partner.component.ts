@@ -330,6 +330,21 @@ export class PartnerComponent implements OnInit {
     }
     this.bookingTable = false;
   }
+  inactivePartner(partner)
+  {
+    var json = {
+      status:"inactive"
+    }
+    this.db.list('/partner').update(partner, json);
+  }
+  activePartner(partner){
+    alert(partner);
+    var json = {
+      status:"active"
+    }
+    
+    this.db.list('/partner').update(partner, json);
 
+  }
 
 }

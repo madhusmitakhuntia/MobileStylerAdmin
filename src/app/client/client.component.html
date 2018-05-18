@@ -314,7 +314,7 @@ float: left;">
             <td>{{bookings[booking].totalAmount}}</td>
             <td></td>
             <td>
-              <button class="btn btn-warning" (click)="showUpdateBookingModal(booking,bookings[booking].customerName,bookings[booking].bookingSchedule.date,bookings[booking].bookingSchedule.time,bookings[booking].notes,bookings[booking].services[0].serviceName,bookings[booking].stage,bookings[booking].totalAmount)">Edit</button>
+              <button class="btn btn-warning" *ngIf="!(bookings[booking].stage === 'completed' || bookings[booking].stage === 'cancel')"  (click)="showUpdateBookingModal(booking,bookings[booking].customerName,bookings[booking].bookingSchedule.date,bookings[booking].bookingSchedule.time,bookings[booking].notes,bookings[booking].services[0].serviceName,bookings[booking].services[0].speciality,bookings[booking].stage,bookings[booking].totalAmount)">Edit</button>
             </td>
           </tr>
         </tbody>
@@ -403,6 +403,29 @@ float: left;">
 
 
                 </select>
+
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Service</label>
+              </div>
+
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #serviceName formControlName="serviceName" readonly/>
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Speciality</label>
+              </div>
+
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #speciality formControlName="speciality" readonly/>
               </div>
 
             </div>
@@ -411,6 +434,9 @@ float: left;">
         </div>
         <div style="background-color: #34495e" (click)="updateBookingInfo(updateBookingData)">
           <button id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button>
+        </div>
+        <div style="background-color: #34495e" (click)="cancelBooking(booking.value)">
+          <button id="testbutton" class="btn btn-danger btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Cancel Booking </button>
         </div>
       </div>
     </form>

@@ -53,7 +53,9 @@ export class ClientComponent implements OnInit {
     date: '',
     time: '',
     note: '',
-    stage: ''
+    stage: '',
+    serviceName:'',
+    speciality:''
 
   };
 
@@ -135,7 +137,9 @@ export class ClientComponent implements OnInit {
       date: '',
       time: '',
       note: '',
-      stage: ''
+      stage: '',
+    serviceName:'',
+    speciality:''
 
     };
     this.updateBookingData = fb.group({
@@ -145,7 +149,9 @@ export class ClientComponent implements OnInit {
       'date': [null],
       'time': [null],
       'note': [null],
-      'stage': [null]
+      'stage': [null],
+      'serviceName':[null],
+    'speciality':[null]
 
     });
 
@@ -422,7 +428,7 @@ export class ClientComponent implements OnInit {
     }
     this.bookingTable = false;
   }
-  showUpdateBookingModal(booking, customerName, date, time, notes, serviceName, stage, totalAmount) {
+  showUpdateBookingModal(booking, customerName, date, time, notes, serviceName,speciality,stage, totalAmount) {
     this.updateBooking = !this.updateBooking;
     this.modal_opened = !this.modal_opened;
     this.updateBookingData.setValue({
@@ -432,7 +438,9 @@ export class ClientComponent implements OnInit {
       'date': date,
       'time': time,
       'note': notes,
-      'stage': stage
+      'stage': stage,
+      'serviceName':serviceName,
+      'speciality':speciality
     });
   }
   hideUpdateBookingModal() {
@@ -445,9 +453,10 @@ export class ClientComponent implements OnInit {
     //console.log(updateBookingData);
     var json = {
       customerName: updateBookingData.customername,
-
-      dates: updateBookingData.date,
-      times: updateBookingData.time,
+      bookingSchedule: {
+        date: updateBookingData.date,
+        time: updateBookingData.time
+      },
       notes: updateBookingData.note,
       stage: updateBookingData.stage
     };
@@ -457,6 +466,14 @@ export class ClientComponent implements OnInit {
 
     this.hideUpdateBookingModal();
 
+  }
+  cancelBooking(bookingkey)
+  {
+    var json={
+      stage:"cancel"
+    };
+    this.db.list('/booking').update(bookingkey, json);
+    this.hideUpdateBookingModal();
   }
 
 

@@ -160,8 +160,14 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
         <td>
           <button class="btn btn-success" (click)="viewService(partner,partners[partner].uid)">View Service</button>
         </td>
+        
         <td><button class="btn btn-warning" (click)="updatePartnerDetails(partner,partners[partner].partnerFirstName,partners[partner].partnerLastName,partners[partner].partnerEmail,partners[partner].partnerGender,partners[partner].partnerPhone)">Edit</button></td>
-      
+        
+        <td>
+            <div *ngIf="partners[partner].status=='active'; then inactive; else active"> </div>
+            <ng-template #inactive>
+          <button class="btn btn-danger"  (click)="inactivePartner(partner)">Inactive</button></ng-template>
+          <ng-template #active> <button class="btn btn-warning"  (click)="activePartner(partner)">Active</button></ng-template></td>
       </tr>
     </tbody>
   </table>
