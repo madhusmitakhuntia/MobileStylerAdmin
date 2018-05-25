@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
-import {AuthService} from '../services/auth.service';
+
 
 
 @Component({
@@ -17,7 +17,7 @@ export class AdminloginComponent implements OnInit {
     email: string;
     password: string;
     demodata={demomail:"admin@gmail.com",demopass:"admin"};
-  constructor(private router:Router,public authService: AuthService,private fb: FormBuilder) { 
+  constructor(private router:Router,private fb: FormBuilder) { 
     this.rForm = fb.group({
       'email' : [null, Validators.email],
       'password' : [null, Validators.required],

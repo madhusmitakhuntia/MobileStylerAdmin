@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DemopartnerComponent } from './demopartner/demopartner.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
-import { PartnerDetailsComponent } from './partner-details/partner-details.component';
 import { Data1Component } from './data1/data1.component';
 import { PartnerComponent } from './partner/partner.component';
+import { Graph2Component } from './graph2/graph2.component';
+
 
 const routes: Routes = [
     {
@@ -22,10 +22,7 @@ const routes: Routes = [
                 path: '',
                 component: Data1Component
             },
-            // {
-            //     path: 'demopartner',
-            //     component:DemopartnerComponent 
-            // },
+          
             {
                 path:'partner',
                 component:PartnerComponent
@@ -34,10 +31,10 @@ const routes: Routes = [
                 path: 'client',
                 component:ClientComponent 
             },
-            // {
-            //     path: 'graph',
-            //     component:Data1Component 
-            // }
+            {
+                path: 'calender',
+                component:Graph2Component 
+            },
            
            
         ]

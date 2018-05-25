@@ -1,29 +1,23 @@
 <div class="row">
-      <div align="right" class="col-md-6">
-<fusioncharts
-    [width]="width"
-    [height]="height"
-    [type]="type"
-    [dataFormat]="dataFormat"
-    [dataSource]="dataSource">
-</fusioncharts>
+    <div align="right" class="col-md-6">
+        <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
+        </fusioncharts>
+    </div>
+    <div class="col-md-6">
+        <fusioncharts [width]="width2" [height]="height2" [type]="type2" [dataFormat]="dataFormat2" [dataSource]="dataSource2">
+        </fusioncharts>
+    </div>
+</div>    
+
+<div style="margin-top:20px"></div>
+<div class="row">
+<div class="col-md-6">
+    <fusioncharts [width]="width1" [height]="height1" [type]="type1" [dataFormat]="dataFormat1" [dataSource]="dataSource1">
+    </fusioncharts>
 </div>
 <div class="col-md-6">
-<fusioncharts
-   [width]="width2"
-   [height]="height2"
-   [type]="type2"
-   [dataFormat]="dataFormat2"
-   [dataSource]="dataSource2">
-</fusioncharts>
+    <div id="map_chart" [chartData]="map_ChartData" [chartOptions]="map_ChartOptions" chartType="GeoChart" GoogleChart style="width: 600px; height: 433px;"></div>
 </div>
 </div>
-<div align="center">
-<fusioncharts
-    [width]="width1"
-    [height]="height1"
-    [type]="type1"
-    [dataFormat]="dataFormat1"
-    [dataSource]="dataSource1">
-</fusioncharts>
-</div>
+<div style="margin-top:20px"></div>
+<app-graph2></app-graph2>
