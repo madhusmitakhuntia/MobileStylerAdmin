@@ -9,6 +9,8 @@ import { GoogleChartComponent } from '../google-chart/google-chart.component';
 import { HttpModule, Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import * as moment from 'moment';
 
 interface User {
   createdAt: string;
@@ -50,6 +52,11 @@ class Booking {
 })
 export class Data1Component implements OnInit {
 
+
+  summery: any = {
+    summerydata: ''
+  };
+
   textmodal: any = true;
   view: string = 'month';
   persons: Person[] = [];
@@ -70,6 +77,23 @@ export class Data1Component implements OnInit {
   oct = 0;
   nov = 0;
   dec = 0;
+
+  d1 = 0;
+  d2 = 0;
+  d3 = 0;
+  d4 = 0;
+  d5 = 0;
+  d6 = 0;
+  d7 = 0;
+  id_lastweek = 'WeeklySignUpChart';
+  width_lastweek = 600;
+  height_lastweek = 400;
+  type_lastweek = 'column2d';
+  dataFormat_lastweek = 'json';
+  dataSource_lastweek;
+  title_lastweek = 'Last Week SignUp';
+  summery_lastweek: boolean = true;
+
   haircuts = 0;
   color_services = 0;
   hair_treatments = 0;
@@ -179,8 +203,122 @@ export class Data1Component implements OnInit {
   public map_ChartOptions;
 
 
+  constructor(private productService: ProductService, private partnerService: PartnerService, private fb: FormBuilder) {
 
-  constructor(private productService: ProductService, private partnerService: PartnerService) {
+    this.summery = {
+      summerydata: ''
+    };
+    this.summery = fb.group({
+      'summerydata': [null]
+    });
+
+  }
+  summeryReport(summery) {
+    //alert(this.summery.value);
+    var data = this.summery.value;
+    if (data.summerydata == "Last Month") {
+      this.lastMonth();
+      //alert("Last Month");
+    }
+    else if (data.summerydata == "Last week") {
+      this.lastWeek();
+      //alert("Last week");
+    }
+
+  }
+  lastMonth() {
+
+  }
+  lastWeek() {
+  
+
+    var d = new Date("04-26-2018");
+    var v1 = d.setDate(d.getDate() - 1);
+    var v2 = d.setDate(d.getDate() - 2);
+    var v3 = d.setDate(d.getDate() - 3);
+    var v4 = d.setDate(d.getDate() - 4);
+    var v5 = d.setDate(d.getDate() - 5);
+    var v6 = d.setDate(d.getDate() - 6);
+    var v7 = d.setDate(d.getDate() - 7);
+    //     //result.push( d );
+    //console.log(d);
+    for (let comp_item of this.items) {
+
+      let date = comp_item.createdAt;
+      //console.log(date);
+      if (moment(new Date(v1)).isSame(new Date(date), 'day') == true) {
+
+        this.d1++;
+      }
+      else if (moment(new Date(v2)).isSame(new Date(date), 'day') == true) {
+
+        this.d2++;
+      }
+      else if (moment(new Date(v3)).isSame(new Date(date), 'day') == true) {
+
+        this.d3++;
+      }
+      else if (moment(new Date(v4)).isSame(new Date(date), 'day') == true) {
+
+        this.d4++;
+      }
+      else if (moment(new Date(v5)).isSame(new Date(date), 'day') == true) {
+
+        this.d5++;
+      }
+      else if (moment(new Date(v6)).isSame(new Date(date), 'day') == true) {
+
+        this.d6++;
+      }
+      else if (moment(new Date(v7)).isSame(new Date(date), 'day') == true) {
+
+        this.d7++;
+      }
+
+    }
+    console.log(v1);
+    this.dataSource_lastweek = {
+      "chart": {
+        "caption": "Customer ",
+        "subCaption": "No of signup in last week",
+        // "numberPrefix": "$",
+        "theme": "ocean"
+      },
+      "data": [
+        {
+          "label":new Date(v1),
+          "value": this.d1
+        },
+        {
+          "label": new Date(v2),
+          "value": this.d2
+        },
+        {
+          "label":new Date(v3),
+          "value": this.d3
+        },
+        {
+          "label": new Date(v4),
+          "value": this.d4
+        },
+        {
+          "label": new Date(v5),
+          "value": this.d5
+        },
+        {
+          "label": new Date(v6),
+          "value": this.d6
+        },
+        {
+          "label":new Date( v7),
+          "value": this.d7
+        }
+      ]
+    };
+
+
+    this.summery_lastweek = false;
+
 
   }
 
@@ -472,7 +610,7 @@ export class Data1Component implements OnInit {
             }
           ]
         };
-        
+
         console.log('MD--->' + this.MD);
         console.log('AZ--->' + this.AZ);
         console.log('US--->' + this.US);
@@ -535,7 +673,7 @@ export class Data1Component implements OnInit {
         this.map_ChartOptions = {
           title: 'Customer Sign ups based on states',
           region: 'US', // Africa
-          colorAxis: { colors: ['#109618', '#3366cc', '#990099'] },
+          colorAxis: { colors: ['#ffffff', '#3366cc', '#990099'] },
           backgroundColor: '#81d4fa',
           datalessRegionColor: '#f8bbd0',
           defaultColor: '#f5f5f5',

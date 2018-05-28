@@ -1,4 +1,31 @@
 <div class="row">
+<form [formGroup]="summery">
+    <div class="modal-content">
+        <div class="panel panel-default" style="margin-bottom: 0px;">     
+    <div class="row ">
+      <div class="col-md-5">
+        <label class="form-control-static txtlabel">Last Registration Summery</label>
+      </div>
+      <div class="col-md-7">
+
+        <!-- <input class="form-control rdc2" #gender formControlName="gender" /> -->
+        <select class="form-control selectcontrol" #summerydata  formControlName="summerydata">
+                           
+            <option ng-value="last_year">Last Year</option>
+            <option ng-value="last_month">Last Month</option>
+            <option ng-value="last_week">Last week</option>
+        </select>
+
+</div>
+<div (click)="summeryReport(summery)" >
+  <button id="testbutton" class="btn btn-theme " style="border-radius:0px;background-color: #34495e">Save </button>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<div class="row">
     <div align="right" class="col-md-6">
         <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
         </fusioncharts>
@@ -21,3 +48,11 @@
 </div>
 <div style="margin-top:20px"></div>
 <app-graph2></app-graph2>
+<div [hidden]="summery_lastweek">
+    <div class="col-md-6">
+        <fusioncharts [width]="width_lastweek" [height]="height_lastweek" [type]="type_lastweek" [dataFormat]="dataFormat_lastweek" [dataSource]="dataSource_lastweek">
+        </fusioncharts>
+    </div>
+
+</div>
+

@@ -55,12 +55,6 @@ export const firebaseConfig = {
     projectId: "mobilestyler-admin",
     storageBucket: "mobilestyler-admin.appspot.com",
     messagingSenderId: "70818185647"
-  // apiKey: "AIzaSyCRBXOBtdi9PTZHDyhYJB5Riuf3w0WyW4E",
-  // authDomain: "partner-f3f0b.firebaseapp.com",
-  // databaseURL: "https://partner-f3f0b.firebaseio.com",
-  // projectId: "partner-f3f0b",
-  // storageBucket: "partner-f3f0b.appspot.com",
-  // messagingSenderId: "396776753432"
 };
 
 @NgModule({

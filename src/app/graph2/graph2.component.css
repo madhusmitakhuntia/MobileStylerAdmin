@@ -6,12 +6,12 @@
     text-align: center;
     border-radius: 6px;
     padding: 8px 0;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     /*bottom: 125%;*/
     left: 50%;
     margin-left: -80px;
-    top:30px;
+    top:933px;
   
 }
 
