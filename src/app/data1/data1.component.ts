@@ -94,6 +94,20 @@ export class Data1Component implements OnInit {
   title_lastweek = 'Last Week SignUp';
   summery_lastweek: boolean = true;
 
+  customer_count=0;
+  customer_count1=0;
+  customer_count2=0;
+  customer_count3=0;
+  dataSource_lastmonth;
+  id_month = 'WeeklySignUpChart';
+  width_lastmonth = 600;
+  height_lastmonth = 400;
+  type_lastmonth = 'column2d';
+  dataFormat_lastmonth = 'json';
+  title_lastmonth = 'Last 4months SignUp';
+  summery_lastmonth: boolean = true;
+
+ 
   haircuts = 0;
   color_services = 0;
   hair_treatments = 0;
@@ -201,7 +215,7 @@ export class Data1Component implements OnInit {
   US = 0; //--->(4)
   public map_ChartData;
   public map_ChartOptions;
-
+  
 
   constructor(private productService: ProductService, private partnerService: PartnerService, private fb: FormBuilder) {
 
@@ -226,22 +240,81 @@ export class Data1Component implements OnInit {
     }
 
   }
+ 
   lastMonth() {
+    
+    var week1=moment(new Date("04-25-2018")).isoWeekday("Monday");
+    var week2=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-6);
+    var week3=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-13);
+    var week4=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-20);
+    for (let comp_week of this.items) {
+
+      let date = comp_week.createdAt;
+      if (moment(new Date(date)).isSame(week1, 'week') == true) {
+
+        this.customer_count++;
+      }
+      else if (moment(new Date(date)).isSame(week2, 'week') == true) {
+
+        this.customer_count1++;
+      }
+      else if (moment(new Date(date)).isSame(week3, 'week') == true) {
+
+        this.customer_count2++;
+      }
+      else if (moment(new Date(date)).isSame(week4, 'week') == true) {
+
+        this.customer_count3++;
+      }
+    }
+  
+    // console.log(this.customer_count);
+    // console.log(this.customer_count1);
+    // console.log(this.customer_count2);
+    // console.log(this.customer_count3);
+    this.dataSource_lastmonth = {
+      "chart": {
+        "caption": "Customer ",
+        "subCaption": "No of signup in 4weeks",
+        // "numberPrefix": "$",
+        "theme": "ocean"
+      },
+      "data": [
+          {
+          "label":"week1",
+          "value": this.customer_count
+        },
+        {
+          "label":"week2",
+          "value": this.customer_count1
+        },
+        {
+          "label":"week3",
+          "value": this.customer_count2
+        },
+        {
+          "label":"week4" ,
+          "value": this.customer_count3
+        },
+        
+    
+      ]
+    };
+    this.summery_lastmonth=false;
 
   }
   lastWeek() {
   
 
-    var d = new Date("04-26-2018");
-    var v1 = d.setDate(d.getDate() - 1);
-    var v2 = d.setDate(d.getDate() - 2);
-    var v3 = d.setDate(d.getDate() - 3);
-    var v4 = d.setDate(d.getDate() - 4);
-    var v5 = d.setDate(d.getDate() - 5);
-    var v6 = d.setDate(d.getDate() - 6);
-    var v7 = d.setDate(d.getDate() - 7);
-    //     //result.push( d );
-    //console.log(d);
+    var d = new Date("04-25-2018");
+    var v1 = new Date("04-25-2018");
+    var v2 = d.setDate(d.getDate() - 1);
+    var v3 = d.setDate(d.getDate() - 1);
+    var v4 = d.setDate(d.getDate() - 1);
+    var v5 = d.setDate(d.getDate() - 1);
+    var v6 = d.setDate(d.getDate() - 1);
+    var v7 = d.setDate(d.getDate() - 1);
+ 
     for (let comp_item of this.items) {
 
       let date = comp_item.createdAt;
@@ -276,7 +349,7 @@ export class Data1Component implements OnInit {
       }
 
     }
-    console.log(v1);
+
     this.dataSource_lastweek = {
       "chart": {
         "caption": "Customer ",
@@ -285,32 +358,32 @@ export class Data1Component implements OnInit {
         "theme": "ocean"
       },
       "data": [
-        {
-          "label":new Date(v1),
+          {
+          "label":moment(v1).format('LL'),
           "value": this.d1
         },
         {
-          "label": new Date(v2),
+          "label": moment(v2).format('LL'),
           "value": this.d2
         },
         {
-          "label":new Date(v3),
+          "label":moment(v3).format('LL'),
           "value": this.d3
         },
         {
-          "label": new Date(v4),
+          "label": moment(v4).format('LL'),
           "value": this.d4
         },
         {
-          "label": new Date(v5),
+          "label": moment(v5).format('LL'),
           "value": this.d5
         },
         {
-          "label": new Date(v6),
+          "label": moment(v6).format('LL'),
           "value": this.d6
         },
         {
-          "label":new Date( v7),
+          "label":moment(v7).format('LL'),
           "value": this.d7
         }
       ]

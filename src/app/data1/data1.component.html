@@ -1,58 +1,65 @@
 <div class="row">
-<form [formGroup]="summery">
+  <form [formGroup]="summery">
     <div class="modal-content">
-        <div class="panel panel-default" style="margin-bottom: 0px;">     
-    <div class="row ">
-      <div class="col-md-5">
-        <label class="form-control-static txtlabel">Last Registration Summery</label>
+      <div class="panel panel-default" style="margin-bottom: 0px;">
+        <div class="container">
+          <div class="col-md-6" align="center" style="margin-top: -20px;margin-bottom: 22px;">
+            <label class="form-control-static txtlabel">Last Registration Summery</label>
+          </div>
+          <div class="col-md-4" align="center" style="margin-top: -20px;">
+
+            <!-- <input class="form-control rdc2" #gender formControlName="gender" /> -->
+            <select class="form-control selectcontrol" #summerydata formControlName="summerydata">
+              <option ng-value="last_year">Last Year</option>
+              <option ng-value="last_month">Last Month</option>
+              <option ng-value="last_week">Last week</option>
+            </select>
+
+          </div>
+          <div (click)="summeryReport(summery)" align="center" class="col-md-2" style="margin-top: -20px;">
+            <button id="testbutton" class="btn btn-success ">Check </button>
+          </div>
+        </div>
       </div>
-      <div class="col-md-7">
+    </div>
+  </form>
+</div>
+<div [hidden]="summery_lastweek">
+  <div class="col-md-6">
+    <fusioncharts [width]="width_lastweek" [height]="height_lastweek" [type]="type_lastweek" [dataFormat]="dataFormat_lastweek"
+      [dataSource]="dataSource_lastweek">
+    </fusioncharts>
+  </div>
 
-        <!-- <input class="form-control rdc2" #gender formControlName="gender" /> -->
-        <select class="form-control selectcontrol" #summerydata  formControlName="summerydata">
-                           
-            <option ng-value="last_year">Last Year</option>
-            <option ng-value="last_month">Last Month</option>
-            <option ng-value="last_week">Last week</option>
-        </select>
+</div>
+<div [hidden]="summery_lastmonth">
+  <div class="col-md-6">
+    <fusioncharts [width]="width_lastmonth" [height]="height_lastmonth" [type]="type_lastmonth" [dataFormat]="dataFormat_lastmonth"
+      [dataSource]="dataSource_lastmonth">
+    </fusioncharts>
+  </div>
 
-</div>
-<div (click)="summeryReport(summery)" >
-  <button id="testbutton" class="btn btn-theme " style="border-radius:0px;background-color: #34495e">Save </button>
-</div>
-</div>
-</div>
-</div>
-</form>
 </div>
 <div class="row">
-    <div align="right" class="col-md-6">
-        <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
-        </fusioncharts>
-    </div>
-    <div class="col-md-6">
-        <fusioncharts [width]="width2" [height]="height2" [type]="type2" [dataFormat]="dataFormat2" [dataSource]="dataSource2">
-        </fusioncharts>
-    </div>
-</div>    
+  <div align="right" class="col-md-6">
+    <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
+    </fusioncharts>
+  </div>
+  <div class="col-md-6">
+    <fusioncharts [width]="width2" [height]="height2" [type]="type2" [dataFormat]="dataFormat2" [dataSource]="dataSource2">
+    </fusioncharts>
+  </div>
+</div>
 
 <div style="margin-top:20px"></div>
 <div class="row">
-<div class="col-md-6">
+  <div class="col-md-6">
     <fusioncharts [width]="width1" [height]="height1" [type]="type1" [dataFormat]="dataFormat1" [dataSource]="dataSource1">
     </fusioncharts>
-</div>
-<div class="col-md-6">
+  </div>
+  <div class="col-md-6">
     <div id="map_chart" [chartData]="map_ChartData" [chartOptions]="map_ChartOptions" chartType="GeoChart" GoogleChart style="width: 600px; height: 433px;"></div>
-</div>
+  </div>
 </div>
 <div style="margin-top:20px"></div>
 <app-graph2></app-graph2>
-<div [hidden]="summery_lastweek">
-    <div class="col-md-6">
-        <fusioncharts [width]="width_lastweek" [height]="height_lastweek" [type]="type_lastweek" [dataFormat]="dataFormat_lastweek" [dataSource]="dataSource_lastweek">
-        </fusioncharts>
-    </div>
-
-</div>
-
