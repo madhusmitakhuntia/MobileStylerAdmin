@@ -56,7 +56,7 @@ export class Data1Component implements OnInit {
   summery: any = {
     summerydata: ''
   };
-
+  demo =1;
   textmodal: any = true;
   view: string = 'month';
   persons: Person[] = [];
@@ -85,10 +85,19 @@ export class Data1Component implements OnInit {
   d5 = 0;
   d6 = 0;
   d7 = 0;
+
+  dp1 = 0;
+  dp2 = 0;
+  dp3 = 0;
+  dp4 = 0;
+  dp5 = 0;
+  dp6 = 0;
+  dp7 = 0;
+
   id_lastweek = 'WeeklySignUpChart';
   width_lastweek = 600;
   height_lastweek = 400;
-  type_lastweek = 'column2d';
+  type_lastweek = 'MSColumn2D';
   dataFormat_lastweek = 'json';
   dataSource_lastweek;
   title_lastweek = 'Last Week SignUp';
@@ -98,11 +107,17 @@ export class Data1Component implements OnInit {
   customer_count1=0;
   customer_count2=0;
   customer_count3=0;
+
+  partner_count = 0;
+  partner_count1 = 0;
+  partner_count2 = 0;
+  partner_count3 = 0;
+
   dataSource_lastmonth;
   id_month = 'WeeklySignUpChart';
   width_lastmonth = 600;
   height_lastmonth = 400;
-  type_lastmonth = 'column2d';
+  type_lastmonth = 'MSColumn2D';
   dataFormat_lastmonth = 'json';
   title_lastmonth = 'Last 4months SignUp';
   summery_lastmonth: boolean = true;
@@ -120,10 +135,11 @@ export class Data1Component implements OnInit {
   id = 'chart1';
   width = 600;
   height = 400;
-  type = 'column2d';
+  type = 'MSColumn2D';
   dataFormat = 'json';
   dataSource;
   title = 'Angular4 FusionCharts Sample';
+  summery_lastyear:boolean=true;
 
   item_partners: any = {};
   partners: any = {};
@@ -213,6 +229,68 @@ export class Data1Component implements OnInit {
   UM = 0;
   VI = 0;
   US = 0; //--->(4)
+
+  //mapdata partner
+  
+  PAL = 0;
+  PAK = 0;
+  PAZ = 0;  //--->(1)
+  PAR = 0;
+  PCA = 0;
+  PCO = 0;
+  PCT = 0;
+  PDE = 0;
+  PFL = 0;
+  PGA = 0;
+  PHI = 0;
+  PID = 0;
+  PIL = 0;
+  PIN = 0;
+  PIA = 0;
+  PKS = 0;
+  PKY = 0;
+  PLA = 0;
+  PME = 0;
+  PMD = 0;  //--->(2)
+  PMA = 0;
+  PMI = 0;
+  PMN = 0;
+  PMS = 0;
+  PMO = 0;
+  PMT = 0;
+  PNE = 0;
+  PNV = 0;
+  PNH = 0;
+  PNJ = 0;
+  PNM = 0;
+  PNY = 0;
+  PNC = 0;
+  PND = 0;
+  POH = 0;
+  POK = 0;
+  POR = 0;
+  PPA = 0;
+  PRI = 0;
+  PSC = 0;
+  PSD = 0;
+  PTN = 0;
+  PTX = 0; //--->(3)
+  PUT = 0;
+  PVT = 0;
+  PVA = 0;
+  PWA = 0;
+  PWV = 0;
+  PWI = 0;
+  PWY = 0;
+  PDC = 0;
+  PAS = 0;
+  PGU = 0;
+  PMP = 0;
+  PPR = 0;
+  PUM = 0;
+  PVI = 0;
+  PUS = 0; //--->(4)
+
   public map_ChartData;
   public map_ChartOptions;
   
@@ -238,15 +316,185 @@ export class Data1Component implements OnInit {
       this.lastWeek();
       //alert("Last week");
     }
+    else if (data.summerydata == "Last Year") {
+      this.lastYear();
+      //alert("Last week");
+    }
+
+  }
+  lastYear()
+  {
+    for (let item of this.items) {
+      //alert('loop');
+      let date = item.createdAt;
+      let newDate = new Date(date);
+      switch (newDate.getMonth()) {
+        case 0:
+          this.jan++;
+          break;
+        case 1:
+          this.feb++;
+          break;
+        case 2:
+          this.mar++;
+          break;
+        case 3:
+          this.apr++;
+          break;
+        case 4:
+          this.may++;
+          break;
+        case 5:
+          this.jun++;
+          break;
+        case 6:
+          this.jul++;
+          break;
+        case 7:
+          this.aug++;
+          break;
+        case 8:
+          this.sep++;
+          break;
+        case 9:
+          this.oct++;
+          break;
+        case 10:
+          this.nov++;
+          break;
+        case 11:
+          this.dec++;
+          break;
+        // default:
+        //   confirm('No data found');
+
+      }
+
+
+    }
+    for (let item of this.item_partners) {
+      // alert('loop');
+      let date = item.createdAt;
+      let newDate = new Date(date);
+      //console.log(newDate.getMonth());
+      switch (newDate.getMonth()) {
+        case 0:
+          this.partner_jan++;
+          break;
+        case 1:
+          this.partner_feb++;
+          break;
+        case 2:
+          this.partner_mar++;
+          break;
+        case 3:
+          this.partner_apr++;
+          break;
+        case 4:
+          this.partner_may++;
+          break;
+        case 5:
+          this.partner_jun++;
+          break;
+        case 6:
+          this.partner_jul++;
+          break;
+        case 7:
+          this.partner_aug++;
+          break;
+        case 8:
+          this.partner_sep++;
+          break;
+        case 9:
+          this.partner_oct++;
+          break;
+        case 10:
+          this.partner_nov++;
+          break;
+        case 11:
+          this.partner_dec++;
+          break;
+        // default:
+        //   confirm('No data found');
+
+      }
+    }
+    this.dataSource = {
+      "chart": {
+        "caption": "Customer ",
+        "subCaption": "No of signup per month",
+        // "numberPrefix": "$",
+        "theme": "ocean"
+      },
+      "categories": [{
+        "category": [{
+          "label": "Jan"
+        },
+        {
+          "label": "Feb"
+        },
+        {
+          "label": "Mar"
+        },
+        {
+          "label": "Apr"
+        },
+        {
+          "label": "May"
+        }
+        ]
+      }],
+      "dataset": [{
+        "seriesname": "Client",
+        "data": [{
+          "value": this.jan
+        },
+        {
+          "value": this.feb
+        },
+        {
+          "value": this.mar
+        },
+        {
+          "value": this.apr
+        },
+        {
+          "value": this.jun
+        }
+        ]
+      },
+      {
+        "seriesname": "Partner",
+        "data": [{
+          "value": this.partner_jan
+        },
+        {
+          "value": this.partner_feb
+        },
+        {
+          "value": this.partner_mar
+        },
+        {
+          "value": this.partner_apr
+        },
+        {
+          "value": this.partner_may
+        }
+        ]
+      }
+      ]
+    };
+ 
+    this.summery_lastyear=false;
 
   }
  
   lastMonth() {
-    
-    var week1=moment(new Date("04-25-2018")).isoWeekday("Monday");
-    var week2=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-6);
-    var week3=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-13);
-    var week4=moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-20);
+
+    var week1 = moment(new Date("04-25-2018")).isoWeekday("Monday");
+    var week2 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-6);
+    var week3 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-13);
+    var week4 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-20);
     for (let comp_week of this.items) {
 
       let date = comp_week.createdAt;
@@ -267,7 +515,27 @@ export class Data1Component implements OnInit {
         this.customer_count3++;
       }
     }
-  
+    for (let par_week of this.item_partners) {
+
+      let date = par_week.createdAt;
+      if (moment(new Date(date)).isSame(week1, 'week') == true) {
+
+        this.partner_count++;
+      }
+      else if (moment(new Date(date)).isSame(week2, 'week') == true) {
+
+        this.partner_count1++;
+      }
+      else if (moment(new Date(date)).isSame(week3, 'week') == true) {
+
+        this.partner_count2++;
+      }
+      else if (moment(new Date(date)).isSame(week4, 'week') == true) {
+
+        this.partner_count3++;
+      }
+    }
+
     // console.log(this.customer_count);
     // console.log(this.customer_count1);
     // console.log(this.customer_count2);
@@ -279,32 +547,61 @@ export class Data1Component implements OnInit {
         // "numberPrefix": "$",
         "theme": "ocean"
       },
-      "data": [
-          {
-          "label":"week1",
+      "categories": [{
+        "category": [{
+          "label": "Week1"
+        },
+        {
+          "label": "Week2"
+        },
+        {
+          "label": "Week3"
+        },
+        {
+          "label": "Week4"
+        }
+        ]
+      }],
+      "dataset": [{
+        "seriesname": "Client",
+        "data": [{
           "value": this.customer_count
         },
         {
-          "label":"week2",
           "value": this.customer_count1
         },
         {
-          "label":"week3",
           "value": this.customer_count2
         },
         {
-          "label":"week4" ,
           "value": this.customer_count3
+        }
+        ]
+      },
+      {
+        "seriesname": "Partner",
+        "data": [{
+          "value": this.partner_count
         },
-        
-    
+        {
+          "value": this.partner_count1
+        },
+        {
+          "value": this.partner_count2
+        },
+        {
+          "value": this.partner_count3
+        }
+        ]
+      }
+
       ]
     };
-    this.summery_lastmonth=false;
+    this.summery_lastmonth = false;
 
   }
   lastWeek() {
-  
+
 
     var d = new Date("04-25-2018");
     var v1 = new Date("04-25-2018");
@@ -314,7 +611,7 @@ export class Data1Component implements OnInit {
     var v5 = d.setDate(d.getDate() - 1);
     var v6 = d.setDate(d.getDate() - 1);
     var v7 = d.setDate(d.getDate() - 1);
- 
+
     for (let comp_item of this.items) {
 
       let date = comp_item.createdAt;
@@ -350,6 +647,41 @@ export class Data1Component implements OnInit {
 
     }
 
+    for (let comp_item of this.item_partners) {
+
+      let date = comp_item.createdAt;
+      //console.log(date);
+      if (moment(new Date(v1)).isSame(new Date(date), 'day') == true) {
+
+        this.dp1++;
+      }
+      else if (moment(new Date(v2)).isSame(new Date(date), 'day') == true) {
+
+        this.dp2++;
+      }
+      else if (moment(new Date(v3)).isSame(new Date(date), 'day') == true) {
+
+        this.dp3++;
+      }
+      else if (moment(new Date(v4)).isSame(new Date(date), 'day') == true) {
+
+        this.dp4++;
+      }
+      else if (moment(new Date(v5)).isSame(new Date(date), 'day') == true) {
+
+        this.dp5++;
+      }
+      else if (moment(new Date(v6)).isSame(new Date(date), 'day') == true) {
+
+        this.dp6++;
+      }
+      else if (moment(new Date(v7)).isSame(new Date(date), 'day') == true) {
+
+        this.dp7++;
+      }
+
+    }
+
     this.dataSource_lastweek = {
       "chart": {
         "caption": "Customer ",
@@ -357,35 +689,81 @@ export class Data1Component implements OnInit {
         // "numberPrefix": "$",
         "theme": "ocean"
       },
-      "data": [
-          {
-          "label":moment(v1).format('LL'),
+      "categories": [{
+        "category": [{
+          "label": moment(v1).format('LL')
+        },
+        {
+          "label": moment(v2).format('LL')
+        },
+        {
+          "label": moment(v3).format('LL')
+        },
+        {
+          "label": moment(v4).format('LL')
+        },
+        {
+          "label": moment(v5).format('LL')
+        },
+        {
+          "label": moment(v6).format('LL')
+        },
+        {
+          "label": moment(v7).format('LL')
+        }
+        ]
+      }],
+      "dataset": [{
+        "seriesname": "Client",
+        "data": [{
           "value": this.d1
         },
         {
-          "label": moment(v2).format('LL'),
           "value": this.d2
         },
         {
-          "label":moment(v3).format('LL'),
           "value": this.d3
         },
         {
-          "label": moment(v4).format('LL'),
           "value": this.d4
         },
         {
-          "label": moment(v5).format('LL'),
           "value": this.d5
         },
         {
-          "label": moment(v6).format('LL'),
           "value": this.d6
         },
         {
-          "label":moment(v7).format('LL'),
           "value": this.d7
         }
+
+        ]
+      },
+      {
+        "seriesname": "Partner",
+        "data": [{
+          "value": this.dp1
+        },
+        {
+          "value": this.dp2
+        },
+        {
+          "value": this.dp3
+        },
+        {
+          "value": this.dp4
+        },
+        {
+          "value": this.dp5
+        },
+        {
+          "value": this.dp6
+        },
+        {
+          "value": this.dp7
+        }
+        ]
+      }
       ]
     };
 
@@ -396,7 +774,10 @@ export class Data1Component implements OnInit {
   }
 
 
+
   ngOnInit() {
+    //this.demo=2;
+    console.log(this.demo++);
     this.productService.readUsers()
       .subscribe(persons => {
         this.persons = persons['customer'];
@@ -416,47 +797,7 @@ export class Data1Component implements OnInit {
           let date = item.createdAt;
           let newDate = new Date(date);
           //console.log(newDate.getMonth());
-          switch (newDate.getMonth()) {
-            case 0:
-              this.jan++;
-              break;
-            case 1:
-              this.feb++;
-              break;
-            case 2:
-              this.mar++;
-              break;
-            case 3:
-              this.apr++;
-              break;
-            case 4:
-              this.may++;
-              break;
-            case 5:
-              this.jun++;
-              break;
-            case 6:
-              this.jul++;
-              break;
-            case 7:
-              this.aug++;
-              break;
-            case 8:
-              this.sep++;
-              break;
-            case 9:
-              this.oct++;
-              break;
-            case 10:
-              this.nov++;
-              break;
-            case 11:
-              this.dec++;
-              break;
-            // default:
-            //   confirm('No data found');
 
-          }
           if (item.addresses !== undefined) {
             const state = item.addresses[0].state;
             // console.log( state);
@@ -653,109 +994,10 @@ export class Data1Component implements OnInit {
         //   height = 400;
         //   type = 'column2d';
         //   dataFormat = 'json';
-        this.dataSource = {
-          "chart": {
-            "caption": "Customer ",
-            "subCaption": "No of signup per month",
-            // "numberPrefix": "$",
-            "theme": "ocean"
-          },
-          "data": [
-            {
-              "label": "January",
-              "value": this.jan
-            },
-            {
-              "label": "February",
-              "value": this.feb
-            },
-            {
-              "label": "Mar",
-              "value": this.mar
-            },
-            {
-              "label": "Apr",
-              "value": this.apr
-            },
-            {
-              "label": "May",
-              "value": this.may
-            }
-          ]
-        };
 
-        console.log('MD--->' + this.MD);
-        console.log('AZ--->' + this.AZ);
-        console.log('US--->' + this.US);
-        console.log('TX--->' + this.TX);
-        console.log('AZ222--->' + this.AZ);
-        this.map_ChartData = [
-          ['State', 'Users', 'Partners'],
-          ['US-AL', 1, 12],
-          ['US-AK', 2, 1],
-          ['US-AZ', this.AZ, 16],
-          ['US-AR', 23, 2],
-          ['US-CA', 1, 3],
-          ['US-CO', 0, 4],
-          ['US-CT', 0, 2],
-          ['US-DE', 7, 1],
-          ['US-DC', 4, 2],
-          ['US-FL', 0, 5],
-          ['US-GA', 0, 6],
-          ['US-HI', 0, 7],
-          ['US-ID', 9, 2],
-          ['US-IL', 0, 6],
-          ['US-IN', 3, 3],
-          ['US-IA', 1, 7],
-          ['US-KS', 0, 8],
-          ['US-KY', 0, 1],
-          ['US-LA', 0, 0],
-          ['US-ME', 9, 2],
-          ['US-MT', 8, 3],
-          ['US-NE', 12, 3],
-          ['US-NV', 11, 4],
-          ['US-NH', 0, 11],
-          ['US-NJ', 0, 2],
-          ['US-NM', 0, 3],
-          ['US-NY', 0, 0],
-          ['US-NC', 0, 0],
-          ['US-ND', 0, 0],
-          ['US-OH', 0, 0],
-          ['US-OK', 0, 0],
-          ['US-OR', 0, 0],
-          ['US-MD', 1, 0],
-          ['US-MA', 2, 0],
-          ['US-MI', 1, 0],
-          ['US-MN', 1, 0],
-          ['US-MS', 1, 0],
-          ['US-MO', 2, 0],
-          ['US-PA', 3, 0],
-          ['US-RI', 1, 0],
-          ['US-SC', 0, 0],
-          ['US-SD', 0, 0],
-          ['US-TN', 1, 0],
-          ['US-TX', this.TX, 0],
-          ['US-UT', 1, 0],
-          ['US-VT', 0, 0],
-          ['US-VA', 0, 0],
-          ['US-WA', 0, 0],
-          ['US-WV', 0, 0],
-          ['US-WI', 0, 0],
-          ['US-WY', 0, 0]
-        ];
-        this.map_ChartOptions = {
-          title: 'Customer Sign ups based on states',
-          region: 'US', // Africa
-          colorAxis: { colors: ['#ffffff', '#3366cc', '#990099'] },
-          backgroundColor: '#81d4fa',
-          datalessRegionColor: '#f8bbd0',
-          defaultColor: '#f5f5f5',
-          resolution: 'provinces',
-          // dataMode: 'markers',
-          // displayMode: 'markers',
-          magnifyingGlass: { enable: true, zoomFactor: 5.0 },
-          legend: { textStyle: { color: 'blue', fontSize: 16 } }
-        };
+    
+       
+
 
 
       });
@@ -926,6 +1168,195 @@ export class Data1Component implements OnInit {
             //   confirm('No data found');
 
           }
+          if (item.addresses !== undefined) {
+            const state = item.addresses[0].state;
+            // console.log( state);
+            switch (state) {
+              case 'AZ':
+                this.PAZ++;
+                break;
+              case 'AL':
+                this.PAL++;
+                break;
+              case 'AK':
+                this.PAK++;
+                break;
+              case 'AZ':
+                this.PAZ++;
+                break;
+              case 'AR':
+                this.PAR++;
+                break;
+              case 'CA':
+                this.PCA++;
+                break;
+              case 'CO':
+                this.PCO++;
+                break;
+              case 'CT':
+                this.PCT++;
+                break;
+              case 'DE':
+                this.PDE++;
+                break;
+              case 'FL':
+                this.PFL++;
+                break;
+              case 'GA':
+                this.PGA++;
+                break;
+              case 'HI':
+                this.PHI++;
+                break;
+              case 'ID':
+                this.PID++;
+                break;
+              case 'IL':
+                this.PIL++;
+                break;
+              case 'IN':
+                this.PIN++;
+                break;
+              case 'IA':
+                this.PIA++;
+                break;
+              case 'KS':
+                this.PKS++;
+                break;
+              case 'KY':
+                this.PKY++;
+                break;
+              case 'LA':
+                this.PLA++;
+                break;
+              case 'ME':
+                this.PME++;
+                break;
+              case 'MD':
+                this.PMD++;
+                break;
+
+              case 'MA':
+                this.PMA++;
+                break;
+              case 'MI':
+                this.PMI++;
+                break;
+              case 'MN':
+                this.PMN++;
+                break;
+              case 'MS':
+                this.PMS++;
+                break;
+              case 'MO':
+                this.PMO++;
+                break;
+              case 'MT':
+                this.PMT++;
+                break;
+              case 'NE':
+                this.PNE++;
+                break;
+              case 'NV':
+                this.PNV++;
+                break;
+              case 'NH':
+                this.PNH++;
+                break;
+              case 'NJ':
+                this.PNJ++;
+                break;
+              case 'NM':
+                this.PNM++;
+                break;
+              case 'NY':
+                this.PNY++;
+                break;
+              case 'NC':
+                this.PNC++;
+                break;
+              case 'ND':
+                this.PND++;
+                break;
+              case 'OH':
+                this.POH++;
+                break;
+              case 'OK':
+                this.POK++;
+                break;
+              case 'OR':
+                this.POR++;
+                break;
+              case 'PA':
+                this.PPA++;
+                break;
+              case 'RI':
+                this.PRI++;
+                break;
+              case 'SC':
+                this.PSC++;
+                break;
+              case 'SD':
+                this.PSD++;
+                break;
+              case 'TN':
+                this.PTN++;
+                break;
+              case 'TX':
+                this.PTX++;
+                break;
+
+              case 'UT':
+                this.PUT++;
+                break;
+              case 'VT':
+                this.PVT++;
+                break;
+              case 'VA':
+                this.PVA++;
+                break;
+              case 'WA':
+                this.PWA++;
+                break;
+              case 'WV':
+                this.PWV++;
+                break;
+              case 'WI':
+                this.PWI++;
+                break;
+              case 'WY':
+                this.PWY++;
+                break;
+              case 'DC':
+                this.PDC++;
+                break;
+              case 'AS':
+                this.PAS++;
+                break;
+              case 'GU':
+                this.PGU++;
+                break;
+              case 'MP':
+                this.PMP++;
+                break;
+              case 'PR':
+                this.PPR++;
+                break;
+              case 'UM':
+                this.PUM++;
+                break;
+              case 'VI':
+                this.PVI++;
+                break;
+              case 'US':
+                this.PUS++;
+                break;
+
+
+            }
+
+          }
+
         }
         //console.log('marpar' + this.partner_mar);
         //console.log('aprpar' + this.partner_apr);
@@ -964,10 +1395,82 @@ export class Data1Component implements OnInit {
           ]
         };
 
-
-
+        console.log('pMD--->' + this.MD);
+        console.log('pAZ--->' + this.AZ);
+        console.log('pUS--->' + this.US);
+        console.log('pTX--->' + this.TX);
+        console.log('pAZ222--->' + this.AZ);
+        this.map_ChartData = [
+          ['State', 'Users', 'Partners'],
+          ['US-AL', 1, this.PAL],
+          ['US-AK', 2, this.PAK],
+          ['US-AZ', this.AZ, this.PAZ],
+          ['US-AR', 23, this.PAR],
+          ['US-CA', 1, this.PCA],
+          ['US-CO', 0, this.PCO],
+          ['US-CT', 0, this.PCT],
+          ['US-DE', 7, this.PDE],
+          ['US-DC', 4, this.PDC],
+          ['US-FL', 0, this.PFL],
+          ['US-GA', 0, this.PGA],
+          ['US-HI', 0, this.PHI],
+          ['US-ID', 9, this.PID],
+          ['US-IL', 0, this.PIL],
+          ['US-IN', 3, this.PIN],
+          ['US-IA', 1, this.PIA],
+          ['US-KS', 0, this.PKS],
+          ['US-KY', 0, this.PKY],
+          ['US-LA', 0, this.PLA],
+          ['US-ME', 9, this.PME],
+          ['US-MT', 8, this.PMT],
+          ['US-NE', 12,this.PNE],
+          ['US-NV', 11, this.PNV],
+          ['US-NH', 0, this.PNH],
+          ['US-NJ', 0, this.PNJ],
+          ['US-NM', 0, this.PNM],
+          ['US-NY', 0, this.PNY],
+          ['US-NC', 0, this.PNC],
+          ['US-ND', 0, this.PND],
+          ['US-OH', 0, this.POH],
+          ['US-OK', 0, this.POK],
+          ['US-OR', 0, this.POR],
+          ['US-MD', 1, this.PMD],
+          ['US-MA', 2, this.PMA],
+          ['US-MI', 1, this.PMI],
+          ['US-MN', 1, this.PMN],
+          ['US-MS', 1, this.PMS],
+          ['US-MO', 2, this.PMO],
+          ['US-PA', 3, this.PPA],
+          ['US-RI', 1, this.PRI],
+          ['US-SC', 0, this.PSC],
+          ['US-SD', 0, this.PSD],
+          ['US-TN', 1, this.PTN],
+          ['US-TX', this.TX, this.PTX],
+          ['US-UT', 1, this.PUT],
+          ['US-VT', 0, this.PVT],
+          ['US-VA', 0, this.PVA],
+          ['US-WA', 0, this.PWA],
+          ['US-WV', 0, this.PWV],
+          ['US-WI', 0, this.PWI],
+          ['US-WY', 0, this.PWY]
+        ];
+        this.map_ChartOptions = {
+          title: 'Customer Sign ups based on states',
+          region: 'US', // Africa
+          colorAxis: { colors: ['#ffffff', '#3366cc', '#990099'] },
+          backgroundColor: '#81d4fa',
+          datalessRegionColor: '#f8bbd0',
+          defaultColor: '#f5f5f5',
+          resolution: 'provinces',
+          // dataMode: 'markers',
+          // displayMode: 'markers',
+          magnifyingGlass: { enable: true, zoomFactor: 5.0 },
+          legend: { textStyle: { color: 'blue', fontSize: 16 } }
+        };
 
       });
+   
+      
   }
 
 }

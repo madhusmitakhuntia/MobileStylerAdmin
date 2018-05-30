@@ -40,7 +40,14 @@
   </div>
 
 </div>
-<div class="row">
+<div [hidden]="summery_lastyear">
+    <div  class="col-md-6">
+        <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
+        </fusioncharts>
+      </div>
+
+</div>
+<!-- <div class="row">
   <div align="right" class="col-md-6">
     <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource">
     </fusioncharts>
@@ -49,7 +56,7 @@
     <fusioncharts [width]="width2" [height]="height2" [type]="type2" [dataFormat]="dataFormat2" [dataSource]="dataSource2">
     </fusioncharts>
   </div>
-</div>
+</div> -->
 
 <div style="margin-top:20px"></div>
 <div class="row">
