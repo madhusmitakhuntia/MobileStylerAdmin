@@ -15,6 +15,8 @@ declare var $: any;
 })
 export class PartnerComponent implements OnInit {
 
+  wpartnerkey: any = [];
+
   partners: any = {};
   items: any = [];
   partnerkey: any = [];
@@ -141,6 +143,7 @@ export class PartnerComponent implements OnInit {
       })
   }
   searchPartnerName(fname, lname): void {
+    $('#DataTables').DataTable().destroy();
     this.dtOptions = {
       pagingType: 'full_numbers'
 
@@ -152,17 +155,61 @@ export class PartnerComponent implements OnInit {
       partnerfDate: '',
       partnertDate: ''
     });
-    this.partnerService.readPartnerByName(fname, lname)
-      .subscribe(partners => {
+    this.partnerService.readPartnerByName(fname)
+    .subscribe(partners => {
         this.partners = partners['partner'];
-        //console.log(this.partners);
-        this.items = Object.values(this.partners);
+        //console.log(this.users);
+        if (this.partners == null) {
+          //console.log('If condition');
+          this.partnerTable = true;
+          this.not_found = false;
+          $('#DataTables').DataTable().destroy();
+          this.items = [];
+          this.partnerkey = [];
+        }
+        else {
+          this.items = [];
+          this.partnerkey = [];
+          this.not_found = true;
+          console.log('else condition');
+          this.items = Object.values(this.partners);
+          this.wpartnerkey = Object.keys(this.partners);
+          for (let keys of this.wpartnerkey) {
+            console.log(keys);
+            console.log(this.partners[keys].partnerLastName == lname);
+            if (this.partners[keys].partnerLastName == lname) {
+              this.partnerkey.push(keys);
+            }
+          }
+          if (this.partnerkey.length == 0) {
+            this.partnerTable = true;
+            this.not_found = false;
+            $('#DataTables').DataTable().destroy();
+            this.items = [];
+            this.partnerkey = [];
+          }
+          else {
+            console.log(this.partnerkey);
+            $('#DataTables').DataTable().destroy();
+            this.dtTrigger.next();
 
-        this.partnerkey = Object.keys(this.partners);
-        // console.log( "key"+this.customerKey);
-        $('#DataTables').DataTable().destroy();
-        this.dtTrigger.next();
+            this.partnerTable = false;
+            //this.bookingTable = true;
+          }
+        }
+
       });
+    // this.partnerService.readPartnerByName(fname, lname)
+    //   .subscribe(partners => {
+    //     this.partners = partners['partner'];
+    //     //console.log(this.partners);
+    //     this.items = Object.values(this.partners);
+
+    //     this.partnerkey = Object.keys(this.partners);
+    //     // console.log( "key"+this.customerKey);
+    //     $('#DataTables').DataTable().destroy();
+    //     this.dtTrigger.next();
+    //   });
     this.partnerTable = false;
     this.serviceTable = true;
     this.bookingTable = true;

@@ -61,12 +61,20 @@ export class ProductService {
             .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbydate?from="+from+"&to="+to)
             .map(res => res.json());
     }
-    readUserByName(fname,lname): Observable<Person[]>{
+    // readUserByName(fname,lname): Observable<Person[]>{
+    //     // alert(fname);
+    //     // alert(lname);
+      
+    //     return this._http
+    //         .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbyname?fname="+fname+"&lname="+lname)
+    //         .map(res => res.json());
+    // }
+    readUserByName(fname): Observable<Person[]> {
         // alert(fname);
         // alert(lname);
-      
+
         return this._http
-            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbyname?fname="+fname+"&lname="+lname)
+            .get("https://us-central1-mobilestyler-admin.cloudfunctions.net/getCustomerbyfname?fname=" + fname)
             .map(res => res.json());
     }
     readUserByEmail(email): Observable<Person[]>{

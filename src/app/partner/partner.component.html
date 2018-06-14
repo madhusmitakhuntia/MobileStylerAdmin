@@ -1,178 +1,189 @@
 <div style="width: 100%;
-float: left;"><b class="theme-color pull-left"> Partner </b></div>
+float: left;">
+  <b class="theme-color pull-left"> Partner </b>
+</div>
 <div class="">
-  
-    <div class="col-md-4">
 
-            <form [formGroup]="searchPartnerByName">
-              <!-- <fieldset ng-disabled="disabled"> -->
+  <div class="col-md-4">
 
-                  <div class="clearfix"></div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label class="form-control-static txtlabel">First Name</label>
-                      <input class="form-control rdc2" name="Email" #partnerFname formControlName="partnerFname" type="text" />
-                    
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-control-static txtlabel">Last Name</label>
-                      <input class="form-control rdc2" name="Email" #partnerLname formControlName="partnerLname" type="text" />
-                      
-                    </div>
+    <form [formGroup]="searchPartnerByName">
+      <!-- <fieldset ng-disabled="disabled"> -->
 
-                   
-                   
-                  </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="form-control-static txtlabel">First Name</label>
+          <input class="form-control rdc2" name="Email" #partnerFname formControlName="partnerFname" type="text" />
 
-              <div class="row mtx20">
+        </div>
+        <div class="col-md-6">
+          <label class="form-control-static txtlabel">Last Name</label>
+          <input class="form-control rdc2" name="Email" #partnerLname formControlName="partnerLname" type="text" />
 
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerName(partnerFname.value,partnerLname.value);">Search</button>
-                </div>
-              </div>
-            </form>
-    </div>
-              
-                <div class="col-md-4">
-              <form [formGroup]="searchPartnerByEmail">
-                <!-- <fieldset ng-disabled="disabled"> -->
+        </div>
 
-                   
-                    <div class="row">
-                                    
-                      
-                      <div class="col-md-12">
-                        <label class="form-control-static txtlabel">Email </label>
-                        <input class="form-control rdc2" #email formControlName="email" />
-                        <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
+
+
+      </div>
+
+      <div class="row mtx20">
+
+        <div class="col-md-12">
+          <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerName(partnerFname.value,partnerLname.value);">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+    <form [formGroup]="searchPartnerByEmail">
+      <!-- <fieldset ng-disabled="disabled"> -->
+
+
+      <div class="row">
+
+
+        <div class="col-md-12">
+          <label class="form-control-static txtlabel">Email </label>
+          <input class="form-control rdc2" #email formControlName="email" />
+          <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
                     <p>Please enter a valid email.</p>
                 </div>-->
-                      </div>
-                    </div>
- 
-  
-                <div class="row mtx20">
-  
-                  <div class="col-md-12">
-                    
-  
-                    <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerEmail(email.value);">Search</button>
-                  </div>
-                </div>
-          
-              </form>
-                </div>
-          
-          
- 
-<!--from date to date-->
+        </div>
+      </div>
 
 
-<div class="col-md-4">
-    <div class="row " >
-        <form  [formGroup]="searchPartnerByDate">
-           
-                <div role="tabpanel" class="active" id="home" style="padding: 0px 9px;">
+      <div class="row mtx20">
 
-                      
-                            <div class="clearfix"></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="form-control-static txtlabel">From Date</label>
-                                    <input class="form-control rdc2" name="fromdate" #partnerfDate formControlName="partnerfDate" type="date"  />
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-control-static txtlabel">To Date</label>
-                                    <input class="form-control rdc2" name="todate" #partnertDate formControlName="partnertDate" type="date" />
-                                    
-                                </div>
-                          
-                            </div>
-                           
-                   
-                    <div class="row mtx20">
+        <div class="col-md-12">
 
-                        <div class="col-md-12">
-                           
 
-                            <button type="button" class="btn btn-theme  btn-lg btn-block"  (click)="searchPartnerDate(partnerfDate.value,partnertDate.value)">Search</button>
-                           
-                          </div>
-                    </div>
-                </div>
-            
-        </form>
+          <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerEmail(email.value);">Search</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+
+  <!--from date to date-->
+
+
+  <div class="col-md-4">
+    <div class="row ">
+      <form [formGroup]="searchPartnerByDate">
+
+        <div role="tabpanel" class="active" id="home" style="padding: 0px 9px;">
+
+
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-control-static txtlabel">From Date</label>
+              <input class="form-control rdc2" name="fromdate" #partnerfDate formControlName="partnerfDate" type="date" />
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-static txtlabel">To Date</label>
+              <input class="form-control rdc2" name="todate" #partnertDate formControlName="partnertDate" type="date" />
+
+            </div>
+
+          </div>
+
+
+          <div class="row mtx20">
+
+            <div class="col-md-12">
+
+
+              <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPartnerDate(partnerfDate.value,partnertDate.value)">Search</button>
+
+            </div>
+          </div>
+        </div>
+
+      </form>
     </div>
-    </div>
-                
+  </div>
+
 </div>
-<div >
+<div>
   <div align='center' style="margin-top: 30px; color: #b11616;" class="col-md-12" [hidden]="not_found">
     <h1>No Data Found! </h1>
-   </div>      
-  <div class="col-md-12" style="margin-top: 35px;"  [hidden]="partnerTable">
+  </div>
+  <div class="col-md-12" style="margin-top: 35px;" [hidden]="partnerTable">
 
     <div class="row" *ngIf="partnerkey?.length == 0">
       <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-   </div> 
-   <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+    </div>
+    <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
     <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button>
   </div> -->
-  <div style="position:absolute;top: -20px;right: 15px;font-weight: 800;z-index: 999">
+    <div style="position:absolute;top: -20px;right: 15px;font-weight: 800;z-index: 999">
       <button type="button" class="close" data-dismiss="modal" (click)="hideTable()">
         <i class="fa fa-times-circle"></i>
       </button>
     </div>
-  <div class="clearfix"></div>
-  <div style="position:relative">
-      
-      <div class="col-md-12" [hidden]="partnerTable">  
-    <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" id="DataTables" >
-    <thead>
-      <tr>
-          <!-- <th>Created At</th> -->
-        <th>FirstName</th>
-       
-        <th>LastName</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Mobile</th>
-       
-        <th>Booking</th>
-        <th>Service</th>
-        <th>Action</th>
-      
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let partner of partnerkey">
-        
-        <!-- <td>{{users[user].createdAt}}</td> -->
-        <!-- <td>{{users[user].MiddleName}}</td> -->
-        <td>{{partners[partner].partnerFirstName}}</td>
-        <td>{{partners[partner].partnerLastName}}</td>
-        <td>{{partners[partner].partnerEmail}}</td>
-        <td>{{partners[partner].partnerGender}}</td>
-        <td>{{partners[partner].partnerPhone}}</td>
-       
-        <td><button class="btn btn-success" (click)="viewBooking(partner,partners[partner].uid)">View Booking</button></td>
-        <td>
-          <button class="btn btn-success" (click)="viewService(partner,partners[partner].uid)">View Service</button>
-        </td>
-        
-        <td><button class="btn btn-warning" (click)="updatePartnerDetails(partner,partners[partner].partnerFirstName,partners[partner].partnerLastName,partners[partner].partnerEmail,partners[partner].partnerGender,partners[partner].partnerPhone)">Edit</button></td>
-        
-        <td>
-            <div *ngIf="partners[partner].status=='active'; then inactive; else active"> </div>
-            <ng-template #inactive>
-          <button class="btn btn-danger"  (click)="inactivePartner(partner)">Inactive</button></ng-template>
-          <ng-template #active> <button class="btn btn-warning"  (click)="activePartner(partner)">Active</button></ng-template></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+    <div class="clearfix"></div>
+    <div style="position:relative">
+
+      <div class="col-md-12" [hidden]="partnerTable">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="DataTables">
+          <thead>
+            <tr>
+              <!-- <th>Created At</th> -->
+              <th>FirstName</th>
+
+              <th>LastName</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Mobile</th>
+
+              <th>Booking</th>
+              <th>Service</th>
+              <th>Action</th>
+              <th></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partner of partnerkey">
+
+              <!-- <td>{{users[user].createdAt}}</td> -->
+              <!-- <td>{{users[user].MiddleName}}</td> -->
+              <td>{{partners[partner].partnerFirstName}}</td>
+              <td>{{partners[partner].partnerLastName}}</td>
+              <td>{{partners[partner].partnerEmail}}</td>
+              <td>{{partners[partner].partnerGender}}</td>
+              <td>{{partners[partner].partnerPhone}}</td>
+
+              <td>
+                <button class="btn btn-success" (click)="viewBooking(partner,partners[partner].uid)">View Booking</button>
+              </td>
+              <td>
+                <button class="btn btn-success" (click)="viewService(partner,partners[partner].uid)">View Service</button>
+              </td>
+
+              <td>
+                <button class="btn btn-warning" (click)="updatePartnerDetails(partner,partners[partner].partnerFirstName,partners[partner].partnerLastName,partners[partner].partnerEmail,partners[partner].partnerGender,partners[partner].partnerPhone)">Edit</button>
+              </td>
+
+              <td>
+                <div *ngIf="partners[partner].status=='active'; then inactive; else active"> </div>
+                <ng-template #inactive>
+                  <button class="btn btn-danger" (click)="inactivePartner(partner)">Inactive</button>
+                </ng-template>
+                <ng-template #active>
+                  <button class="btn btn-warning" (click)="activePartner(partner)">Active</button>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -181,28 +192,30 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
 
 <div class="dialog" [hidden]="updatePartner">
   <div class="modal-dialog modal-sm login-cls pt10">
-      <form [formGroup]="updatePartnerdetail">
-          <div class="modal-content">
-              <div class="panel panel-default" style="margin-bottom: 0px;">
+    <form [formGroup]="updatePartnerdetail">
+      <div class="modal-content">
+        <div class="panel panel-default" style="margin-bottom: 0px;">
 
-                  <div class="panel-body" style="min-height: 400px;">
-                      <button type="button" class="close" data-dismiss="modal" (click)="hidePartnerModal()">&times;</button>
+          <div class="panel-body" style="min-height: 400px;">
+            <button type="button" class="close" data-dismiss="modal" (click)="hidePartnerModal()">&times;</button>
 
-                      <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;"> <b>Update User Info</b> </p>
-                      <div class="clearfix mtx20"></div>
-                      <input type="hidden" #userKey formControlName="userKey" />
-                      <div class="row ">
-                          <div class="col-md-5">
-                              <label class="form-control-static txtlabel">First Name</label>
-                          </div>
-                         
-                          <div class="col-md-7">
+            <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;">
+              <b>Update User Info</b>
+            </p>
+            <div class="clearfix mtx20"></div>
+            <input type="hidden" #userKey formControlName="userKey" />
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">First Name</label>
+              </div>
 
-                              <input class="form-control rdc2" #partnerFirstname formControlName="partnerFirstname" />
-                          </div>
-                        
-                      </div>
-                      <!-- <div class="row ">
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #partnerFirstname formControlName="partnerFirstname" />
+              </div>
+
+            </div>
+            <!-- <div class="row ">
                           <div class="col-md-5">
                               <label class="form-control-static txtlabel">Middle Name</label>
                           </div>
@@ -212,142 +225,145 @@ float: left;"><b class="theme-color pull-left"> Partner </b></div>
                           </div>
                         
                       </div> -->
-                      <div class="row ">
-                          <div class="col-md-5">
-                              <label class="form-control-static txtlabel">Last Name</label>
-                          </div>
-                          <div class="col-md-7">
-
-                              <input class="form-control rdc2" #partnerLastname formControlName="partnerLastname" />
-                          </div>
-                        
-                      </div>
-                      <div class="row ">
-                          <div class="col-md-5">
-                              <label class="form-control-static txtlabel">Email</label>
-                          </div>
-                          <div class="col-md-7">
-
-                              <input class="form-control rdc2" #partnerEmail formControlName="partnerEmail" />
-                          </div>
-                        
-                      </div>
-                      <div class="row ">
-                          <div class="col-md-5">
-                              <label class="form-control-static txtlabel">Gender</label>
-                          </div>
-                          <div class="col-md-7">
-                              <select class="form-control selectcontrol" #partnerGender  formControlName="partnerGender">
-                                   
-                                  <option ng-value="male">male</option>
-                                  <option ng-value="female">female</option>
-                              </select>
-
-                              
-                          </div>
-                        
-                      </div>
-                      <div class="row ">
-                          <div class="col-md-5">
-                              <label class="form-control-static txtlabel">Mobile</label>
-                          </div>
-                          <div class="col-md-7">
-
-                              <input class="form-control rdc2" #partnerMobile formControlName="partnerMobile" />
-                          </div>
-                        
-                      </div>
-
-                  </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Last Name</label>
               </div>
-              <div style="background-color: #34495e"  ><button  id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e" (click)='saveUpdateData(updatePartnerdetail)'>Save </button> </div>
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #partnerLastname formControlName="partnerLastname" />
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Email</label>
+              </div>
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #partnerEmail formControlName="partnerEmail" />
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Gender</label>
+              </div>
+              <div class="col-md-7">
+                <select class="form-control selectcontrol" #partnerGender formControlName="partnerGender">
+
+                  <option ng-value="male">male</option>
+                  <option ng-value="female">female</option>
+                </select>
+
+
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Mobile</label>
+              </div>
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #partnerMobile formControlName="partnerMobile" />
+              </div>
+
+            </div>
+
           </div>
-      </form>
+        </div>
+        <div style="background-color: #34495e">
+          <button id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e"
+            (click)='saveUpdateData(updatePartnerdetail)'>Save </button>
+        </div>
+      </div>
+    </form>
   </div>
-  
+
 </div>
 <div class="overlay" [hidden]="modal_opened"></div>
 <!--Service table -->
 
 <div class="row">
-    <div class="col-md-12" [hidden]="serviceTable">
-  
-      <div style="position:relative">
-        <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+  <div class="col-md-12" [hidden]="serviceTable">
+
+    <div style="position:relative">
+      <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
         <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <!-- <th>Created At</th> -->
-              <th>Partner Id</th>
-  
-              
-              <th>Amount</th>
-              <th>Profile Status</th>
-              <th>Service Radius</th>
-              <th>Service</th>
-              <th>Specialist</th>
-                          
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let serv of service_result">
-                <td>{{services[serv].puid}}</td>
-              <td>{{services[serv].amount}}</td>
-            
-              <td>{{services[serv].profileStatus}}</td>
-             
-              <td>{{services[serv].serverRadius}}</td>
-              <td>{{services[serv].service}}</td>
-              <td>{{services[serv].speciality}}</td>
-                          
-             
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>Partner Id</th>
+
+
+            <th>Amount</th>
+            <th>Profile Status</th>
+            <th>Service Radius</th>
+            <th>Service</th>
+            <th>Specialist</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let serv of service_result">
+            <td>{{services[serv].puid}}</td>
+            <td>{{services[serv].amount}}</td>
+
+            <td>{{services[serv].profileStatus}}</td>
+
+            <td>{{services[serv].serverRadius}}</td>
+            <td>{{services[serv].service}}</td>
+            <td>{{services[serv].speciality}}</td>
+
+
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 
-  <!--Booking Table -->
+<!--Booking Table -->
 
-  <div class="row">
-        <div class="col-md-12" [hidden]="bookingTable">
-      
-          <div style="position:relative">
-            <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+<div class="row">
+  <div class="col-md-12" [hidden]="bookingTable">
+
+    <div style="position:relative">
+      <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
             <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <!-- <th>Created At</th> -->
-                  <th>Name</th>
-      
-                  <th>Key</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Note</th>
-                  <th>Service</th>
-                  <th>Stage</th>
-                  <th>Total Amount</th>
-              
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let booking of booking_result">
-      
-                  <td>{{bookings[booking].customerName}}</td>
-                  <td>{{booking}}</td>
-                  <td>{{bookings[booking].bookingSchedule.date}}</td>
-                  <td>{{bookings[booking].bookingSchedule.time}}</td>
-                  <td>{{bookings[booking].notes}}</td>
-                  <td>{{bookings[booking].services[0].serviceName}}</td>
-                  <td>{{bookings[booking].stage}}</td>
-                  <td>{{bookings[booking].totalAmount}}</td>
-                 
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>Name</th>
+
+            <th>Key</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Note</th>
+            <th>Service</th>
+            <th>Stage</th>
+            <th>Total Amount</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of booking_result">
+
+            <td>{{bookings[booking].customerName}}</td>
+            <td>{{booking}}</td>
+            <td>{{bookings[booking].bookingSchedule.date}}</td>
+            <td>{{bookings[booking].bookingSchedule.time}}</td>
+            <td>{{bookings[booking].notes}}</td>
+            <td>{{bookings[booking].services[0].serviceName}}</td>
+            <td>{{bookings[booking].stage}}</td>
+            <td>{{bookings[booking].totalAmount}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

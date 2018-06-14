@@ -16,6 +16,9 @@ declare var $: any;
   providers: [ProductService]
 })
 export class ClientComponent implements OnInit {
+
+  wcustomerKey: any = [];
+
   products: any = {};
   items: any = [];
   users: any = {};
@@ -54,8 +57,8 @@ export class ClientComponent implements OnInit {
     time: '',
     note: '',
     stage: '',
-    serviceName:'',
-    speciality:''
+    serviceName: '',
+    speciality: ''
 
   };
 
@@ -138,8 +141,8 @@ export class ClientComponent implements OnInit {
       time: '',
       note: '',
       stage: '',
-    serviceName:'',
-    speciality:''
+      serviceName: '',
+      speciality: ''
 
     };
     this.updateBookingData = fb.group({
@@ -150,8 +153,8 @@ export class ClientComponent implements OnInit {
       'time': [null],
       'note': [null],
       'stage': [null],
-      'serviceName':[null],
-    'speciality':[null]
+      'serviceName': [null],
+      'speciality': [null]
 
     });
 
@@ -307,63 +310,95 @@ export class ClientComponent implements OnInit {
 
     };
     this.searchByName.setValue({
-      searchFname:'',
-      searchLname:''
+      searchFname: '',
+      searchLname: ''
     });
     this.searchByEmail.setValue({
-      email:''
+      email: ''
     });
     this.productService.readUserByDate(fdate, tdate)
       .subscribe(users => {
         this.users = users['customer'];
-        if(this.users == null)
-        {
+        if (this.users == null) {
           //console.log('If condition');
           this.userTable = true;
           this.not_found = false;
           $('#DataTables').DataTable().destroy();
-          this.items =[];
-          this.customerKey =[];
+          this.items = [];
+          this.customerKey = [];
         }
-        else
-        {
+        else {
           this.not_found = true;
           console.log('else condition');
           this.items = Object.values(this.users);
           this.customerKey = Object.keys(this.users);
           $('#DataTables').DataTable().destroy();
           this.dtTrigger.next();
- 
+
           this.userTable = false;
           this.bookingTable = true;
         }
       });
-    
+
   }
   searchName(fname, lname): void {
+    $('#DataTables').DataTable().destroy();
+    this.items = [];
+    this.customerKey = [];
     this.dtOptions = {
       pagingType: 'full_numbers'
 
     };
     this.searchpartner.setValue({
-      partnerfDate:'',
-      partnertDate:''
+      partnerfDate: '',
+      partnertDate: ''
     });
     this.searchByEmail.setValue({
-      email:''
+      email: ''
     });
-    this.productService.readUserByName(fname, lname)
+    this.productService.readUserByName(fname)
       .subscribe(users => {
         this.users = users['customer'];
         //console.log(this.users);
+        if (this.users == null) {
+          //console.log('If condition');
+          this.userTable = true;
+          this.not_found = false;
+          $('#DataTables').DataTable().destroy();
+          this.items = [];
+          this.customerKey = [];
+        }
+        else {
+          this.items = [];
+          this.customerKey = [];
+          this.not_found = true;
+          console.log('else condition');
+          this.items = Object.values(this.users);
+          this.wcustomerKey = Object.keys(this.users);
+          for (let keys of this.wcustomerKey) {
+            console.log(keys);
+            console.log(this.users[keys].partnerLastName == lname);
+            if (this.users[keys].partnerLastName == lname) {
+              this.customerKey.push(keys);
+            }
+          }
+          if (this.customerKey.length == 0) {
+            this.userTable = true;
+            this.not_found = false;
+            $('#DataTables').DataTable().destroy();
+            this.items = [];
+            this.customerKey = [];
+          }
+          else {
+            console.log(this.customerKey);
+            $('#DataTables').DataTable().destroy();
+            this.dtTrigger.next();
 
-        this.items = Object.values(this.users);
-        //console.log(this.items);
+            this.userTable = false;
+            this.bookingTable = true;
+          }
+        }
 
-        this.customerKey = Object.keys(this.users);
-        // console.log( "key"+this.customerKey);
-        $('#DataTables').DataTable().destroy();
-        this.dtTrigger.next();
       });
     this.userTable = false;
     this.bookingTable = true;
@@ -375,41 +410,39 @@ export class ClientComponent implements OnInit {
 
     };
     this.searchpartner.setValue({
-      partnerfDate:'',
-      partnertDate:''
+      partnerfDate: '',
+      partnertDate: ''
     });
     this.searchByName.setValue({
-      searchFname:'',
-      searchLname:''
+      searchFname: '',
+      searchLname: ''
     });
     this.productService.readUserByEmail(email)
       .subscribe(users => {
         this.users = users['customer'];
-        if(this.users == null)
-        {
+        if (this.users == null) {
           //console.log('If condition');
           this.userTable = true;
           this.not_found = false;
           $('#DataTables').DataTable().destroy();
-          this.items =[];
-          this.customerKey =[];
+          this.items = [];
+          this.customerKey = [];
         }
-        else
-        {
+        else {
           this.not_found = true;
           console.log('else condition');
           this.items = Object.values(this.users);
           this.customerKey = Object.keys(this.users);
           $('#DataTables').DataTable().destroy();
           this.dtTrigger.next();
- 
+
           this.userTable = false;
           this.bookingTable = true;
         }
 
-       
+
       });
-    
+
 
   }
   findbooking(key, uid) {
@@ -428,7 +461,7 @@ export class ClientComponent implements OnInit {
     }
     this.bookingTable = false;
   }
-  showUpdateBookingModal(booking, customerName, date, time, notes, serviceName,speciality,stage, totalAmount) {
+  showUpdateBookingModal(booking, customerName, date, time, notes, serviceName, speciality, stage, totalAmount) {
     this.updateBooking = !this.updateBooking;
     this.modal_opened = !this.modal_opened;
     this.updateBookingData.setValue({
@@ -439,8 +472,8 @@ export class ClientComponent implements OnInit {
       'time': time,
       'note': notes,
       'stage': stage,
-      'serviceName':serviceName,
-      'speciality':speciality
+      'serviceName': serviceName,
+      'speciality': speciality
     });
   }
   hideUpdateBookingModal() {
@@ -467,10 +500,9 @@ export class ClientComponent implements OnInit {
     this.hideUpdateBookingModal();
 
   }
-  cancelBooking(bookingkey)
-  {
-    var json={
-      stage:"cancel"
+  cancelBooking(bookingkey) {
+    var json = {
+      stage: "cancel"
     };
     this.db.list('/booking').update(bookingkey, json);
     this.hideUpdateBookingModal();
