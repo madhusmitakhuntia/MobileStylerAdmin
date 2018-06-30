@@ -1,0 +1,57 @@
+<div class="banner">
+
+
+  <div class="container" style="padding-top: 5%">
+      <div class="col-md-8">
+
+          <div class="aitslogow3ls  pull-left">
+              <a href="index.html">
+                  <div class="agilelo go centerlogo" style="left: 0;">
+                      <img src="assets/images/mbp.png" style="width:60%" />
+                     
+                  </div>
+              </a>
+          </div>
+          <div class="clearfix"></div>
+      </div>
+      <div class="col-md-3 aboutright">
+          <form  [formGroup]="rForm">
+              <div class="panel panel-default" style="margin-bottom: 0px">
+                  <div class="panel-heading  text-center" style="padding: 10px;">
+                      <h3 class="theme-color bold1"> Welcome Admin </h3>
+                  </div>
+                  <div class="panel-body" style="min-height: 400px;" (click)="hideError()">
+
+
+                      <div style="padding-top:5% ">
+                          <label class="mt10   control-label txtlabel1" style="margin-bottom: 15px;"><b> Email id</b></label>
+                          <input type="email" class="form-control height50" #email formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!rForm.controls.email.valid && rForm.controls.email.dirty" />
+                      </div>
+                      <div class="danger" *ngIf="!rForm.controls.email.valid  && rForm.controls.email.dirty">
+                          <p>Please enter a valid email.</p>
+                      </div>
+                      <div>
+                          <label class="mt10   control-label txtlabel1" style="margin-bottom: 15px;"><b> Password  </b></label>
+                          <input type="password" class="form-control height50" #password formControlName="password" type="password" placeholder="Your password" [class.invalid]="!rForm.controls.password.valid && rForm.controls.password.dirty" />
+                      </div>
+                      <div class="danger" *ngIf="!rForm.controls.password.valid  && rForm.controls.password.dirty">
+                          <p>Please enter a valid password.</p>
+                      </div>
+                      <br>
+                      <div class="danger" *ngIf="error" style="font-size: 12px">
+                          {{error}}
+                      </div>
+
+                      <!-- <p class="mt10 text-center"><a [routerLink]="['/signup']">Not a member? Signup Here</a></p>
+                      <p class="mt10 text-center" style="margin-top:7%"><a [routerLink]="['/forgot']">Forgot Password</a> </p>
+                      <p class="mt10 text-center" style="margin-top:7%"><a [routerLink]="['/home']">Skip Login</a> </p> -->
+                  </div>
+
+              </div>
+              <div style="margin-top:-5px">
+                  <button type="button" class="btn btn-theme btn-lg btn-block border-bottom" (click)="login(email.value,password.value)" [disabled]="!rForm.valid">Sign In</button> </div>
+          </form>
+
+      </div>
+  </div>
+</div>

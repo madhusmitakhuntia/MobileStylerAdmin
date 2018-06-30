@@ -1,0 +1,40 @@
+<!-- loader content end -->
+
+
+<div class="aitsheaderw3ls" id="agilehome">
+
+  <!-- Navigation -->
+  <div class="agiletopbar ">
+      <div class="wthreenavigation ">
+          <div class="menu-wrap">
+              <nav class="menu">
+                  <div class="icon-list">
+                      <a class="scroll active" [routerLink]="['/adminhome']"> <span>Home</span></a>
+                      <a class="scroll" [routerLink]="['/adminhome/partner']" (click)="check()"> <span>Partner</span></a>
+                      
+                      <a class="scroll" [routerLink]="['/adminhome/client']" (click)="check()"> <span>Client</span></a>
+                     <!-- <a class="scroll" [routerLink]="['/adminhome/calender']" (click)="check()"> <span>Calender</span></a> -->
+                      <a class="scroll"  (click)="signOut()"> <span>Signout</span></a>
+                  </div>
+              </nav>
+              <button class="close-button" id="close-button">Close Menu</button>
+          </div>
+          <button class="menu-button" id="open-button">Open Menu</button>
+      </div>
+
+
+      <div class="logo"> MobileStyler</div>
+      <div class="right-header"> 
+       
+          <!-- Norton NJ <i class="fa fa-times"></i> -->
+      </div>
+
+  </div>
+  <!-- //Navigation -->
+ 
+</div>
+
+
+   
+
+<router-outlet></router-outlet>

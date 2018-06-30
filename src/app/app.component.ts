@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';     // Add this
-import {LoginComponent} from './login/login.component';
+
 
 
 @Component({

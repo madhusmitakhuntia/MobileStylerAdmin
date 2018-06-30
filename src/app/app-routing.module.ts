@@ -1,81 +1,48 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';     // Add this
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { ForgotComponent } from './forgot/forgot.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BookingsComponent } from './bookings/bookings.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { RegisterComponent } from './register/register.component';
-import { DetailsComponent } from './details/details.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ClientComponent } from './client/client.component';
-import { PrivacyComponent } from './privacy/privacy.component';
+import { Data1Component } from './data1/data1.component';
+import { PartnerComponent } from './partner/partner.component';
+import { Graph2Component } from './graph2/graph2.component';
+
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/adminlogin',
         pathMatch: 'full'
     },
-    {
-        path: 'home',
-        component: HomeComponent,
+   {
+        path: 'adminhome',
+        component: AdminhomeComponent,
         children: [
             {
                 path: '',
-                component: DetailsComponent
+                component: Data1Component
             },
+          
             {
-                path: 'bookings',
-                component: BookingsComponent
+                path:'partner',
+                component:PartnerComponent
             },
-            {
-                path: 'profile',
-                component: ProfileComponent
-            },
-            {
-                path: 'notifications',
-                component: NotificationsComponent
-            },
-            {
-                path: 'payments',
-                component: PaymentsComponent
-            }
-            ,
             {
                 path: 'client',
-                component: ClientComponent
-            }
-            // ,
-            // {
-            //     path: 'payments',
-            //     component: PaymentsComponent
-            // }
-            
+                component:ClientComponent 
+            },
+            {
+                path: 'calender',
+                component:Graph2Component 
+            },
+           
+           
         ]
-    },
-    {
-        path:'privacy',
-        component:PrivacyComponent
-    },
-    {
-        path: 'profile',
-        component: RegisterComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'signup',
-        component: SignupComponent
-    },
-    {
-        path: 'forgot',
-        component: ForgotComponent
-    }
+   },
+   {
+    path: 'adminlogin',
+    component:AdminloginComponent 
+   }
 
 
 ];

@@ -56,7 +56,7 @@ a {
 .wthreenavigation {
     width: 5%;
     float: left;
-    height: 65px;
+    /* height: 65px; */
 }
 
 .agileinfomenu {
@@ -1785,8 +1785,8 @@ img.zoom-img:hover {
 }
 
 .txtlabel {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .txtlabel1 {
@@ -2033,4 +2033,11 @@ body {
 body:hover {
     overflow-y: auto;
 }
+
+.raphael-group-8-creditgroup{visibility:hidden !important; display:none !important;}
+.raphael-group-3-creditgroup{visibility:hidden !important; display:none !important;}
+.raphael-group-13-creditgroup{visibility:hidden !important; display:none !important;}
+.raphael-group-227-creditgroup{visibility:hidden !important; display:none !important;}
+.raphael-group-460-creditgroup{visibility:hidden !important; display:none !important;}
+.raphael-group-356-creditgroup{visibility:hidden !important; display:none !important;}
 

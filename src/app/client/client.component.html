@@ -1,471 +1,489 @@
-<div class="dialog" [hidden]="adressPage">
+<!--update modal -->
+
+<div class="dialog" [hidden]="updatePage">
   <div class="modal-dialog modal-sm login-cls pt10">
-    <form [formGroup]="address">
+    <form [formGroup]="updateUser">
       <div class="modal-content">
         <div class="panel panel-default" style="margin-bottom: 0px;">
 
           <div class="panel-body" style="min-height: 400px;">
-            <button type="button" class="close" data-dismiss="modal" (click)="hideAddressModal()">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" (click)="hideUpdateModal()">&times;</button>
 
             <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;">
-              <b>View Location </b>
+              <b>Update User Info</b>
             </p>
             <div class="clearfix mtx20"></div>
-
+            <input type="hidden" #userKey formControlName="userKey" />
             <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Name </label>
+                <label class="form-control-static txtlabel">First Nmae</label>
               </div>
+
               <div class="col-md-7">
 
-                <input class="form-control rdc2" #name formControlName="name" />
+                <input class="form-control rdc2" #UserFName formControlName="UserFName" />
               </div>
-              <!-- <div class="col-md-12">
-															<div class=" alert-danger" *ngIf="!address.controls.name.valid  && address.controls.name.dirty">
-																	<p>Please enter a valid name.</p>
-															</div>
-													</div> -->
-            </div>
 
-            <div class="row mt10">
+            </div>
+            <!-- <div class="row ">
+                          <div class="col-md-5">
+                              <label class="form-control-static txtlabel">Middle Name</label>
+                          </div>
+                          <div class="col-md-7">
+
+                              <input class="form-control rdc2" #UserMName formControlName="UserMName" />
+                          </div>
+                        
+                      </div> -->
+            <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Addresss Line 1 </label>
+                <label class="form-control-static txtlabel">Last Name</label>
               </div>
               <div class="col-md-7">
 
-                <input class="form-control rdc2" #address1 formControlName="address1" />
+                <input class="form-control rdc2" #UserLName formControlName="UserLName" />
               </div>
-              <!-- <div class="col-md-12">
-															<div class=" alert-danger" *ngIf="!address.controls.address1.valid  && address.controls.address1.dirty">
-																	<p>Please enter a valid address.</p>
-															</div>
-													</div> -->
-            </div>
 
-            <div class="row mt10">
+            </div>
+            <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Addresss Line 2 </label>
+                <label class="form-control-static txtlabel">Email</label>
               </div>
               <div class="col-md-7">
 
-                <input class="form-control rdc2" #address2 formControlName="address2" />
+                <input class="form-control rdc2" #Useremail formControlName="Useremail" />
               </div>
 
             </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Gender</label>
+              </div>
+              <div class="col-md-7">
 
-            <div class="row mt10">
-              <div class="col-md-2">
-                <label class="form-control-static txtlabel">Zip</label>
-              </div>
-              <div class="col-md-4">
-                <input class="form-control rdc2" #zip formControlName="zip" />
-              </div>
-              <!-- <div class="col-md-12">
-															<div class="alert-danger" *ngIf="!address.controls.zip.valid  && address.controls.zip.dirty">
-																	<p>Please enter a valid zip code.</p>
-															</div>
-													</div> -->
-            </div>
+                <!-- <input class="form-control rdc2" #gender formControlName="gender" /> -->
+                <select class="form-control selectcontrol" #gender formControlName="gender">
 
-            <div class="row mt10">
-              <div class="col-md-2">
-                <label class="form-control-static txtlabel">City </label>
+                  <option ng-value="male">male</option>
+                  <option ng-value="female">female</option>
+                </select>
               </div>
-              <div class="col-md-4">
-
-                <input class="form-control rdc2" #city formControlName="city" />
-              </div>
-              <div class="col-md-2">
-                <label class="form-control-static txtlabel">State </label>
-              </div>
-              <div class="col-md-4">
-
-                <input class="form-control rdc2" #state formControlName="state" />
-              </div>
-              <!-- <div class="col-md-6 pull-right">
-															<div class="alert-danger" *ngIf="!address.controls.state.valid  && address.controls.state.dirty">
-																	<p>Please enter a valid state.</p>
-															</div>
-													</div>
-													<div class="col-md-6 pull-left">
-															<div class="alert-danger" *ngIf="!address.controls.city.valid  && address.controls.city.dirty">
-																	<p>Please enter a valid city.</p>
-															</div>
-													</div> -->
 
             </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Mobile</label>
+              </div>
+              <div class="col-md-7">
 
+                <input class="form-control rdc2" #mobile formControlName="mobile" />
+              </div>
 
-
+            </div>
 
           </div>
         </div>
-        <div style="background-color: #34495e" (click)="addAddress(address)" *ngIf="!address.index">
-          <button [disabled]="!address.valid" id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button>
+        <div style="background-color: #34495e" (click)="updateUserInfo(updateUser)">
+          <button id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button>
         </div>
-        <!--<div style="background-color: #34495e" (click)="saveUpdatedAddress(address)" *ngIf="address.index"><button [disabled]="!address.valid" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Edit  </button> </div>
-							<div style="background-color: #f44336" *ngIf="address.index" (click)="removeAddress(address.index)"><button [disabled]="!address.valid" class="btn btn-danger form-control btn-block" style="border-radius:0px;background-color: #f44336 ">Remove  </button> </div>-->
-
       </div>
     </form>
   </div>
-  <!--button (click)="close()" aria-label="Close" class="dialog__close-btn">X</button-->
+
 </div>
 <div class="overlay" [hidden]="modal_opened"></div>
 
-<div class="dialog" [hidden]="bookingPage">
+<!--update modal -->
+
+<!-- <div style="width: 100%;
+float: left;">
+  <b class="theme-color pull-left"> Client </b>
+</div> -->
+<div align='center' style="margin: 15px 0; color: #6c7993;font-weight: bold;" class="col-md-12">
+  <h3 style="font-weight: bold;">Client </h3>
+</div>
+<div class="col-md-3" style="padding:0 10px;">
+  <div class="btn btn-primary" style="width:90%;" [class.active]="!search_name" (click)="open_search_name();">Search by Name</div>
+</div>
+<div class="col-md-3" style="padding:0 10px;">
+  <div class="btn btn-primary" style="width:90%;" [class.active]="!search_phone" (click)="open_search_phone();">Search by Phone</div>
+</div>
+<div class="col-md-3" style="padding:0 10px;">
+  <div class="btn btn-primary" style="width:90%;" [class.active]="!search_email" (click)="open_search_email();">Search by Email</div>
+</div>
+<div class="col-md-3" style="padding:0 10px;">
+  <div class="btn btn-primary" style="width:90%;" [class.active]="!search_date" (click)="open_search_date();">Search by Date</div>
+</div>
+<div class="col-md-12" align="center">
+  <div class="col-md-6"  style="float: none;">
+    <div class="col-md-12"  [hidden]="search_name">
+
+      <form [formGroup]="searchByName">
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-control-static txtlabel">First Name</label>
+            <input class="form-control rdc2" name="Email" #searchFname formControlName="searchFname" type="text" />
+            <!--[readonly]="true" -->
+            <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
+                    <p>Please enter a valid name.</p>
+                </div>-->
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-static txtlabel">Last Name</label>
+            <input class="form-control rdc2" name="Email" #searchLname formControlName="searchLname" type="text" />
+            <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
+                    <p>Please enter a valid name.</p>
+                </div>-->
+          </div>
+
+
+
+        </div>
+
+        <div class="row mtx20">
+
+          <div class="col-md-12">
+            <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchName(searchFname.value,searchLname.value);">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-12"  [hidden]="search_email"  style="float: none;">
+      <form [formGroup]="searchByEmail">
+        <!-- <fieldset ng-disabled="disabled"> -->
+
+
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <label class="form-control-static txtlabel">Email </label>
+            <input class="form-control rdc2" #email formControlName="email" />
+            <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
+                    <p>Please enter a valid email.</p>
+                </div>-->
+          </div>
+        </div>
+
+
+        <div class="row mtx20">
+
+          <div class="col-md-12">
+
+
+            <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchEmail(email.value);">Search</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <!--search by phone -->
+  <div class="col-md-6"  style="float: none;">
+    <div class="col-md-12" [hidden]="search_phone" >
+      <form [formGroup]="searchByPhone">
+        <!-- <fieldset ng-disabled="disabled"> -->
+
+
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <label class="form-control-static txtlabel">Phone No:</label>
+            <input class="form-control rdc2" #clientPhone formControlName="clientPhone" />
+            <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
+                  <p>Please enter a valid email.</p>
+              </div>-->
+          </div>
+        </div>
+
+
+        <div class="row mtx20">
+
+          <div class="col-md-12">
+
+
+            <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchPhone(clientPhone.value);">Search</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!--search by phone -->
+
+
+    <!--from date to date-->
+
+
+    <div class="col-md-12"  [hidden]="search_date"  style="float: none;" >
+      <div class="row ">
+        <form [formGroup]="searchpartner">
+
+          <div role="tabpanel" class="active" id="home" style="padding: 0px 9px;">
+
+
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-control-static txtlabel">From Date</label>
+                <input class="form-control rdc2" name="fromdate" #partnerfDate formControlName="partnerfDate" type="date" />
+
+              </div>
+              <div class="col-md-6">
+                <label class="form-control-static txtlabel">To Date</label>
+                <input class="form-control rdc2" name="todate" #partnertDate formControlName="partnertDate" type="date" />
+
+              </div>
+
+            </div>
+
+
+            <div class="row mtx20">
+
+              <div class="col-md-12">
+
+
+                <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="searchByDate(partnerfDate.value,partnertDate.value)">Search</button>
+
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Data table -->
+<div class="clearfix"></div>
+<div align='center' style="margin-top: 30px; color: #b11616;" class="col-md-12" [hidden]="not_found">
+  <h1>No Data Found! </h1>
+</div>
+<div style="margin-top: 35px;">
+
+  <div class="col-md-12" [hidden]="userTable">
+    <div class="row" *ngIf="customerKey?.length == 0">
+      <i style="display:block;margin: 0 auto;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    </div>
+    <div style="position:absolute;top: -20px;right: 15px;font-weight: 800;z-index: 999">
+      <button type="button" class="close" data-dismiss="modal" (click)="hideTable()">
+        <i class="fa fa-times-circle"></i>
+      </button>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div style="position:relative">
+
+
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="DataTables">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>FirstName</th>
+
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Booking</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of customerKey">
+
+            <!-- <td>{{users[user].createdAt}}</td> -->
+            <!-- <td>{{users[user].MiddleName}}</td> -->
+            <td>{{users[user].partnerFirstName}}</td>
+            <td>{{users[user].partnerLastName}}</td>
+            <td>{{users[user].partnerEmail}}</td>
+            <td>{{users[user].partnerGender}}</td>
+            <td>{{users[user].partnerPhone}}</td>
+            <td>
+              <button class="btn btn-success" (click)="findbooking(user,users[user].uid)">View Booking</button>
+            </td>
+            <td>
+              <button class="btn btn-warning" (click)="showUpdateModal(user,users[user].partnerFirstName,users[user].partnerLastName,users[user].partnerEmail,users[user].partnerGender,users[user].partnerPhone)">Edit</button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--Data table -->
+<!-- Booking Data Table -->
+<div class="row">
+  <div class="col-md-12" [hidden]="bookingTable">
+
+    <div style="position:relative">
+      <!-- <div style="position:absolute;top: 5px;right: 5px; font-weight: 800;">
+        <button type="button" class="close" data-dismiss="modal" (click)="hideTable()"><i class="fa fa-times-circle"></i></button></div> -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <!-- <th>Created At</th> -->
+            <th>Name</th>
+
+            <th>Key</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Note</th>
+            <th>Service</th>
+            <th>Stage</th>
+            <th>Total Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of booking_result">
+
+            <td>{{bookings[booking].customerName}}</td>
+            <td>{{booking}}</td>
+            <td>{{bookings[booking].bookingSchedule.date}}</td>
+            <td>{{bookings[booking].bookingSchedule.time}}</td>
+            <td>{{bookings[booking].notes}}</td>
+            <td>{{bookings[booking].services[0].serviceName}}</td>
+            <td>{{bookings[booking].stage}}</td>
+            <td>{{bookings[booking].totalAmount}}</td>
+            <td></td>
+            <td>
+              <button class="btn btn-warning" *ngIf="!(bookings[booking].stage === 'completed' || bookings[booking].stage === 'cancel')"
+                (click)="showUpdateBookingModal(booking,bookings[booking].customerName,bookings[booking].bookingSchedule.date,bookings[booking].bookingSchedule.time,bookings[booking].notes,bookings[booking].services[0].serviceName,bookings[booking].services[0].speciality,bookings[booking].stage,bookings[booking].totalAmount)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--Update Bookings -->
+<div class="dialog" [hidden]="updateBooking">
   <div class="modal-dialog modal-sm login-cls pt10">
-    <form [formGroup]="booking">
+    <form [formGroup]="updateBookingData">
       <div class="modal-content">
         <div class="panel panel-default" style="margin-bottom: 0px;">
 
           <div class="panel-body" style="min-height: 400px;">
-            <button type="button" class="close" data-dismiss="modal" (click)="hideBookingModal()">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" (click)="hideUpdateBookingModal()">&times;</button>
 
             <p style="border-bottom: 1px solid #d3d3d3; padding-bottom: 5px;">
-              <b>View Booking Details </b>
+              <b>Update Booking Info</b>
             </p>
             <div class="clearfix mtx20"></div>
-
+            <input type="hidden" #booking formControlName="booking" />
             <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Booking ID </label>
+                <label class="form-control-static txtlabel">Customer Name</label>
               </div>
+
               <div class="col-md-7">
 
-                <input class="form-control rdc2" #b_id formControlName="b_id" />
+                <input class="form-control rdc2" #customername formControlName="customername" readonly/>
               </div>
-              <!-- <div class="col-md-12">
-															<div class=" alert-danger" *ngIf="!address.controls.name.valid  && address.controls.name.dirty">
-																	<p>Please enter a valid name.</p>
-															</div>
-													</div> -->
-            </div>
 
-            <div class="row mt10">
+            </div>
+            <!-- <div class="row ">
+                            <div class="col-md-5">
+                                <label class="form-control-static txtlabel">Middle Name</label>
+                            </div>
+                            <div class="col-md-7">
+  
+                                <input class="form-control rdc2" #UserMName formControlName="UserMName" />
+                            </div>
+                          
+                        </div> -->
+            <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Service </label>
-              </div>
-              <div class="col-md-7">
-
-                <input class="form-control rdc2" #service formControlName="service" />
-              </div>
-              <!-- <div class="col-md-12">
-															<div class=" alert-danger" *ngIf="!address.controls.address1.valid  && address.controls.address1.dirty">
-																	<p>Please enter a valid address.</p>
-															</div>
-													</div> -->
-            </div>
-
-            <div class="row mt10">
-              <div class="col-md-5">
-                <label class="form-control-static txtlabel">Expertise </label>
-              </div>
-              <div class="col-md-7">
-
-                <input class="form-control rdc2" #expertise formControlName="expertise" />
-              </div>
-
-            </div>
-
-            <div class="row mt10">
-              <div class="col-md-5">
-                <label class="form-control-static txtlabel">Price </label>
-              </div>
-              <div class="col-md-7">
-
-                <input class="form-control rdc2" #price formControlName="price" />
-              </div>
-
-            </div>
-
-            <div class="row mt10">
-              <div class="col-md-5">
-                <label class="form-control-static txtlabel">Address </label>
-              </div>
-              <div class="col-md-7">
-
-                <input class="form-control rdc2" #b_address formControlName="b_address" />
-              </div>
-
-            </div>
-
-            <div class="row mt10">
-              <div class="col-md-2">
                 <label class="form-control-static txtlabel">Date</label>
               </div>
-              <div class="col-md-4">
-                <input class="form-control rdc2" #date formControlName="date" />
-              </div>
-              <!-- <div class="col-md-12">
-															<div class="alert-danger" *ngIf="!address.controls.zip.valid  && address.controls.zip.dirty">
-																	<p>Please enter a valid zip code.</p>
-															</div>
-                          </div> -->
-              <div class="col-md-2">
-                <label class="form-control-static txtlabel">Time</label>
-              </div>
-              <div class="col-md-4">
-                <input class="form-control rdc2" #time formControlName="time" />
-              </div>            
-            </div>
+              <div class="col-md-7">
 
-            <div class="row mt10">
+                <input type="date" class="form-control rdc2" #date formControlName="date" />
+              </div>
+
+            </div>
+            <div class="row ">
               <div class="col-md-5">
-                <label class="form-control-static txtlabel">Note </label>
+                <label class="form-control-static txtlabel">Time</label>
               </div>
               <div class="col-md-7">
 
-                <input class="form-control rdc2" #note formControlName="note" />
+                <input type="time" class="form-control rdc2" #time formControlName="time" />
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Note</label>
+              </div>
+              <div class="col-md-7">
+
+                <textarea class="form-control ng-untouched ng-pristine ng-valid" cols="10" rows="3" formControlName="note"></textarea>
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Stage</label>
+              </div>
+              <div class="col-md-7">
+
+                <select class="form-control selectcontrol" formControlName="stage">
+
+                  <option ng-value="pending">pending</option>
+                  <option ng-value="completed">completed</option>
+                  <option ng-value="end">end</option>
+
+
+                </select>
+
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Service</label>
+              </div>
+
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #serviceName formControlName="serviceName" readonly/>
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-5">
+                <label class="form-control-static txtlabel">Speciality</label>
+              </div>
+
+              <div class="col-md-7">
+
+                <input class="form-control rdc2" #speciality formControlName="speciality" readonly/>
               </div>
 
             </div>
 
           </div>
         </div>
-        <!-- <div style="background-color: #34495e" (click)="addAddress(address)" *ngIf="!address.index"> -->
-          <button  id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Edit </button>
-        <!-- </div> -->
-        <!--<div style="background-color: #34495e" (click)="saveUpdatedAddress(address)" *ngIf="address.index"><button [disabled]="!address.valid" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Edit  </button> </div>
-							<div style="background-color: #f44336" *ngIf="address.index" (click)="removeAddress(address.index)"><button [disabled]="!address.valid" class="btn btn-danger form-control btn-block" style="border-radius:0px;background-color: #f44336 ">Remove  </button> </div>-->
-
+        <div style="background-color: #34495e" (click)="updateBookingInfo(updateBookingData)">
+          <button id="testbutton" class="btn btn-theme btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Save </button>
+        </div>
+        <div style="background-color: #34495e" (click)="cancelBooking(booking.value)">
+          <button id="testbutton" class="btn btn-danger btn-lg btn-block" style="border-radius:0px;background-color: #34495e">Cancel Booking </button>
+        </div>
       </div>
     </form>
   </div>
-  <!--button (click)="close()" aria-label="Close" class="dialog__close-btn">X</button-->
+
 </div>
-<div sclass="overlay" [hidden]="modal_opened"></div>
-
-
-<div class="" style="height:100%">
-  <div class="row prl10" style="height:100%">
-
-    <div class="col-md-3">
-    </div>
-
-    <div class="col-md-6 aboutright" style="background-color: #edf0f3;">
-
-
-      <div class="row ">
-
-        <div class="tab-content" style="padding: 6%">
-          <div role="tabpanel" class="tab-pane active" id="home">
-
-            <form [formGroup]="search">
-              <!-- <fieldset ng-disabled="disabled"> -->
-              <div class="panel panel-default mb10" style="margin-bottom: 0px;">
-                <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
-                  <b class="theme-color pull-left"> Client </b>
-
-
-                </div>
-                <div class="panel-body">
-
-                  <div class="clearfix"></div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <label class="form-control-static txtlabel">First Name</label>
-                      <input class="form-control rdc2" name="Email" #searchFname formControlName="searchFname" type="text" />
-                      <!--[readonly]="true" -->
-                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
-                    <p>Please enter a valid name.</p>
-                </div>-->
-                    </div>
-                    <div class="col-md-3">
-                      <label class="form-control-static txtlabel">Last Name</label>
-                      <input class="form-control rdc2" name="Email" #searchLname formControlName="searchLname" type="text" />
-                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
-                    <p>Please enter a valid name.</p>
-                </div>-->
-                    </div>
-
-                    <div class="col-md-1" style="padding: 18px 0px; text-align: center;color: #000;font-weight: bold;">OR</div>
-                    <div class="col-md-5">
-                      <label class="form-control-static txtlabel">Email </label>
-                      <input class="form-control rdc2" #searchEmail formControlName="searchEmail" />
-                      <!--<div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
-                  <p>Please enter a valid email.</p>
-              </div>-->
-                    </div>
-                  </div>
-
-
-
-                </div>
-
-              </div>
-
-              <div class="row mtx20">
-
-                <div class="col-md-12">
-                  <div class="alert alert-danger" *ngIf="error">
-                    <strong>Error!</strong> {{error}}
-                  </div>
-
-                  <button type="button" class="btn btn-theme  btn-lg btn-block" (click)="findEmailfromdata(searchEmail.value);findfname(searchFname.value,searchLname.value);">Submit</button>
-                </div>
-              </div>
-            </form>
-            <form [formGroup]="model">
-              <div class="panel panel-default mb10 mtx20" style="margin-bottom: 0px;">
-                <!-- <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
-															<b class="theme-color pull-left"> Client   </b>
-
-
-													</div> -->
-                <div class="panel-body">
-                  <fieldset [disabled]="is_readonly">
-                    <div class="clearfix"></div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">First Name</label>
-                        <input class="form-control rdc2" name="Email" #partnerFName formControlName="partnerFName" type="text" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
-																						<p>Please enter a valid name.</p>
-																				</div> -->
-                      </div>
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">Gender </label>
-                        <select class="form-control rdc2" #partnerGender formControlName="partnerGender">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="transgender">Transgender</option>
-                        </select>
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerGender.valid  && model.controls.partnerGender.dirty">
-																					<p>Please enter a valid gender.</p>
-																			</div> -->
-                      </div>
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">Middle Name</label>
-                        <input class="form-control rdc2" #partnerMName formControlName="partnerMName" type="text" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
-																					<p>Please enter a valid name.</p>
-																			</div> -->
-                      </div>
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">Last Name</label>
-                        <input class="form-control rdc2" name="Email" #partnerLName formControlName="partnerLName" type="text" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerName.valid  && model.controls.partnerName.dirty">
-																						<p>Please enter a valid name.</p>
-																				</div> -->
-                      </div>
-                    </div>
-                    <div class="row">
-
-                      <div class="col-md-12">
-                        <label class="form-control-static txtlabel">Date of Birth </label>
-                        <input class="form-control rdc2" #partnerDob formControlName="partnerDob" type="date" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
-																							<p>Please enter a valid DOB.</p>
-																					</div> -->
-                      </div>
-
-                    </div>
-
-                    <div class="row">
-
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">Email </label>
-                        <input class="form-control rdc2" #partnerEmail formControlName="partnerEmail" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerEmail.valid  && model.controls.partnerEmail.dirty">
-																					<p>Please enter a valid email.</p>
-																			</div> -->
-                      </div>
-                      <div class="col-md-6">
-                        <label class="form-control-static txtlabel">Mobile </label>
-                        <input class="form-control rdc2" #partnerPhone formControlName="partnerPhone" />
-                        <!-- <div class="alert alert-danger" *ngIf="!model.controls.partnerPhone.valid  && model.controls.partnerPhone.dirty">
-																					<p>Please enter a valid phone number.</p>
-																			</div> -->
-                      </div>
-                    </div>
-                  </fieldset>
-
-                  <div class="clearfix"></div>
-                  <!-- <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
-                    <b class="theme-color pull-left"> Booking Details </b>
-
-
-                  </div> -->
-                </div>
-              </div>
-
-
-
-
-              <div class="panel panel-default mb10 mtx20" style="margin-bottom: 0px;" (click)="hideError()">
-                <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
-                  <b class="theme-color pull-left"> Location </b>
-
-                  <a class="pull-right" (click)="showAddress()">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                  </a>
-
-                </div>
-                <div class="panel-body" style="height: 150px;overflow:auto;padding:0px">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li *ngFor="let item_address of addresses; let i = index">
-                      <a>
-                        <i class="fa fa-edit pull-right" aria-hidden="true" style="font-size: 20px;" (click)="showUpdateAddress();updateAddress(i+1,item_address)"></i> {{item_address.name}}
-                      </a>
-                    </li>
-
-
-                  </ul>
-                  <div class="clearfix"></div>
-
-                </div>
-              </div>
-
-              <div class="panel panel-default mb10 mtx20" style="margin-bottom: 0px;" (click)="hideError()">
-                <div class="panel-heading " style="padding: 20px 10px  30px 10px;">
-                  <b class="theme-color pull-left"> Booking Details </b>
-
-                  <a class="pull-right" (click)="showBooking()">
-                    <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->Show
-                  </a>
-
-                </div>
-                <div class="panel-body" style="height: 150px;overflow:auto;padding:0px">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li *ngFor="let item_address of addresses; let i = index">
-                      <!-- <a>
-                        <i class="fa fa-edit pull-right" aria-hidden="true" style="font-size: 20px;" (click)="showUpdateAddress();updateAddress(i+1,item_address)"></i> {{item_address.name}}
-                      </a> -->
-                    </li>
-
-
-                  </ul>
-                  <div class="clearfix"></div>
-
-                </div>
-              </div>
-
-
-
-              <div class="row mtx20">
-
-                <div class="col-md-12">
-                  <div class="alert alert-danger" *ngIf="error">
-                    <strong>Error!</strong> {{error}}
-                  </div>
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-primary  btn-lg btn-block no-border-radius" (click)="makeEditable()">Edit</button>
-                  </div>
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-theme  btn-lg btn-block no-border-radius" (click)="signOut()">Save</button>
-                  </div>
-                </div>
-              </div>
-              <!-- </fieldset> -->
-            </form>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <div>{{datas[0].email}}</div> -->
+<div class="overlay" [hidden]="modal_opened"></div>
