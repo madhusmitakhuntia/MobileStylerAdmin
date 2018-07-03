@@ -46,9 +46,7 @@ class Booking {
   templateUrl: './data1.component.html',
   styleUrls: ['./data1.component.css'],
 
-  providers: [ProductService, PartnerService,
-
-  ]
+  providers: [ProductService, PartnerService  ]
 })
 export class Data1Component implements OnInit {
 
@@ -56,7 +54,7 @@ export class Data1Component implements OnInit {
   summery: any = {
     summerydata: ''
   };
-  demo =1;
+  demo = 1;
   textmodal: any = true;
   view: string = 'month';
   persons: Person[] = [];
@@ -103,10 +101,10 @@ export class Data1Component implements OnInit {
   title_lastweek = 'Last Week SignUp';
   summery_lastweek: boolean = true;
 
-  customer_count=0;
-  customer_count1=0;
-  customer_count2=0;
-  customer_count3=0;
+  customer_count = 0;
+  customer_count1 = 0;
+  customer_count2 = 0;
+  customer_count3 = 0;
 
   partner_count = 0;
   partner_count1 = 0;
@@ -122,7 +120,7 @@ export class Data1Component implements OnInit {
   title_lastmonth = 'Last 4months SignUp';
   summery_lastmonth: boolean = true;
 
- 
+
   haircuts = 0;
   color_services = 0;
   hair_treatments = 0;
@@ -139,7 +137,7 @@ export class Data1Component implements OnInit {
   dataFormat = 'json';
   dataSource;
   title = 'Angular4 FusionCharts Sample';
-  summery_lastyear:boolean=true;
+  summery_lastyear: boolean = true;
 
   item_partners: any = {};
   partners: any = {};
@@ -231,7 +229,7 @@ export class Data1Component implements OnInit {
   US = 0; //--->(4)
 
   //mapdata partner
-  
+
   PAL = 0;
   PAK = 0;
   PAZ = 0;  //--->(1)
@@ -293,7 +291,7 @@ export class Data1Component implements OnInit {
 
   public map_ChartData;
   public map_ChartOptions;
-  
+
 
   constructor(private productService: ProductService, private partnerService: PartnerService, private fb: FormBuilder) {
 
@@ -322,8 +320,7 @@ export class Data1Component implements OnInit {
     }
 
   }
-  lastYear()
-  {
+  lastYear() {
     for (let item of this.items) {
       //alert('loop');
       let date = item.createdAt;
@@ -441,6 +438,27 @@ export class Data1Component implements OnInit {
         },
         {
           "label": "May"
+        },
+        {
+          "label": "Jun"
+        },
+        {
+          "label": "Jul"
+        },
+        {
+          "label": "Aug"
+        },
+        {
+          "label": "Sep"
+        },
+        {
+          "label": "Oct"
+        },
+        {
+          "label": "Nov"
+        },
+        {
+          "label": "Dec"
         }
         ]
       }],
@@ -459,7 +477,28 @@ export class Data1Component implements OnInit {
           "value": this.apr
         },
         {
+          "value": this.may
+        },
+        {
           "value": this.jun
+        },
+        {
+          "value": this.jul
+        },
+        {
+          "value": this.aug
+        },
+        {
+          "value": this.sep
+        },
+        {
+          "value": this.oct
+        },
+        {
+          "value": this.nov
+        },
+        {
+          "value": this.dec
         }
         ]
       },
@@ -479,22 +518,46 @@ export class Data1Component implements OnInit {
         },
         {
           "value": this.partner_may
+        },
+        {
+          "value": this.partner_jun
+        },
+        {
+          "value": this.partner_jul
+        },
+        {
+          "value": this.partner_aug
+        },
+        {
+          "value": this.partner_sep
+        },
+        {
+          "value": this.partner_oct
+        },
+        {
+          "value": this.partner_nov
+        },
+        {
+          "value": this.partner_dec
+        },
+        {
+          "value": this.partner_may
         }
         ]
       }
       ]
     };
- 
-    this.summery_lastyear=false;
+
+    this.summery_lastyear = false;
 
   }
- 
+
   lastMonth() {
 
-    var week1 = moment(new Date("04-25-2018")).isoWeekday("Monday");
-    var week2 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-6);
-    var week3 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-13);
-    var week4 = moment(new Date("04-25-2018")).isoWeekday("Monday").weekday(-20);
+    var week1 = moment(new Date()).isoWeekday("Monday");
+    var week2 = moment(new Date()).isoWeekday("Monday").weekday(-6);
+    var week3 = moment(new Date()).isoWeekday("Monday").weekday(-13);
+    var week4 = moment(new Date()).isoWeekday("Monday").weekday(-20);
     for (let comp_week of this.items) {
 
       let date = comp_week.createdAt;
@@ -603,8 +666,8 @@ export class Data1Component implements OnInit {
   lastWeek() {
 
 
-    var d = new Date("04-25-2018");
-    var v1 = new Date("04-25-2018");
+    var d = new Date();
+    var v1 = new Date();
     var v2 = d.setDate(d.getDate() - 1);
     var v3 = d.setDate(d.getDate() - 1);
     var v4 = d.setDate(d.getDate() - 1);
@@ -995,373 +1058,373 @@ export class Data1Component implements OnInit {
         //   type = 'column2d';
         //   dataFormat = 'json';
 
-    
-       
+        this.partnerService.readPartner()
+          .subscribe(partners => {
+            this.partners = partners['partner'];
+            //console.log(partners);
+            this.item_partners = Object.values(this.partners);
+            // this.items1 = Object.values(this.items);
+
+            //console.log(this.item_partners[0].createdAt);
+
+            // console.log(Object.values(this.items).length);
+            // this.foundBooks = Array.of(this.foundBooks);
+
+            // console.log(this.partners);
+            // alert(this.persons);
+            for (let item of this.item_partners) {
+              // alert('loop');
+              let date = item.createdAt;
+              let newDate = new Date(date);
+              //console.log(newDate.getMonth());
+              switch (newDate.getMonth()) {
+                case 0:
+                  this.partner_jan++;
+                  break;
+                case 1:
+                  this.partner_feb++;
+                  break;
+                case 2:
+                  this.partner_mar++;
+                  break;
+                case 3:
+                  this.partner_apr++;
+                  break;
+                case 4:
+                  this.partner_may++;
+                  break;
+                case 5:
+                  this.partner_jun++;
+                  break;
+                case 6:
+                  this.partner_jul++;
+                  break;
+                case 7:
+                  this.partner_aug++;
+                  break;
+                case 8:
+                  this.partner_sep++;
+                  break;
+                case 9:
+                  this.partner_oct++;
+                  break;
+                case 10:
+                  this.partner_nov++;
+                  break;
+                case 11:
+                  this.partner_dec++;
+                  break;
+                // default:
+                //   confirm('No data found');
+
+              }
+              if (item.addresses !== undefined) {
+                const state = item.addresses[0].state;
+                // console.log( state);
+                switch (state) {
+                  case 'AZ':
+                    this.PAZ++;
+                    break;
+                  case 'AL':
+                    this.PAL++;
+                    break;
+                  case 'AK':
+                    this.PAK++;
+                    break;
+                  case 'AZ':
+                    this.PAZ++;
+                    break;
+                  case 'AR':
+                    this.PAR++;
+                    break;
+                  case 'CA':
+                    this.PCA++;
+                    break;
+                  case 'CO':
+                    this.PCO++;
+                    break;
+                  case 'CT':
+                    this.PCT++;
+                    break;
+                  case 'DE':
+                    this.PDE++;
+                    break;
+                  case 'FL':
+                    this.PFL++;
+                    break;
+                  case 'GA':
+                    this.PGA++;
+                    break;
+                  case 'HI':
+                    this.PHI++;
+                    break;
+                  case 'ID':
+                    this.PID++;
+                    break;
+                  case 'IL':
+                    this.PIL++;
+                    break;
+                  case 'IN':
+                    this.PIN++;
+                    break;
+                  case 'IA':
+                    this.PIA++;
+                    break;
+                  case 'KS':
+                    this.PKS++;
+                    break;
+                  case 'KY':
+                    this.PKY++;
+                    break;
+                  case 'LA':
+                    this.PLA++;
+                    break;
+                  case 'ME':
+                    this.PME++;
+                    break;
+                  case 'MD':
+                    this.PMD++;
+                    break;
+
+                  case 'MA':
+                    this.PMA++;
+                    break;
+                  case 'MI':
+                    this.PMI++;
+                    break;
+                  case 'MN':
+                    this.PMN++;
+                    break;
+                  case 'MS':
+                    this.PMS++;
+                    break;
+                  case 'MO':
+                    this.PMO++;
+                    break;
+                  case 'MT':
+                    this.PMT++;
+                    break;
+                  case 'NE':
+                    this.PNE++;
+                    break;
+                  case 'NV':
+                    this.PNV++;
+                    break;
+                  case 'NH':
+                    this.PNH++;
+                    break;
+                  case 'NJ':
+                    this.PNJ++;
+                    break;
+                  case 'NM':
+                    this.PNM++;
+                    break;
+                  case 'NY':
+                    this.PNY++;
+                    break;
+                  case 'NC':
+                    this.PNC++;
+                    break;
+                  case 'ND':
+                    this.PND++;
+                    break;
+                  case 'OH':
+                    this.POH++;
+                    break;
+                  case 'OK':
+                    this.POK++;
+                    break;
+                  case 'OR':
+                    this.POR++;
+                    break;
+                  case 'PA':
+                    this.PPA++;
+                    break;
+                  case 'RI':
+                    this.PRI++;
+                    break;
+                  case 'SC':
+                    this.PSC++;
+                    break;
+                  case 'SD':
+                    this.PSD++;
+                    break;
+                  case 'TN':
+                    this.PTN++;
+                    break;
+                  case 'TX':
+                    this.PTX++;
+                    break;
+
+                  case 'UT':
+                    this.PUT++;
+                    break;
+                  case 'VT':
+                    this.PVT++;
+                    break;
+                  case 'VA':
+                    this.PVA++;
+                    break;
+                  case 'WA':
+                    this.PWA++;
+                    break;
+                  case 'WV':
+                    this.PWV++;
+                    break;
+                  case 'WI':
+                    this.PWI++;
+                    break;
+                  case 'WY':
+                    this.PWY++;
+                    break;
+                  case 'DC':
+                    this.PDC++;
+                    break;
+                  case 'AS':
+                    this.PAS++;
+                    break;
+                  case 'GU':
+                    this.PGU++;
+                    break;
+                  case 'MP':
+                    this.PMP++;
+                    break;
+                  case 'PR':
+                    this.PPR++;
+                    break;
+                  case 'UM':
+                    this.PUM++;
+                    break;
+                  case 'VI':
+                    this.PVI++;
+                    break;
+                  case 'US':
+                    this.PUS++;
+                    break;
+
+
+                }
+
+              }
+
+            }
+            //console.log('marpar' + this.partner_mar);
+            //console.log('aprpar' + this.partner_apr);
+            //   width = 600;
+            //   height = 400;
+            //   type = 'column2d';
+            //   dataFormat = 'json';
+            this.dataSource2 = {
+              "chart": {
+                "caption": "Partner ",
+                "subCaption": "No of signup per month",
+                // "numberPrefix": "$",
+                "theme": "ocean"
+              },
+              "data": [
+                {
+                  "label": "January",
+                  "value": this.partner_jan
+                },
+                {
+                  "label": "February",
+                  "value": this.partner_feb
+                },
+                {
+                  "label": "Mar",
+                  "value": this.partner_mar
+                },
+                {
+                  "label": "Apr",
+                  "value": this.partner_apr
+                },
+                {
+                  "label": "May",
+                  "value": this.partner_may
+                }
+              ]
+            };
+
+            console.log('pMD--->' + this.MD);
+            console.log('pAZ--->' + this.AZ);
+            console.log('pUS--->' + this.US);
+            console.log('pTX--->' + this.TX);
+            console.log('pAZ222--->' + this.AZ);
+            this.map_ChartData = [
+              ['State', 'Users', 'Partners'],
+              ['US-AL', this.AL, this.PAL],
+              ['US-AK', this.AK, this.PAK],
+              ['US-AZ', this.AZ, this.PAZ],
+              ['US-AR', this.AR, this.PAR],
+              ['US-CA', this.CA, this.PCA],
+              ['US-CO', this.CO, this.PCO],
+              ['US-CT', this.CT, this.PCT],
+              ['US-DE', this.DE, this.PDE],
+              ['US-DC', this.DC, this.PDC],
+              ['US-FL', this.FL, this.PFL],
+              ['US-GA', this.GA, this.PGA],
+              ['US-HI', this.HI, this.PHI],
+              ['US-ID', this.ID, this.PID],
+              ['US-IL', this.IL, this.PIL],
+              ['US-IN', this.IN, this.PIN],
+              ['US-IA', this.IA, this.PIA],
+              ['US-KS', this.KS, this.PKS],
+              ['US-KY', this.KY, this.PKY],
+              ['US-LA', this.LA, this.PLA],
+              ['US-ME', this.ME, this.PME],
+              ['US-MT', this.MT, this.PMT],
+              ['US-NE', this.NE, this.PNE],
+              ['US-NV', this.NV, this.PNV],
+              ['US-NH', this.NH, this.PNH],
+              ['US-NJ', this.NJ, this.PNJ],
+              ['US-NM', this.NM, this.PNM],
+              ['US-NY', this.NY, this.PNY],
+              ['US-NC', this.NC, this.PNC],
+              ['US-ND', this.ND, this.PND],
+              ['US-OH', this.OH, this.POH],
+              ['US-OK', this.OK, this.POK],
+              ['US-OR', this.OR, this.POR],
+              ['US-MD', this.MD, this.PMD],
+              ['US-MA', this.MA, this.PMA],
+              ['US-MI', this.MI, this.PMI],
+              ['US-MN', this.MN, this.PMN],
+              ['US-MS', this.MS, this.PMS],
+              ['US-MO', this.MO, this.PMO],
+              ['US-PA', this.PA, this.PPA],
+              ['US-RI', this.RI, this.PRI],
+              ['US-SC', this.SC, this.PSC],
+              ['US-SD', this.SD, this.PSD],
+              ['US-TN', this.TN, this.PTN],
+              ['US-TX', this.TX, this.PTX],
+              ['US-UT', this.UT, this.PUT],
+              ['US-VT', this.VT, this.PVT],
+              ['US-VA', this.VA, this.PVA],
+              ['US-WA', this.WA, this.PWA],
+              ['US-WV', this.WV, this.PWV],
+              ['US-WI', this.WI, this.PWI],
+              ['US-WY', this.WY, this.PWY]
+            ];
+            this.map_ChartOptions = {
+              title: 'Customer Sign ups based on states',
+              region: 'US', // Africa
+              colorAxis: { colors: ['#ffffff', '#3366cc', '#990099'] },
+              backgroundColor: '#81d4fa',
+              datalessRegionColor: '#f8bbd0',
+              defaultColor: '#f5f5f5',
+              resolution: 'provinces',
+              // dataMode: 'markers',
+              // displayMode: 'markers',
+              magnifyingGlass: { enable: true, zoomFactor: 5.0 },
+              legend: { textStyle: { color: 'blue', fontSize: 16 } }
+            };
+
+          });
+
 
 
 
       });
-      this.partnerService.readPartner()
-      .subscribe(partners => {
-        this.partners = partners['partner'];
-        //console.log(partners);
-        this.item_partners = Object.values(this.partners);
-        // this.items1 = Object.values(this.items);
 
-        //console.log(this.item_partners[0].createdAt);
-
-        // console.log(Object.values(this.items).length);
-        // this.foundBooks = Array.of(this.foundBooks);
-
-        // console.log(this.partners);
-        // alert(this.persons);
-        for (let item of this.item_partners) {
-          // alert('loop');
-          let date = item.createdAt;
-          let newDate = new Date(date);
-          //console.log(newDate.getMonth());
-          switch (newDate.getMonth()) {
-            case 0:
-              this.partner_jan++;
-              break;
-            case 1:
-              this.partner_feb++;
-              break;
-            case 2:
-              this.partner_mar++;
-              break;
-            case 3:
-              this.partner_apr++;
-              break;
-            case 4:
-              this.partner_may++;
-              break;
-            case 5:
-              this.partner_jun++;
-              break;
-            case 6:
-              this.partner_jul++;
-              break;
-            case 7:
-              this.partner_aug++;
-              break;
-            case 8:
-              this.partner_sep++;
-              break;
-            case 9:
-              this.partner_oct++;
-              break;
-            case 10:
-              this.partner_nov++;
-              break;
-            case 11:
-              this.partner_dec++;
-              break;
-            // default:
-            //   confirm('No data found');
-
-          }
-          if (item.addresses !== undefined) {
-            const state = item.addresses[0].state;
-            // console.log( state);
-            switch (state) {
-              case 'AZ':
-                this.PAZ++;
-                break;
-              case 'AL':
-                this.PAL++;
-                break;
-              case 'AK':
-                this.PAK++;
-                break;
-              case 'AZ':
-                this.PAZ++;
-                break;
-              case 'AR':
-                this.PAR++;
-                break;
-              case 'CA':
-                this.PCA++;
-                break;
-              case 'CO':
-                this.PCO++;
-                break;
-              case 'CT':
-                this.PCT++;
-                break;
-              case 'DE':
-                this.PDE++;
-                break;
-              case 'FL':
-                this.PFL++;
-                break;
-              case 'GA':
-                this.PGA++;
-                break;
-              case 'HI':
-                this.PHI++;
-                break;
-              case 'ID':
-                this.PID++;
-                break;
-              case 'IL':
-                this.PIL++;
-                break;
-              case 'IN':
-                this.PIN++;
-                break;
-              case 'IA':
-                this.PIA++;
-                break;
-              case 'KS':
-                this.PKS++;
-                break;
-              case 'KY':
-                this.PKY++;
-                break;
-              case 'LA':
-                this.PLA++;
-                break;
-              case 'ME':
-                this.PME++;
-                break;
-              case 'MD':
-                this.PMD++;
-                break;
-
-              case 'MA':
-                this.PMA++;
-                break;
-              case 'MI':
-                this.PMI++;
-                break;
-              case 'MN':
-                this.PMN++;
-                break;
-              case 'MS':
-                this.PMS++;
-                break;
-              case 'MO':
-                this.PMO++;
-                break;
-              case 'MT':
-                this.PMT++;
-                break;
-              case 'NE':
-                this.PNE++;
-                break;
-              case 'NV':
-                this.PNV++;
-                break;
-              case 'NH':
-                this.PNH++;
-                break;
-              case 'NJ':
-                this.PNJ++;
-                break;
-              case 'NM':
-                this.PNM++;
-                break;
-              case 'NY':
-                this.PNY++;
-                break;
-              case 'NC':
-                this.PNC++;
-                break;
-              case 'ND':
-                this.PND++;
-                break;
-              case 'OH':
-                this.POH++;
-                break;
-              case 'OK':
-                this.POK++;
-                break;
-              case 'OR':
-                this.POR++;
-                break;
-              case 'PA':
-                this.PPA++;
-                break;
-              case 'RI':
-                this.PRI++;
-                break;
-              case 'SC':
-                this.PSC++;
-                break;
-              case 'SD':
-                this.PSD++;
-                break;
-              case 'TN':
-                this.PTN++;
-                break;
-              case 'TX':
-                this.PTX++;
-                break;
-
-              case 'UT':
-                this.PUT++;
-                break;
-              case 'VT':
-                this.PVT++;
-                break;
-              case 'VA':
-                this.PVA++;
-                break;
-              case 'WA':
-                this.PWA++;
-                break;
-              case 'WV':
-                this.PWV++;
-                break;
-              case 'WI':
-                this.PWI++;
-                break;
-              case 'WY':
-                this.PWY++;
-                break;
-              case 'DC':
-                this.PDC++;
-                break;
-              case 'AS':
-                this.PAS++;
-                break;
-              case 'GU':
-                this.PGU++;
-                break;
-              case 'MP':
-                this.PMP++;
-                break;
-              case 'PR':
-                this.PPR++;
-                break;
-              case 'UM':
-                this.PUM++;
-                break;
-              case 'VI':
-                this.PVI++;
-                break;
-              case 'US':
-                this.PUS++;
-                break;
-
-
-            }
-
-          }
-
-        }
-        //console.log('marpar' + this.partner_mar);
-        //console.log('aprpar' + this.partner_apr);
-        //   width = 600;
-        //   height = 400;
-        //   type = 'column2d';
-        //   dataFormat = 'json';
-        this.dataSource2 = {
-          "chart": {
-            "caption": "Partner ",
-            "subCaption": "No of signup per month",
-            // "numberPrefix": "$",
-            "theme": "ocean"
-          },
-          "data": [
-            {
-              "label": "January",
-              "value": this.partner_jan
-            },
-            {
-              "label": "February",
-              "value": this.partner_feb
-            },
-            {
-              "label": "Mar",
-              "value": this.partner_mar
-            },
-            {
-              "label": "Apr",
-              "value": this.partner_apr
-            },
-            {
-              "label": "May",
-              "value": this.partner_may
-            }
-          ]
-        };
-
-        console.log('pMD--->' + this.MD);
-        console.log('pAZ--->' + this.AZ);
-        console.log('pUS--->' + this.US);
-        console.log('pTX--->' + this.TX);
-        console.log('pAZ222--->' + this.AZ);
-        this.map_ChartData = [
-          ['State', 'Users', 'Partners'],
-          ['US-AL', 1, this.PAL],
-          ['US-AK', 2, this.PAK],
-          ['US-AZ', this.AZ, this.PAZ],
-          ['US-AR', 23, this.PAR],
-          ['US-CA', 1, this.PCA],
-          ['US-CO', 0, this.PCO],
-          ['US-CT', 0, this.PCT],
-          ['US-DE', 7, this.PDE],
-          ['US-DC', 4, this.PDC],
-          ['US-FL', 0, this.PFL],
-          ['US-GA', 0, this.PGA],
-          ['US-HI', 0, this.PHI],
-          ['US-ID', 9, this.PID],
-          ['US-IL', 0, this.PIL],
-          ['US-IN', 3, this.PIN],
-          ['US-IA', 1, this.PIA],
-          ['US-KS', 0, this.PKS],
-          ['US-KY', 0, this.PKY],
-          ['US-LA', 0, this.PLA],
-          ['US-ME', 9, this.PME],
-          ['US-MT', 8, this.PMT],
-          ['US-NE', 12,this.PNE],
-          ['US-NV', 11, this.PNV],
-          ['US-NH', 0, this.PNH],
-          ['US-NJ', 0, this.PNJ],
-          ['US-NM', 0, this.PNM],
-          ['US-NY', 0, this.PNY],
-          ['US-NC', 0, this.PNC],
-          ['US-ND', 0, this.PND],
-          ['US-OH', 0, this.POH],
-          ['US-OK', 0, this.POK],
-          ['US-OR', 0, this.POR],
-          ['US-MD', 1, this.PMD],
-          ['US-MA', 2, this.PMA],
-          ['US-MI', 1, this.PMI],
-          ['US-MN', 1, this.PMN],
-          ['US-MS', 1, this.PMS],
-          ['US-MO', 2, this.PMO],
-          ['US-PA', 3, this.PPA],
-          ['US-RI', 1, this.PRI],
-          ['US-SC', 0, this.PSC],
-          ['US-SD', 0, this.PSD],
-          ['US-TN', 1, this.PTN],
-          ['US-TX', this.TX, this.PTX],
-          ['US-UT', 1, this.PUT],
-          ['US-VT', 0, this.PVT],
-          ['US-VA', 0, this.PVA],
-          ['US-WA', 0, this.PWA],
-          ['US-WV', 0, this.PWV],
-          ['US-WI', 0, this.PWI],
-          ['US-WY', 0, this.PWY]
-        ];
-        this.map_ChartOptions = {
-          title: 'Customer Sign ups based on states',
-          region: 'US', // Africa
-          colorAxis: { colors: ['#ffffff', '#3366cc', '#990099'] },
-          backgroundColor: '#81d4fa',
-          datalessRegionColor: '#f8bbd0',
-          defaultColor: '#f5f5f5',
-          resolution: 'provinces',
-          // dataMode: 'markers',
-          // displayMode: 'markers',
-          magnifyingGlass: { enable: true, zoomFactor: 5.0 },
-          legend: { textStyle: { color: 'blue', fontSize: 16 } }
-        };
-
-      });
     this.productService.readBookings()
       .subscribe(bookings => {
         this.bookings = bookings['bookings'];
@@ -1469,9 +1532,11 @@ export class Data1Component implements OnInit {
         };
 
       });
-    
-   
-      
+
+
+
   }
+  parentMessage = "message from parent in child";
+  mess = "asdfasdf";
 
 }

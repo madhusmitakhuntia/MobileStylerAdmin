@@ -1,6 +1,6 @@
  .popuptext {
     visibility: visible;
-    width: 160px;
+    width: 270px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -9,7 +9,7 @@
     position: absolute;
     z-index: 1;
     /*bottom: 125%;*/
-    left: 50%;
+    /* left: 50%; */
     margin-left: -80px;
     top:933px;
   

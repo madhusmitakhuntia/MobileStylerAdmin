@@ -91,24 +91,24 @@ export class AdminhomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productService.readUsers()
-    .subscribe(users => {
-      this.users = users['customer'];
-      //console.log(products);
-      //console.log(products.products);
-      // console.log(Object.keys(products.products)[0]);
-      // console.log((Object.values(products.products)[2].pname);
-      //console.log((Object.values(products.products)[2]));
-      // this.dtTrigger.next();
-       //console.log(this.users);
-      // console.log((Object.values(this.users)));
-      // console.log(Object.values(this.users).length);
-      this.items = Object.values(this.users);
+    // this.productService.readUsers()
+    // .subscribe(users => {
+    //   this.users = users['customer'];
+    //   //console.log(products);
+    //   //console.log(products.products);
+    //   // console.log(Object.keys(products.products)[0]);
+    //   // console.log((Object.values(products.products)[2].pname);
+    //   //console.log((Object.values(products.products)[2]));
+    //   // this.dtTrigger.next();
+    //    //console.log(this.users);
+    //   // console.log((Object.values(this.users)));
+    //   // console.log(Object.values(this.users).length);
+    //   this.items = Object.values(this.users);
 
-       //console.log(this.items);
-       this.userkey = Object.keys(this.users);
+    //    //console.log(this.items);
+    //    this.userkey = Object.keys(this.users);
 
-    });
+    // });
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarDateFormatter } from 'angular-calendar';
@@ -40,7 +40,7 @@ const colors: any = {
 export class Graph2Component implements OnInit {
 
   items: any = [];
-  partdata:any=[];
+  partdata: any = [];
   users: any = {};
   userkey: any = [];
   partners: any = {};
@@ -57,8 +57,9 @@ export class Graph2Component implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-
-
+  @Input() items_client: any;
+  @Input() item_partners: any;
+  // console.log();
 
   refresh: Subject<any> = new Subject();
   // events: CalendarEvent[] = [
@@ -95,17 +96,17 @@ export class Graph2Component implements OnInit {
   //     }
   //   }
   // }
- count = 0;
- count1=0;
+  count = 0;
+  count1 = 0;
   dayClicked(event) {
- 
-   this.count=0;
-   this.count1=0;
+
+    this.count = 0;
+    this.count1 = 0;
     var dt = new Date(event.date);
     for (let user of this.items) {
       if (moment(dt).isSame(new Date(user.createdAt), 'day') == true) {
         //this.activeDayIsOpen = true;
-       this.count++;
+        this.count++;
         // this.events.push({
 
         //   start: startOfDay(dt),
@@ -131,32 +132,32 @@ export class Graph2Component implements OnInit {
     //   title: 'Has custom class'+count,
     // });
     // this.refresh.next();
-   //console.log(this.events);
-  for (let partner of this.partdata) {
-    if (moment(dt).isSame(new Date(partner.createdAt), 'day') == true) {
-      //this.activeDayIsOpen = true;
-     this.count1++;
-      // this.events.push({
+    //console.log(this.events);
+    for (let partner of this.partdata) {
+      if (moment(dt).isSame(new Date(partner.createdAt), 'day') == true) {
+        //this.activeDayIsOpen = true;
+        this.count1++;
+        // this.events.push({
 
-      //   start: startOfDay(dt),
-      //   title: 'Has custom class',
-      // });
+        //   start: startOfDay(dt),
+        //   title: 'Has custom class',
+        // });
+
+      }
+
 
     }
-
-
-  }
-  this.textmodal=false;
+    this.textmodal = false;
 
   }
-  hidetextmodal()
-  {
-    this.textmodal=true;
+  hidetextmodal() {
+    this.textmodal = true;
   }
 
   constructor(private productService: ProductService, private partnerService: PartnerService) { }
 
   ngOnInit() {
+    console.log("client_in_child"+this.items_client);
 
     this.productService.readUsers()
       .subscribe(users => {

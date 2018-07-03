@@ -19,81 +19,55 @@
     <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
   </div>
 </ng-template>
-
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="activeDayIsOpen = false">
-        Previous
-      </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate">
-        Today
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="activeDayIsOpen = false">
-        Next
+<div style="position: relative">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+          Previous
+        </div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+          Next
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <!-- <div
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <!-- <div
         class="btn btn-primary"
         (click)="view = 'month'"
         [class.active]="view === 'month'">
         Month
       </div> -->
-      <!-- <div
+        <!-- <div
         class="btn btn-primary"
         (click)="view = 'week'"
         [class.active]="view === 'week'">
         Week
       </div> -->
-      <!-- <div
+        <!-- <div
         class="btn btn-primary"
         (click)="view = 'day'"
         [class.active]="view === 'day'">
         Day
       </div> -->
+      </div>
     </div>
   </div>
-</div>
-<br>
-<div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="'month'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)" 
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-  
-    (dayClicked)="dayClicked($event.day)" 
->
-  </mwl-calendar-week-view>
-  <!-- <mwl-calendar-day-view
+  <br>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (dayClicked)="dayClicked($event.day)">
+    </mwl-calendar-week-view>
+    <!-- <mwl-calendar-day-view
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
@@ -101,9 +75,13 @@
     (dayClicked)="dayClicked($event.day)"
   >
   </mwl-calendar-day-view> -->
+  </div>
+  <div [hidden]="textmodal" class="popuptext" #popuptext style="position: absolute;top: 0;right: 0;">
+    <div>
+      <button type="button" class="close" data-dismiss="modal" (click)="hidetextmodal()">&times;</button>
+    </div>
+    No of registered Customer:{{this.count}}
+    <br> No of registered Partner:{{this.count1}}
+  </div>
 </div>
-<div  [hidden]="textmodal" class="popuptext" #popuptext>
-  <div><button type="button" class="close" data-dismiss="modal" (click)="hidetextmodal()">&times;</button></div>
-No of registered Customer:{{this.count}}<br>
-No of registered Partner:{{this.count1}}
-</div>
+<!-- {{childMessage}}{{mess2}} -->

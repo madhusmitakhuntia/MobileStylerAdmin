@@ -21,8 +21,8 @@ export class GoogleChartComponent implements OnInit {
       google.charts.load('current', {'packages':['corechart']});
         setTimeout(() =>{
           this.drawGraph(this.chartOptions,this.chartType,this.chartData,this._element)
-        },2000);
-      },2000
+        },4000);
+      },1000
     );
   }
   drawGraph (chartOptions,chartType,chartData,ele) {
