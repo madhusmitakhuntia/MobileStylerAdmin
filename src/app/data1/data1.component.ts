@@ -318,6 +318,7 @@ export class Data1Component implements OnInit {
       this.lastYear();
       //alert("Last week");
     }
+    
 
   }
   lastYear() {
@@ -549,6 +550,9 @@ export class Data1Component implements OnInit {
     };
 
     this.summery_lastyear = false;
+    this.summery_lastweek = true;
+    this.summery_lastmonth = true;
+
 
   }
 
@@ -661,6 +665,10 @@ export class Data1Component implements OnInit {
       ]
     };
     this.summery_lastmonth = false;
+
+    this.summery_lastyear = true;
+    this.summery_lastweek = true;
+
 
   }
   lastWeek() {
@@ -832,6 +840,9 @@ export class Data1Component implements OnInit {
 
 
     this.summery_lastweek = false;
+
+    this.summery_lastyear = true;
+    this.summery_lastmonth = true;
 
 
   }

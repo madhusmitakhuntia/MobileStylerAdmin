@@ -22,7 +22,7 @@ export class GoogleChartComponent implements OnInit {
         setTimeout(() =>{
           this.drawGraph(this.chartOptions,this.chartType,this.chartData,this._element)
         },4000);
-      },1000
+      },2000
     );
   }
   drawGraph (chartOptions,chartType,chartData,ele) {

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "sign-up-angular",
+    "dist": "mobilestyler-admin"
+  }
+}
